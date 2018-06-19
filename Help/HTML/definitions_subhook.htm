@@ -1,0 +1,65 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+   <title>SubHook</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   <meta http-equiv="Content-Style-Type" content="text/css" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+   <script type="text/javascript" src="jquery.js"></script>
+   <script type="text/javascript" src="helpman_settings.js"></script>
+   <script type="text/javascript" src="helpman_topicinit.js"></script>
+
+   <script type="text/javascript">
+     HMSyncTOC("index.html", "definitions_subhook.htm");
+   </script>
+   <script type="text/javascript" src="highlight.js"></script>
+   <script type="text/javascript">
+     $(document).ready(function(){highlight();});
+   </script>
+</head>
+<body style="margin: 0px 0px 0px 0px; background: #FFFFFF;">
+
+
+<table width="100%" border="0" cellspacing="0" cellpadding="5" bgcolor="#99CCFF">
+  <tr valign="middle">
+    <td align="left">
+     <span style="font-size: 8pt">
+      <b>Modular Application Framework Components</b>
+     </span>
+    </td>
+  </tr>
+  <tr valign="middle">
+    <td align="left">
+      <h1 class="p_Heading1"><span class="f_Heading1">SubHook</span></h1>
+
+    </td>
+    <td align="right">
+     <span style="font-size: 9pt">
+     <a href="introduction.htm">Top</a>&nbsp;
+     <a href="definitions_hook.htm">Previous</a>&nbsp;
+     
+     </span>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table width="100%" border="0" cellspacing="0" cellpadding="5"><tr valign="top"><td align="left">
+<p style="margin: 0px 0px 0px 24px;">A SubHook defines a single function in a module. It is a member to one DynamicFunction only, but its code can be assigned to several SubHooks.</p>
+<p style="margin: 0px 0px 0px 24px;">The SubHook uses a local ID to identify itself withion a module. This ID must be unique within the module and should be unique within the DynamicFunction.</p>
+<p style="margin: 0px 0px 0px 24px;">Additionally the SubHook has a global unique ID that is used for installation purposes. This ID is managed by the DFT automatically.</p>
+<p style="margin: 0px 0px 0px 24px;">If a new module wants to overwrite an existing SubHook with own code, it has to overwrite this unique ID, as it cannot be certain that the function still can be found using the combination HookID, SubHookID and ModuleID (due to the installation of another module before overwriting the same SubHook).</p>
+<p style="margin: 0px 0px 0px 24px;">&nbsp;</p>
+<p style="margin: 0px 0px 0px 24px;">&nbsp;</p>
+<p style="margin: 0px 0px 0px 24px;">If the DynamicFunction doesn't exist when the SubHook gets installed, the DynamicFunction will be created.</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+
+</td></tr></table>
+<hr />
+   (c)opyright 2009 by Helge Lange. All Rights Reserved.
+</body>
+</html>

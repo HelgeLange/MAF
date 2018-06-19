@@ -1,0 +1,79 @@
+package MAF_Base;
+
+{$R *.res}
+{$IFDEF IMPLICITBUILDING This IFDEF should not be used by users}
+{$ALIGN 8}
+{$ASSERTIONS ON}
+{$BOOLEVAL OFF}
+{$DEBUGINFO OFF}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS ON}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION OFF}
+{$OVERFLOWCHECKS ON}
+{$RANGECHECKS ON}
+{$REFERENCEINFO ON}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES ON}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST ON}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$DEFINE DEBUG}
+{$DEFINE PNGComponents}
+{$DEFINE PNGimage}
+{$ENDIF IMPLICITBUILDING}
+{$DESCRIPTION 'Modular Application Framework Components Base package (Runtime)'}
+{$LIBSUFFIX '240'}
+{$RUNONLY}
+{$IMPLICITBUILD OFF}
+
+requires
+  rtl,
+  vcl,
+  dbrtl,
+  vclimg,
+  xmlrtl,
+  PngComponentsD;
+
+contains
+  uMAF_Globals in '..\..\uMAF_Globals.pas',
+  uMAF_Tools in '..\..\uMAF_Tools.pas',
+  uMAF_CustomBaseDB in '..\..\MAF_Base\uMAF_CustomBaseDB.pas',
+  uMAF_ResourceClient in '..\..\MAF_Base\uMAF_ResourceClient.pas',
+  uBaseSQL_Consts in '..\..\MAF_Database\uBaseSQL_Consts.pas',
+  uMAF_Tracer in '..\..\MAF_Base\uMAF_Tracer.pas',
+  uMAF_DynamicFunctionTable in '..\..\MAF_Base\uMAF_DynamicFunctionTable.pas',
+  uMAF_GlobalVars in '..\..\MAF_Base\uMAF_GlobalVars.pas',
+  uMAF_HookManager in '..\..\MAF_Base\uMAF_HookManager.pas',
+  uMAF_HookManager_Helper in '..\..\MAF_Base\uMAF_HookManager_Helper.pas',
+  uMAF_LinkManager in '..\..\MAF_Base\uMAF_LinkManager.pas',
+  uMAF_Logger in '..\..\MAF_Base\uMAF_Logger.pas',
+  uMAF_ModuleController in '..\..\MAF_Base\uMAF_ModuleController.pas',
+  uMAF_ModuleController_DataHelper in '..\..\MAF_Base\uMAF_ModuleController_DataHelper.pas',
+  uMAF_ModuleManager in '..\..\MAF_Base\uMAF_ModuleManager.pas',
+  uMAF_ResourceManager in '..\..\MAF_Base\uMAF_ResourceManager.pas',
+  uMAF_ResourceManager_Helper in '..\..\MAF_Base\uMAF_ResourceManager_Helper.pas',
+  uMAF_DataStorage in '..\..\MAF_Base\uMAF_DataStorage.pas',
+  uMAF_UserSecurity in '..\..\MAF_Base\uMAF_UserSecurity.pas',
+  uMAF_WindowController in '..\..\MAF_Base\uMAF_WindowController.pas',
+  uMAF_WindowManager in '..\..\MAF_Base\uMAF_WindowManager.pas',
+  uMAF_HookClient in '..\..\MAF_Base\uMAF_HookClient.pas',
+  uMAF_LinkClient in '..\..\MAF_Base\uMAF_LinkClient.pas',
+  uMAF_ManagerLoader in '..\..\MAF_Base\uMAF_ManagerLoader.pas',
+  uMAF_FileDB in '..\..\MAF_Base\uMAF_FileDB.pas',
+  uMAF_TemplateStreamer in '..\..\MAF_Base\uMAF_TemplateStreamer.pas',
+  uMAF_CustomResource in '..\..\MAF_Base\uMAF_CustomResource.pas',
+  uMAF_Core in '..\..\MAF_Base\uMAF_Core.pas',
+  uMAF_BaseDB in '..\..\MAF_Database\uMAF_BaseDB.pas',
+  uMAF_License in '..\..\MAF_Base\uMAF_License.pas',
+  uMAF_CustomFileResource in '..\..\MAF_Base\uMAF_CustomFileResource.pas',
+  uMAF_VarController in '..\..\MAF_Base\uMAF_VarController.pas',
+  uMAF_Parameters in '..\..\MAF_Base\uMAF_Parameters.pas',
+  uMAF_XmlStorage in '..\..\MAF_Base\uMAF_XmlStorage.pas';
+
+end.

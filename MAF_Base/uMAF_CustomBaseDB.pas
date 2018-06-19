@@ -1,0 +1,1066 @@
+{*******************************************************************************
+Name         : uMAF_CustomBaseDB.pas
+Coding by    : Helge Lange
+Copyright    : (c)opyright 2007-2012 by Helge Lange
+Info         : HelgeLange@maf-components.com
+Website      : http://www.maf-components.com
+Date         : 30.01.2007
+Last Update  : 26.01.2012
+Version      : 1.0.012
+Purpose      :
+Last Changes :
+
+1.0.012 (26.01.2012) -----------------------------------------------------------
+- [ADD] now we can delete streams :)
+1.0.011 (03.11.2011) -----------------------------------------------------------
+- [ADD] ReadTemplate returns now ErrorCode ERR_STREAM_EMPTY when the result
+        stream has 0 size.
+1.0.010 (02.10.2010) -----------------------------------------------------------
+- [ADD] moved a lot functionality from the specific implementation to the base
+        class to make it much easier to create new DAC implementation.
+        The new DAC implementations should only explain some basic functions to
+        the base class now, like how to write a ParamByName for SQL, how to
+        read/write blobs, when EoF of a query is true etc.
+1.0.009 (19.11.2009) -----------------------------------------------------------
+- [FIX] removing the database component from the form/datamodule will now set
+        connected to false and reset the user data
+1.0.008 (05.11.2009) -----------------------------------------------------------
+- [ADD] new property DefaultTables where default table names can be set and
+        when the component connects to the database, default table names are used
+        in case the components didn't set anything
+- [DEL] removed property AccessRightTable, was obselete
+1.0.007 (29.09.2009) -----------------------------------------------------------
+- [ADD] ConnectionData.UserID and ConnectionData.GroupID are now filled (finally)
+        when the database is connected
+1.0.006 (18.09.2009) -----------------------------------------------------------
+- [ADD] sDefaultEncryptionKey constant added, wich will be used as standard and
+        should be changed by the user of the component package for their own
+        application
+- [DEL] removed obsolete code as Hooks and Modules are now saved in templates
+1.0.005 (03.10.2008) -----------------------------------------------------------
+- [ADD] some new SQLs and base implementations added
+1.0.004 (23.05.2007) -----------------------------------------------------------
+- [CHG] function RequestQuery now is only virtual, not abstract and fires an
+        event (OnCreateQuery) when inherited in called in descendant components.
+        That will give the user the chance to make additional settings to the
+        query component
+- [ADD] new event OnCreateQuery
+- [ADD] new abstract/virtual method __LoadDefaultSQL, wich is called in Loaded
+        automatically if no SQL is set
+- [ADD] TERPSQL.IsEmpty added, wich returns TRUE, if no SQL is set
+- [ADD] TInternalSQL.IsEmpty added, wich returns TRUE, if no TERPSQL has SQL
+        queries
+- [ADD] protected function __GetQueryID to get the next free number to name
+        a query component 
+1.0.003 (21.05.2007) -----------------------------------------------------------
+- [ADD] property InternalSQL
+- [ADD] new virtual public method SetDefaultInternalSQL to set database specific
+        SQL at component create
+- [ADD] new event OnSetDefaultSQL
+1.0.002 (03.04.2007) -----------------------------------------------------------
+- [ADD] public property AccessRightTable to support TERPSecurityLayer, will be set,
+        automatically by TERPSecurityLayer, when the DB object is being assinged
+- [ADD] base implementation for delete a right
+1.0.001 (30.01.2007) -----------------------------------------------------------
+- initial version
+*******************************************************************************}
+unit uMAF_CustomBaseDB;
+
+{$I MAFramework.inc}
+
+interface
+
+uses SysUtils, Classes, Windows, DB,
+     // Modular Application Framework Components units
+     uMAF_ResourceClient, uMAF_Core, uMAF_Globals, uMAF_TemplateStreamer;
+
+Type TmafCustomBaseDB = class;
+
+     TmafBaseDBError = class(Exception);
+     TOnSpecialSQL = procedure(Sender: TObject; SQL_Ident: Integer; var SQL: String) Of Object;
+
+     TDefaultTables = class(TPersistent)
+     private
+       FsUserTable : String;
+       FsGroupTable : String;
+       FsDataStorageTable : String;
+     public
+       constructor Create;
+     published
+       property UserTable : String read FsUserTable write FsUserTable;
+       property GroupTable : String read FsGroupTable write FsGroupTable;
+       property DataStorageTable : String read FsDataStorageTable write FsDataStorageTable;
+     end;
+
+     TConnectionData = class(TPersistent)
+     private
+       FnUserID : Integer;          // UserID in DB, will be set when connected
+       FnGroupID : Integer;         // GroupID in DB
+       FnSessionID : Integer;       // SessionID
+       FdtSessionStart : TDateTime; // start time for current session
+       FOnUserID : TNotifyEvent;    // event when a UserID is set
+       FnSL : Byte;                 // user security level
+       procedure __SetUserID(const Value: Integer);
+     public
+       constructor Create;
+       procedure Reset;
+     published
+       property UserID : Integer read FnUserID write __SetUserID stored False;
+       property GroupID : Integer read FnGroupID write FnGroupID stored False;
+       property SessionID : Integer read FnSessionID;
+       property SessionStart : TDateTime read FdtSessionStart;
+       property SecurityLevel : Byte read FnSL;
+       // events
+       property OnUserID : TNotifyEvent read FOnUserID write FOnUserID;
+     end;
+
+     TUserConnectOption  = (ucoSimple, ucoSecure);
+
+     TmafCustomBaseDB = class(TComponent)
+     private
+       FsComputerName : String;
+       FsDataBaseName : String;
+       FsUser         : String;
+       FsPassword     : String;
+       FConnectionData  : TConnectionData;
+       FDefaultTables : TDefaultTables;
+       FpDatabase : TComponent;
+       FpTransaction : TComponent;
+       FpUpdateTransaction : TComponent;
+       FpQueryList : TList;
+       FpDataSetList : TList;
+       FdwDataSetID : DWORD;
+       FsDataStorageTable : String;
+       FsUserTable : String;
+       FsGroupTable : String;
+       FsTableIdent : String;
+       // events
+       FOnConnect       : TNotifyEvent;
+       FOnDisconnect    : TNotifyEvent;
+       FOnPackDFT       : TNotifyEvent;
+       FOnUnpackDFT     : TNotifyEvent;
+       FOnSetDefaultSQL : TNotifyEvent;
+       FOnCreateQuery   : TNotifyEvent;
+       function __DataSetIDGen: DWORD;
+     protected
+       FpStreamer : TTemplateStreamer;
+       FbConnected : Boolean;
+       procedure Notification(AComponent: TComponent; Operation: TOperation); override;
+       // property methods
+       function __GetConnected: Boolean; virtual;
+       procedure __SetConnected(const Value: Boolean); virtual;
+       function __GetQueryID(List: TList; sName: String): Integer; virtual;
+       function RequestSQL(nID: Integer): String; virtual;
+
+       procedure __InternalConnect; virtual;
+       procedure __InternalDisconnect; virtual;
+       procedure __ReadStreamData(Sender: TObject; ID: Integer); virtual;
+       procedure __WriteStreamData(Sender: TObject; ID: Integer); virtual;
+
+       procedure __WriteBlob(AQuery: TComponent; FieldName: String; aStream: TStream); virtual; abstract;
+       procedure __ReadBlob(AQuery: TComponent; FieldName: String; aStream: TMemoryStream); virtual; abstract;
+
+       function __QueryHasSQL(AQuery: TComponent): Boolean; virtual; abstract;
+       function __RequestQuery(bWrite: Boolean = False; SQL_ID: Integer = -1): Integer; virtual;
+       function RequestQuery(bWrite: Boolean = False; SQL_ID: Integer = -1): TComponent; virtual;
+       procedure FreeQuery(var AQuery: TComponent); virtual;
+       procedure __ExecuteQuery(AQuery: TComponent); virtual;
+       function PrepareTemplateQuery(nID: Integer; TabName, sCat, sName : String): TComponent; virtual;
+       procedure __SetQueryParameter(AQuery: TComponent; FieldName: String; Value: Variant); virtual; abstract;
+       procedure __SwitchReadWriteQuery(AQuery: TComponent; bWrite: Boolean); virtual;
+       function __QueryEoF(AQuery: TComponent): Boolean; virtual; abstract;
+       procedure ApplyChanges; virtual;
+
+       // Users
+       function CreateUser(pData: PUserDataRec) : Boolean; virtual;
+       function DeleteUser(pData: PUserDataRec) : Boolean; virtual;
+       function UpdateUser(pData: PUserDataRec) : Boolean; virtual;
+       function GetUserData(pData: PUserDataRec): Boolean; virtual;
+
+       // groups
+       function CreateGroup(pGroup: PGroupDataRec): Integer; virtual;
+       function UpdateGroup(pGroup: PGroupDataRec): Integer; virtual;
+       function DeleteGroup(pGroup: PGroupDataRec): Integer; virtual;
+       function GetGroupData(pGroup: PGroupDataRec): Integer; virtual;
+
+       // protected properties
+       property ComputerName : String read FsComputerName stored False;
+       property DataBaseName : String read FsDataBaseName write FsDataBaseName;
+       property QueryList : TList read FpQueryList;
+       property DataSetList : TList read FpDataSetList;
+       property DataSetID : DWORD read __DataSetIDGen;
+       // events
+       property OnConnect : TNotifyEvent read FOnConnect write FOnConnect;
+       property OnDisconnect : TNotifyEvent read FOnDisconnect write FOnDisconnect;
+       property OnSetDefaultSQL : TNotifyEvent read FOnSetDefaultSQL write FOnSetDefaultSQL;
+       property OnCreateQuery : TNotifyEvent read FOnCreateQuery write FOnCreateQuery;
+     public
+       constructor Create(AOwner: TComponent); override;
+       destructor Destroy; override;
+       procedure Loaded; override;
+       function CheckRequirements: Boolean; virtual;
+       function ReplaceTableIdent(S, Ident: String): String; virtual;
+       function CreateDataSet: TComponent; virtual;
+       function DestroyDataSet(DataSet: Pointer): Boolean; virtual;
+       function GetDatabaseList(aList: TStrings): Integer; virtual;
+
+
+       // DataStorage
+       function ReadTemplate(aStream: TMemoryStream; var nID: Integer; TableName: String; var Category, TemplateName: String; bReadData: Boolean = True): Integer; virtual;
+       function WriteTemplate(aStream: TMemoryStream; var nID: Integer; TableName: String; var Category, TemplateName: String): Integer; virtual;
+       function GetCategories(AList: TStringList) : Integer; virtual;
+       procedure DeleteTemplate(TableName: String; Category, TemplateName: String); virtual;
+
+       // Users
+       function QueryUserTable(nCommand: Integer; pData: PUserDataRec): Boolean; virtual;
+       procedure ListUsers(UserList: TStringList; GroupID : Integer); virtual;
+
+       // groups
+       function QueryGroupTable(nCommand: Integer; pGroup: PGroupDataRec): Integer; virtual;
+       function ListGroups(GroupList: TList): Integer; virtual;
+
+       // public properties
+       property TableIdent : String read FsTableIdent write FsTableIdent;
+       property Connected : Boolean read __GetConnected write __SetConnected;
+       property User : String read FsUser write FsUser;
+       property Password : String read FsPassword write FsPassword;
+       property Database : TComponent read FpDatabase write FpDatabase;
+       property Transaction : TComponent read FpTransaction write FpTransaction;
+       property UpdateTransaction : TComponent read FpUpdateTransaction write FpUpdateTransaction;
+       property DataStorageTable : String read FsDataStorageTable write FsDataStorageTable;
+       property UserTable : String read FsUserTable write FsUserTable;
+       property GroupTable : String read FsGroupTable write FsGroupTable;
+       // events
+       property OnPackDFT : TNotifyEvent read FOnPackDFT write FOnPackDFT;
+       property OnUnpackDFT : TNotifyEvent read FOnUnpackDFT write FOnUnpackDFT;
+     published
+       property ConnectionData  : TConnectionData read FConnectionData write FConnectionData;
+       property DefaultTables : TDefaultTables read FDefaultTables write FDefaultTables;
+     end; // TmafCustomBaseDB
+
+     TmafCustomBaseDB2 = class(TComponent)
+     private
+       FsProviderName : String;
+       FProviderPackage: HModule;
+       FProviderClass: TPersistentClass;
+       function __GetProviderName: String;
+       procedure __SetProviderName(const Value: String); // Name of the BPL file
+     protected
+       procedure __LoadProviderLibrary;
+     public
+     published
+       property ProviderName : String read __GetProviderName write __SetProviderName;
+     end;
+
+     TmafCustomProvider = class(TComponent)
+     public
+       class function GetProviderName: string; virtual;
+     end;
+
+     TmafProviderClass = Class Of TmafCustomProvider;
+
+     TmafProvider = class(TObject)
+     private
+       FsName : String;
+       FClass : TmafProviderClass;
+     public
+       property ProviderName : String read FsName write FsName;
+       property ProviderClass : TmafProviderClass read FClass write FClass;
+     end;
+
+     TmafProviders = class(TObject)
+     private
+       FpProviderList : TList;
+     protected
+     public
+       constructor Create;
+       destructor Destroy; override;
+
+       procedure RegisterProvider(AProviderClass: TmafProviderClass);
+       procedure GetProviderNames(AList: TStringList);
+     end;
+
+const COMPONENT_BASENAME_QUERY   = 'InternalQuery';
+      COMPONENT_BASENAME_DATASET = 'InternalDataSet';
+
+      // template sql ids
+      SQL_ID_TEMPLATE_SELECT_ID          = 1;
+      SQL_ID_TEMPLATE_SELECT_NAME        = SQL_ID_TEMPLATE_SELECT_ID + 1;
+      SQL_ID_TEMPLATE_UPDATE             = SQL_ID_TEMPLATE_SELECT_NAME + 1;
+      SQL_ID_TEMPLATE_DELETE             = SQL_ID_TEMPLATE_UPDATE + 1;
+      SQL_ID_TEMPLATE_INSERT             = SQL_ID_TEMPLATE_DELETE + 1;
+      SQL_ID_TEMPLATE_CREATE             = SQL_ID_TEMPLATE_INSERT + 1;
+
+      // user sql ids
+      SQL_ID_USERS_SELECT                = SQL_ID_TEMPLATE_CREATE + 1;
+      SQL_ID_USERS_UPDATE                = SQL_ID_USERS_SELECT + 1;
+      SQL_ID_USERS_INSERT                = SQL_ID_USERS_UPDATE + 1;
+      SQL_ID_USERS_DELETE                = SQL_ID_USERS_INSERT + 1;
+      SQL_ID_USERS_CREATE                = SQL_ID_USERS_DELETE + 1;
+      SQL_ID_USERS_LIST_ALL              = SQL_ID_USERS_CREATE + 1;
+      SQL_ID_USERS_LIST_GROUP            = SQL_ID_USERS_LIST_ALL + 1;
+      SQL_ID_USERS_SELECT_NAME           = SQL_ID_USERS_LIST_GROUP + 1;
+
+      // group sql ids
+      SQL_ID_GROUP_SELECT                = SQL_ID_USERS_SELECT_NAME + 1;
+      SQL_ID_GROUP_CREATE                = SQL_ID_GROUP_SELECT + 1;
+      SQL_ID_GROUP_INSERT                = SQL_ID_GROUP_CREATE + 1;
+      SQL_ID_GROUP_DELETE                = SQL_ID_GROUP_INSERT + 1;
+      SQL_ID_GROUP_UPDATE                = SQL_ID_GROUP_DELETE + 1;
+      SQL_ID_GROUP_SELECT_ID             = SQL_ID_GROUP_UPDATE + 1;
+
+      sDefaultTemplateTable = 'MAF_Templates';
+
+  // Delphi 2009 and upwards use Widestrings as standard string, so passwords
+  // saved with an older Delphi won't be readable anymore. So we save a flag that
+  // tells us, if the password was saved before Delphi 2009 (with 8Bit) or with
+  // at least with Delphi 2009
+  {$IFDEF D11+}
+    nUserBaseFlag = 1;  // 16 bit Delphi 2009 and later
+  {$ELSE}
+    nUserBaseFlag = 0;  // 8 bit Delphi 2007 and earlier
+  {$ENDIF}
+
+  sDefaultEncryptionKey : String = 'X9@zulu$$kffs87#%';
+
+var mafProviders : TmafProviders;
+
+implementation
+
+uses uMAF_Tools, dialogs, uBaseSQL_Consts;
+
+{ TConnectionData }
+
+constructor TConnectionData.Create;
+begin
+  FnUserID := -1;    // no user
+  FnSessionID := -1; // no session active
+  FdtSessionStart := Now;
+end;
+
+procedure TConnectionData.Reset;
+begin
+  FnUserID := -1;
+  FnGroupID := -1;
+  FnSessionID := 0;
+  FnSL := 1;
+end;
+
+procedure TConnectionData.__SetUserID(const Value: Integer);
+begin
+  FnUserID := Value;
+  If Assigned(FOnUserID) Then
+    FOnUserID(Self);
+end;
+
+{ TDefaultTables }
+
+constructor TDefaultTables.Create;
+begin
+  FsUserTable := 'MAF_Users';
+  FsGroupTable := 'MAF_Groups';
+  FsDataStorageTable := 'MAF_DataStorage';
+end;
+
+{ TmafCustomBaseDB }
+
+constructor TmafCustomBaseDB.Create(AOwner: TComponent);
+begin
+  inherited;
+  FsTableIdent := '%Ident_TableName%'; // default
+  FConnectionData := TConnectionData.Create;
+  FDefaultTables := TDefaultTables.Create;
+  FsComputerName := GetEnvironmentVariable('ComputerName'); //GetLocalIPAddressOrHostName(_HOSTNAME);
+  FpQueryList := TList.Create;
+  FpDataSetList := TList.Create;
+  FpDatabase := nil;
+  FpTransaction := nil;
+  FpUpdateTransaction := nil;
+  FdwDataSetID := 0;
+  FbConnected := False;
+  FpStreamer := TTemplateStreamer.Create;
+  FpStreamer.Attributes := 1;
+  FpStreamer.StreamVersion := 200;  // default version 2.00 streams
+  FpStreamer.OnStreamReadAttribute := __ReadStreamData;
+  FpStreamer.OnStreamWriteAttribute := __WriteStreamData;
+end;
+
+destructor TmafCustomBaseDB.Destroy;
+begin
+  If FbConnected Then
+    Connected := False;
+  FreeAndNil(FpStreamer);
+  FreeAndNil(FpQueryList);
+  FreeAndNil(FpDataSetList);
+  FConnectionData.Free;
+  FDefaultTables.Free;
+  inherited;
+end;
+
+procedure TmafCustomBaseDB.Loaded;
+begin
+  inherited;
+  Connected := FbConnected;    // now we can connect, if designed as connected
+end;
+
+procedure TmafCustomBaseDB.Notification(AComponent: TComponent; Operation: TOperation);
+begin
+  inherited;
+  If Operation = opRemove Then begin
+    If AComponent = FpDatabase Then begin
+      FpDatabase := nil;
+      FConnectionData.Reset;
+      FbConnected := False;
+    end;
+    If AComponent = FpTransaction Then
+      FpTransaction := nil;
+    If AComponent = FpUpdateTransaction Then
+      FpUpdateTransaction := nil;
+  end;  //  --  If Operation = opRemove Then
+end; // Notification
+
+function TmafCustomBaseDB.PrepareTemplateQuery(nID: Integer; TabName, sCat, sName: String): TComponent;
+var AQuery : TComponent;
+begin
+  AQuery := nil;
+//  QueryID := -1;
+  If nID > 0 Then begin
+    AQuery := RequestQuery(False, SQL_ID_TEMPLATE_SELECT_ID);
+{    TIB_Q(QueryList.Items[nQueryID]).SQL.Text := RequestSQL(SQL_ID_TEMPLATE_SELECT_ID);
+    TIB_Q(QueryList.Items[nQueryID]).Prepare;}
+    __SetQueryParameter(AQuery, 'DataID', nID);
+//    TDataSet(QueryList.Items[nQueryID]).ParamByName('DataID').AsInteger := nID;
+  end else
+    If ((sCat <> '') AND (sName <> '')) Then begin
+      AQuery := RequestQuery(False, SQL_ID_TEMPLATE_SELECT_NAME);
+{      TIB_Q(QueryList.Items[nQueryID]).SQL.Text := RequestSQL(SQL_ID_TEMPLATE_SELECT_NAME);
+      TIB_Q(QueryList.Items[nQueryID]).Prepare;
+      TIB_Q(QueryList.Items[nQueryID]).ParamByName('Data_Category').AsString := sCat;
+      TIB_Q(QueryList.Items[nQueryID]).ParamByName('Data_Name').AsString := sName;}
+    __SetQueryParameter(AQuery, 'Data_Category', sCat);
+    __SetQueryParameter(AQuery, 'Data_Name', sName);
+    end;  //  --  If ((Category <> '') AND (TemplateName <> '')) Then
+
+  // check again, if we have a SQL query as we should by now
+  If Not __QueryHasSQL(AQuery) Then begin
+    FreeQuery(AQuery);            // releasing the query
+    Exit;                         // and we're gone :P
+  end;  //  --  If TpFIBQuery(QueryList.Items[nQueryID]).SQL.Text = '' Then
+  Result := AQuery;
+end;
+
+function TmafCustomBaseDB.__DataSetIDGen: DWORD;
+begin
+  Inc(FdwDataSetID);
+  Result := FdwDataSetID;
+end;
+
+procedure TmafCustomBaseDB.__ExecuteQuery(AQuery: TComponent);
+begin
+  // Do nothing :)
+end;
+
+function TmafCustomBaseDB.CreateDataSet: TComponent;
+begin
+  Result := nil;
+end;
+
+function TmafCustomBaseDB.DestroyDataSet(DataSet: Pointer): Boolean;
+var i : Integer;
+begin
+  Result := False;
+  For i := 0 To FpDataSetList.Count - 1 Do
+    If FpDataSetList.Items[i] = DataSet Then
+      If TComponent(FpDataSetList.Items[i]).Tag = TComponent(DataSet).Tag Then begin // double safe :)
+        TComponent(FpDataSetList.Items[i]).Free;
+        FpDataSetList.Delete(i);
+        Result := True;
+        Break;
+      end;  //  --  If TDataSet(FpDataSetList.Items[i]).Tag = TDataSet(DataSet).Tag Then
+end; // DestroyDataSet
+
+function TmafCustomBaseDB.__GetConnected: Boolean;
+begin
+  Result := ((Assigned(Database)) And (FbConnected));
+end;
+
+procedure TmafCustomBaseDB.__SetConnected(const Value: Boolean);
+begin
+  If csLoading in ComponentState Then begin // we do it in Loaded
+    FbConnected := Value;
+    Exit;
+  end;
+
+{  If FsUserTable = '' Then
+    FsUserTable := FDefaultTables.UserTable;
+  If FsGroupTable = '' Then
+    FsGroupTable := FDefaultTables.GroupTable;
+  If FsDataStorageTable = '' Then
+    FsDataStorageTable := FDefaultTables.DataStorageTable;
+}
+  If Value Then __InternalConnect
+           Else __InternalDisconnect;
+end;
+
+procedure TmafCustomBaseDB.__SwitchReadWriteQuery(AQuery: TComponent; bWrite: Boolean);
+begin
+  // Do nothing
+end;
+
+procedure TmafCustomBaseDB.__InternalConnect;
+var pUser : PUserDataRec;
+    pGroup : PGroupDataRec;
+begin
+  If Connected Then begin
+    If FsUserTable <> '' Then begin
+      New(pUser);
+      pUser^.Login := FsUser;
+      pUser^.ID := -1;
+      If QueryUserTable(US_GET_USER_DATA, pUser) Then begin
+        FConnectionData.FnGroupID := pUser^.GroupID;
+        If FConnectionData.FnGroupID > 0 Then begin
+          New(pGroup);
+          pGroup^.GroupID := FConnectionData.FnGroupID;
+          QueryGroupTable(US_GET_GROUP_DATA, pGroup);
+          FConnectionData.FnSL := pGroup^.SL;
+          Dispose(pGroup);
+        end;
+        FConnectionData.FnUserID := pUser^.ID; // causes OnUserID event
+      end;
+      Dispose(pUser);
+    end else
+      FConnectionData.Reset;
+    If Assigned(FOnConnect) Then
+      FOnConnect(Self);
+  end;
+end;
+
+procedure TmafCustomBaseDB.__InternalDisconnect;
+begin
+  If Assigned(FOnDisconnect) Then
+    FOnDisconnect(Self);
+  FConnectionData.FnUserID := -1;
+  FConnectionData.FnGroupID := -1;
+  FConnectionData.FnSessionID := -1;
+  FbConnected := False;
+end;
+
+procedure TmafCustomBaseDB.FreeQuery(var AQuery: TComponent);
+var nID : Integer;
+begin
+  If Assigned(AQuery) Then begin
+    nID := FpQueryList.IndexOf(AQuery);
+    FreeAndNil(AQuery);
+    If nID > -1 Then
+      FpQueryList.Delete(nID);
+  end;  //  --  If Assigned(AQuery) Then
+end;
+
+function TmafCustomBaseDB.GetCategories(AList: TStringList): Integer;
+begin
+  //
+end;
+
+function TmafCustomBaseDB.GetDatabaseList(aList: TStrings): Integer;
+begin
+  Result := ERR_NO_ERROR;
+end;
+
+procedure TmafCustomBaseDB.ApplyChanges;
+begin
+  // Do nothing, any child component has to overwrite it to commit the transaction here
+end;
+
+function TmafCustomBaseDB.CheckRequirements: Boolean;
+begin
+  Result := ((Assigned(DataBase)) And (Assigned(Transaction)));
+  If Result Then
+    Result := Connected;
+end;
+
+function TmafCustomBaseDB.ReplaceTableIdent(S, Ident: String): String;
+var S1 : String;
+begin
+  S1 := S;
+  S1 := StringReplace(S1, sUserTableIdent, FsUserTable, [rfIgnoreCase, rfReplaceAll]);
+  S1 := StringReplace(S1, sGroupTableIdent, FsGroupTable, [rfIgnoreCase, rfReplaceAll]);
+  S1 := StringReplace(S1, sDataStorageTableIdent, FsDataStorageTable, [rfIgnoreCase, rfReplaceAll]);
+  Result := S1;
+end;
+
+procedure TmafCustomBaseDB.DeleteTemplate(TableName, Category, TemplateName: String);
+var AQuery : TComponent;
+    nID : Integer;
+begin
+  If TableName = EmptyStr Then // the basics
+    If ((Category = '') AND (TemplateName = '')) Then
+      Exit;
+
+  nID := 0;
+  AQuery := PrepareTemplateQuery(nID, TableName, Category, TemplateName);
+  __ExecuteQuery(AQuery);
+  If Assigned(AQuery) Then begin
+    If Not TDataSet(AQuery).EoF Then
+      nID := TDataSet(AQuery).Fields[0].AsInteger; // we need the ID in any case
+
+    FreeQuery(AQuery);
+    AQuery := RequestQuery(True, SQL_ID_TEMPLATE_DELETE);
+    __SetQueryParameter(AQuery, 'DataID', nID);
+    __ExecuteQuery(AQuery);
+    FreeQuery(AQuery);
+  end;  //  --  If nQueryID = -1 Then
+end;
+
+// ********************************* Comments **********************************
+// Description : writes a template into the database through ID or combination of
+//               Category/TemplateName
+// Param (in)  : aStream=stream to save the template data
+//               nID=ID of the template
+//               TableName=Name of the template table
+//               Category=Name of the template category
+//               TemplateName=Name of the template
+// Param (out) : ErrCode + var params : nID, Category and TemplateName
+// Coding by   : Helge Lange
+// Date        : 26.03.2007
+// Last Update : 03.10.2010
+// *****************************************************************************
+function TmafCustomBaseDB.WriteTemplate(aStream: TMemoryStream; var nID: Integer; TableName: String; var Category, TemplateName: String): Integer;
+var AQuery : TComponent;
+begin
+  Result := ERR_NO_ERROR;
+  If ((aStream = nil) Or (TableName = EmptyStr)) Then // the basics
+    If ((nID = 0) Or ((Category = '') AND (TemplateName = ''))) Then begin // the params
+      Result := ERR_PARAM_FAILURE;
+      Exit;
+    end;  //  --  If ((nID = 0) Or ((Category = '') AND (TemplateName = ''))) Then
+
+  Result := ERR_UNKNOWN_ERROR;
+  AQuery := PrepareTemplateQuery(nID, TableName, Category, TemplateName);
+  If Not Assigned(AQuery) Then begin
+    Result := ERR_PARAM_FAILURE;
+    Exit;
+  end;  //  --  If nQueryID = -1 Then
+
+  __ExecuteQuery(AQuery);
+  If Not TDataSet(AQuery).EoF Then begin
+    // update mode
+    nID := TDataSet(AQuery).Fields[0].AsInteger; // we need the ID in any case
+    Category := TDataSet(AQuery).Fields[1].AsString; // return for users convenience
+    TemplateName := TDataSet(AQuery).Fields[2].AsString;
+
+    __ReadBlob(AQuery, 'Data_Storage', nil);  // doesn't read the blob, but for FIBComponent based DACs it stores the BlobID
+
+    TDataSet(AQuery).Close;
+    FreeQuery(AQuery);
+
+    AQuery := RequestQuery(True, SQL_ID_TEMPLATE_UPDATE);
+    __SetQueryParameter(AQuery, 'DataID', nID);
+  end else begin
+    // create new template
+    FreeQuery(AQuery);
+    AQuery := RequestQuery(True, SQL_ID_TEMPLATE_INSERT);
+    nID := -1; // we don't know the ID yet
+    __SetQueryParameter(AQuery, 'Data_Category', Category);
+    __SetQueryParameter(AQuery, 'Data_Name', TemplateName);
+  end;
+  __WriteBlob(AQuery, 'Data_Storage', aStream);
+  __ExecuteQuery(AQuery);
+  ApplyChanges;
+  Result := ERR_NO_ERROR;
+  FreeQuery(AQuery);
+  If nID = -1 Then begin
+    // we inserted a new template, we return the ID
+    AQuery := PrepareTemplateQuery(nID, TableName, Category, TemplateName); // will cause to prepare a query through Category/TemplateName
+    __SwitchReadWriteQuery(AQuery, False); // just reading... promise!
+    __ExecuteQuery(AQuery);
+    If Not TDataSet(AQuery).EoF Then
+      nID := TDataSet(AQuery).Fields[0].AsInteger;
+    FreeQuery(TComponent(AQuery));
+  end;
+end;
+
+// ********************************* Comments **********************************
+// Description : reads a template from the database through ID or combination of
+//               Category/TemplateName
+// Param (in)  : aStream=stream to save the template data
+//               nID=ID of the template
+//               TableName=Name of the template table
+//               Category=Name of the template category
+//               TemplateName=Name of the template
+// Param (out) : ErrCode + var params : nID, Category and TemplateName
+// Coding by   : Helge Lange
+// Date        : 26.03.2007
+// Last Update : 02.10.2010
+// *****************************************************************************
+function TmafCustomBaseDB.ReadTemplate(aStream: TMemoryStream; var nID: Integer; TableName: String; var Category, TemplateName: String; bReadData: Boolean = True): Integer;
+var AQuery : TComponent;
+begin
+  Result := ERR_NO_ERROR;
+  If ((aStream = nil) Or (TableName = EmptyStr)) Then // the basics
+    If ((nID = 0) Or ((Category = '') AND (TemplateName = ''))) Then begin // the params
+      Result := ERR_PARAM_FAILURE;
+      Exit;
+    end;  //  --  If ((nID = 0) Or ((Category = '') AND (TemplateName = ''))) Then
+
+  AQuery := PrepareTemplateQuery(nID, TableName, Category, TemplateName);
+  If Not Assigned(AQuery) Then begin
+    Result := ERR_PARAM_FAILURE;
+    Exit;
+  end;  //  --  If Not Assigned(AQuery) Then
+
+  __ExecuteQuery(AQuery);
+  If Not TDataSet(AQuery).EoF Then begin
+    // filling all 3
+    nID := TDataSet(AQuery).Fields[0].AsInteger;
+    Category := TDataSet(AQuery).Fields[1].AsString;
+    TemplateName := TDataSet(AQuery).Fields[2].AsString;
+    Result := ERR_NO_ERROR; // everything ok here
+    If bReadData Then begin
+      __ReadBlob(AQuery, 'Data_Storage', aStream);
+      If aStream.Size = 0 Then
+        Result := ERR_STREAM_EMPTY;
+    end;
+  end else  //  --  If Not TpFIBQuery(QueryList.Items[nQueryID]).EoF Then
+    Result := ERR_STREAM_EMPTY;
+  FreeQuery(TComponent(AQuery)); // free the query
+end;
+
+function TmafCustomBaseDB.__RequestQuery(bWrite: Boolean = False; SQL_ID: Integer = -1): Integer;
+begin
+  Result := -1;
+  If FpQueryList.Count > 0 Then begin
+    Result := FpQueryList.Count - 1;
+    If Assigned(FOnCreateQuery) Then
+      FOnCreateQuery(TObject(FpQueryList.Items[Result]));
+  end;  //  --  If FpQueryList.Count > 0 Then 
+end;
+
+function TmafCustomBaseDB.__GetQueryID(List: TList; sName: String): Integer;
+var i, HighID : Integer;
+    S : String;
+begin
+  HighID := 1;
+  For i := 0 To List.Count - 1 Do begin
+    S := TComponent(List.Items[i]).Name;
+    Delete(S, 1, Length(sName)); // remove sName from the name
+    If StrToIntDef(S, 0) > HighID Then
+      HighID := StrToIntDef(S, 0);
+  end;  //  --  For i := 0 To List.Count - 1 Do
+  Result := HighID;
+end;
+
+function TmafCustomBaseDB.QueryGroupTable(nCommand: Integer; pGroup: PGroupDataRec): Integer;
+begin
+  Case nCommand of
+    US_CREATE_GROUP   : Result := CreateGroup(pGroup);
+    US_UPDATE_GROUP   : Result := UpdateGroup(pGroup);
+    US_DELETE_GROUP   : Result := DeleteGroup(pGroup);
+    US_GET_GROUP_DATA : Result := GetGroupData(pGroup);
+    Else Result := ERR_PARAM_FAILURE;
+  end;
+end;
+
+function TmafCustomBaseDB.QueryUserTable(nCommand: Integer; pData: PUserDataRec): Boolean;
+begin
+  Case nCommand Of
+    US_CREATE_USER   : Result := CreateUser(pData);
+    US_DELETE_USER   : Result := DeleteUser(pData);
+    US_MODIFY_USER   : Result := UpdateUser(pData);
+    US_GET_USER_DATA : Result := GetUserData(pData);
+    Else Result := False;
+  end;
+end;
+
+function TmafCustomBaseDB.CreateUser(pData: PUserDataRec): Boolean;
+var AQuery : TComponent;
+begin
+  Result := False;
+  If pData = nil Then
+    Exit;
+
+  AQuery := RequestQuery(True, SQL_ID_USERS_INSERT);
+  //AQuery.ParamByName('ID').AsInteger := 1; // doesn't matter, the trigger will set the ID
+  __SetQueryParameter(AQuery, 'Login', pData^.Login);
+  __SetQueryParameter(AQuery, 'GroupID', pData^.GroupID);
+
+  FpStreamer.Data := pData;
+  FpStreamer.WriteStream(6558);
+  __WriteBlob(AQuery, 'Account_Data', FpStreamer.Stream);
+  __ExecuteQuery(AQuery);
+  ApplyChanges;
+  FreeQuery(TComponent(AQuery));
+  Result := True;
+end;
+
+function TmafCustomBaseDB.DeleteUser(pData: PUserDataRec): Boolean;
+var AQuery : TComponent;
+begin
+  Result := False;
+  If ((pData = nil) Or (pData^.ID = 0)) Then
+    Exit;
+
+  AQuery := RequestQuery(True, SQL_ID_USERS_DELETE);
+  __SetQueryParameter(AQuery, 'ID', pData^.ID);
+  __ExecuteQuery(AQuery);
+
+  FreeQuery(TComponent(AQuery));
+  Result := True;
+end;
+
+function TmafCustomBaseDB.UpdateUser(pData: PUserDataRec): Boolean;
+var AQuery : TComponent;
+begin
+  Result := False;
+  If ((pData = nil) Or (pData^.ID = 0)) Then
+    Exit;
+
+  AQuery := RequestQuery(True, SQL_ID_USERS_UPDATE);
+  __SetQueryParameter(AQuery, 'ID', pData^.ID);
+  __SetQueryParameter(AQuery, 'GroupID', pData^.GroupID);
+
+  FpStreamer.Data := pData;
+  FpStreamer.WriteStream(6558);
+
+  __WriteBlob(AQuery, 'Account_Data', FpStreamer.Stream);
+  __ExecuteQuery(AQuery);
+
+  FreeQuery(AQuery);
+  Result := True;
+end;
+
+procedure TmafCustomBaseDB.ListUsers(UserList: TStringList; GroupID: Integer);
+var AQuery : TComponent;
+begin
+  If GroupID = -1 Then begin
+    AQuery := RequestQuery(False, SQL_ID_USERS_LIST_ALL);
+  end Else begin
+    AQuery := RequestQuery(False, SQL_ID_USERS_LIST_GROUP);
+    __SetQueryParameter(AQuery, 'GroupID', GroupID);
+  end;  //  --  If GroupID = -1 Then
+
+  __ExecuteQuery(AQuery);
+  While Not TDataSet(AQuery).EoF Do begin
+    UserList.AddObject(TDataSet(AQuery).Fields[1].AsString, Pointer(TDataSet(AQuery).Fields[0].AsInteger));
+    TDataSet(AQuery).Next;
+  end;  //  --  While Not pQuery.EoF Do
+  TDataSet(AQuery).Close;
+  FreeQuery(AQuery);
+end;
+
+function TmafCustomBaseDB.GetUserData(pData: PUserDataRec): Boolean;
+var AQuery: TComponent;
+begin
+  Result := False;
+  If ((pData = nil) Or (pData^.ID = 0)) Then
+    Exit;
+
+  If pData^.ID = -1 Then begin
+    AQuery := RequestQuery(False, SQL_ID_USERS_SELECT_NAME);
+    __SetQueryParameter(AQuery, 'Login', pData^.Login);
+  end Else begin
+    AQuery := RequestQuery(False, SQL_ID_USERS_SELECT);
+    __SetQueryParameter(AQuery, 'ID', pData^.ID);
+  end;
+  __ExecuteQuery(AQuery);
+  If Not TDataSet(AQuery).EoF Then begin
+    pData^.ID := TDataset(AQuery).Fields[0].AsInteger;
+    pData^.Login := TDataset(AQuery).Fields[1].AsString;
+    pData^.GroupID := TDataset(AQuery).Fields[2].AsInteger;
+    pData^.SL := Byte(TDataset(AQuery).Fields[4].AsInteger);
+
+    FpStreamer.Stream.Size := 0;
+    FpStreamer.Data := pData;
+    __ReadBlob(AQuery, 'Account_Data', FpStreamer.Stream);
+    FpStreamer.ReadStream;
+    FpStreamer.Stream.Size := 0;
+
+    Result := True;
+  end;  //  --  If Not pQuery.EoF Then
+  FreeQuery(TComponent(AQuery));
+end;
+
+function TmafCustomBaseDB.ListGroups(GroupList: TList): Integer;
+var AQuery : TComponent;
+    pGroup : PGroupDataRec;
+begin
+  AQuery := RequestQuery(False, SQL_ID_GROUP_SELECT);
+  __ExecuteQuery(AQuery);
+  While Not TDataSet(AQuery).EoF Do begin
+    New(pGroup);
+    pGroup^.GroupID := TDataSet(AQuery).Fields[0].AsInteger;
+    pGroup^.GroupName := TDataSet(AQuery).Fields[1].AsString;
+    pGroup^.Flags := []; // TODO
+    pGroup^.SL := TDataSet(AQuery).Fields[2].AsInteger;
+    GroupList.Add(pGroup);
+    TDataSet(AQuery).Next;
+  end;  //  --  While Not pQuery.EoF Do
+  TDataSet(AQuery).Close;
+  FreeQuery(TComponent(AQuery));
+end;
+
+function TmafCustomBaseDB.CreateGroup(pGroup: PGroupDataRec): Integer;
+var AQuery : TComponent;
+begin
+  AQuery := RequestQuery(True, SQL_ID_GROUP_INSERT);
+  __SetQueryParameter(AQuery, 'Name', pGroup^.GroupName);
+  If pGroup^.SL > ConnectionData.SecurityLevel Then
+    pGroup^.SL := 1;
+  __SetQueryParameter(AQuery, 'SL', pGroup^.SL);
+  __ExecuteQuery(AQuery);
+  ApplyChanges;
+  FreeQuery(AQuery);
+  Result := ERR_NO_ERROR;
+end;
+
+function TmafCustomBaseDB.UpdateGroup(pGroup: PGroupDataRec): Integer;
+var AQuery : TComponent;
+begin
+  AQuery := RequestQuery(True, SQL_ID_GROUP_UPDATE);
+  __SetQueryParameter(AQuery, 'ID', pGroup^.GroupID);
+  __SetQueryParameter(AQuery, 'Name', pGroup^.GroupName);
+  __SetQueryParameter(AQuery, 'SL', pGroup^.SL);
+  __ExecuteQuery(AQuery);
+  ApplyChanges;
+  FreeQuery(AQuery);
+  Result := ERR_NO_ERROR;
+end;
+
+function TmafCustomBaseDB.DeleteGroup(pGroup: PGroupDataRec): Integer;
+var AQuery : TComponent;
+begin
+  AQuery := RequestQuery(True, SQL_ID_GROUP_DELETE);
+  __SetQueryParameter(AQuery, 'ID', pGroup^.GroupID);
+  __ExecuteQuery(AQuery);
+  FreeQuery(AQuery);
+  Result := ERR_NO_ERROR;
+end;
+
+function TmafCustomBaseDB.GetGroupData(pGroup: PGroupDataRec): Integer;
+var AQuery : TComponent;
+begin
+  AQuery := RequestQuery(False, SQL_ID_GROUP_SELECT_ID);
+  __SetQueryParameter(AQuery, 'ID', pGroup^.GroupID);
+  __ExecuteQuery(AQuery);
+  If TDataSet(AQuery).Eof = False Then begin
+    pGroup^.GroupID := TDataSet(AQuery).Fields[0].AsInteger;
+    pGroup^.GroupName := TDataSet(AQuery).Fields[1].AsString;
+    pGroup^.SL := TDataSet(AQuery).Fields[2].Value;
+  end;
+  FreeQuery(AQuery);
+  Result := ERR_NO_ERROR;
+end;
+
+function TmafCustomBaseDB.RequestQuery(bWrite: Boolean; SQL_ID: Integer): TComponent;
+var nQueryID: Integer;
+begin
+  Result := nil;
+  nQueryID := __RequestQuery(bWrite, SQL_ID);
+  If nQueryID > -1 Then
+    Result := TComponent(FpQueryList.Items[nQueryID]);
+end;
+
+function TmafCustomBaseDB.RequestSQL(nID: Integer): String;
+begin
+  Case nID Of
+    // template sql ids
+    SQL_ID_TEMPLATE_SELECT_ID : Result := ReplaceTableIdent(sQUERY_TEMPLATE_ID, DataStorageTable);
+    SQL_ID_TEMPLATE_UPDATE  : Result := ReplaceTableIdent(sUPDATE_TEMPLATE, DataStorageTable);
+    SQL_ID_TEMPLATE_DELETE  : Result := ReplaceTableIdent(sDELETE_TEMPLATE, DataStorageTable);
+    SQL_ID_TEMPLATE_INSERT  : Result := ReplaceTableIdent(sINSERT_TEMPLATE, DataStorageTable);
+    SQL_ID_TEMPLATE_CREATE  : Result := ReplaceTableIdent(sCREATE_TEMPLATE_TABLE, DataStorageTable);
+    SQL_ID_TEMPLATE_SELECT_NAME : Result := ReplaceTableIdent(sQUERY_TEMPLATE_NAME, DataStorageTable);
+    // user sql ids
+    SQL_ID_USERS_SELECT     : Result := ReplaceTableIdent(sQUERY_USERS_ID, FsUserTable);
+    SQL_ID_USERS_UPDATE     : Result := ReplaceTableIdent(sUPDATE_USERS, FsUserTable);
+    SQL_ID_USERS_INSERT     : Result := ReplaceTableIdent(sINSERT_USERS, FsUserTable);
+    SQL_ID_USERS_DELETE     : Result := ReplaceTableIdent(sDELETE_USERS, FsUserTable);
+    SQL_ID_USERS_CREATE     : Result := ReplaceTableIdent(sCREATE_USER_TABLE, FsUserTable);
+    SQL_ID_USERS_LIST_ALL   : Result := ReplaceTableIdent(sLIST_ALL_USERS, FsUserTable);
+    SQL_ID_USERS_LIST_GROUP : Result := ReplaceTableIdent(sLIST_USER_BY_GROUP, FsUserTable);
+    SQL_ID_USERS_SELECT_NAME: Result := ReplaceTableIdent(sQUERY_USERS_NAME, FsUserTable);
+
+    // group sql ids
+    SQL_ID_GROUP_SELECT     : Result := ReplaceTableIdent(sQUERY_GROUPS, FsGroupTable);
+    SQL_ID_GROUP_CREATE     : Result := ReplaceTableIdent(sCREATE_GROUP_TABLE, FsGroupTable);
+    SQL_ID_GROUP_INSERT     : Result := ReplaceTableIdent(sINSERT_GROUP, FsGroupTable);
+    SQL_ID_GROUP_DELETE     : Result := ReplaceTableIdent(sDELETE_GROUP_ID, FsGroupTable);
+    SQL_ID_GROUP_UPDATE     : Result := ReplaceTableIdent(sUPDATE_GROUP_ID, FsGroupTable);
+    SQL_ID_GROUP_SELECT_ID  : Result := ReplaceTableIdent(sSELECT_BY_GROUP_ID, FsGroupTable);
+  end;
+end;
+
+procedure TmafCustomBaseDB.__WriteStreamData(Sender: TObject; ID: Integer);
+begin
+  // do nothing
+end;
+
+procedure TmafCustomBaseDB.__ReadStreamData(Sender: TObject; ID: Integer);
+begin
+  // do nothing
+end;
+
+{ TmafCustomBaseDB2 }
+
+function TmafCustomBaseDB2.__GetProviderName: String;
+begin
+  Result := FsProviderName;
+end;
+
+procedure TmafCustomBaseDB2.__SetProviderName(const Value: String);
+begin
+
+  FsProviderName := Value;
+end;
+
+procedure TmafCustomBaseDB2.__LoadProviderLibrary;
+begin
+  //LoadPackage(
+end;
+
+{ TmafProviders }
+
+constructor TmafProviders.Create;
+begin
+  FpProviderList := TList.Create;
+end;
+
+destructor TmafProviders.Destroy;
+var i: Integer;
+begin
+  For i := 0 To FpProviderList.Count - 1 Do
+    TmafProvider(FpProviderList.Items[i]).Free;
+  FpProviderList.Clear;
+  FpProviderList.Free;
+  inherited;
+end;
+
+procedure TmafProviders.GetProviderNames(AList: TStringList);
+var i: Integer;
+begin
+  If Assigned(AList) Then 
+    For i := 0 To FpProviderList.Count - 1 Do
+      AList.Add(TmafProvider(FpProviderList.Items[i]).ProviderName);
+end;
+
+procedure TmafProviders.RegisterProvider(AProviderClass: TmafProviderClass);
+var mafProvider : TmafProvider;
+begin
+  mafProvider := TmafProvider.Create;
+  mafProvider.ProviderClass := AProviderClass;
+  mafProvider.ProviderName := AProviderClass.GetProviderName;
+end;
+
+{ TmafCustomProvider }
+
+class function TmafCustomProvider.GetProviderName: string;
+begin
+  Result := 'TmafProvider Base Class';
+end;
+
+{initialization
+  mafProviders := TmafProviders.Create;
+
+finalization
+  mafProviders.Free;
+}
+end.

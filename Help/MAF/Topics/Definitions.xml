@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<topic template="Default" lasteditedby="Helge" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../helpproject.xsd">
+  <title translate="true">Definitions</title>
+  <body>
+    <header>
+      <para styleclass="Heading1"><text styleclass="Heading1" translate="true">Definitions</text></para>
+    </header>
+    <para styleclass="Normal" style="margin-left:24px;"><text styleclass="Normal" translate="true">This section contains definitions for expressions used in the help file.</text></para>
+  </body>
+</topic>

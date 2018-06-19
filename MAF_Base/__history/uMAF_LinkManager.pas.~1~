@@ -1,0 +1,365 @@
+{*******************************************************************************
+Name         : uMAF_LinkManager.pas
+Coding by    : Helge Lange
+Copyright    : (c)opyright 2004-2015 by Helge Lange
+Info         : HelgeLange@maf-components.com
+Website      : http://www.maf-components.com
+Date         : 02.03.2004
+Last Update  : 03.09.2015
+Version      : 1.1.005
+Last Changes :
+
+1.0.005 (03.09.2015)------------------------------------------------------------
+- [ADD] the LinkManager inserts itself into the FreeNotification list of every
+        LinkClient that adds a LinkId
+1.0.004 (24.07.2009)------------------------------------------------------------
+- [CHG] changed TmafLinkManager to inherit from TmafCustomManagerComponent
+        therefore the obsolet HookAccessContainer stuff was deleted and we now
+        use the ModuleController defined in the new CustomClass
+1.1.003 (04.04.2007)------------------------------------------------------------
+- [CHANGE] changed to TComponent descendant
+- [ADD] added usage of TERPHookAccessContainer as client interface
+1.0.002 (06.11.2004) -----------------------------------------------------------
+- [CHANGE] changed to use pure API, no window handle needed anymore
+- [FIX] fixed a bug in TLink.Destroy
+1.0.001 (02.03.2004) -----------------------------------------------------------
+- initial version
+*******************************************************************************}
+unit uMAF_LinkManager;
+
+interface
+
+uses Classes, Windows, Messages,
+     // Modular Application Framework Components units
+     uMAF_Globals, uMAF_Core;
+
+Type TLinkID = class
+     private
+       FLinkID : Integer;
+       ClientList : TList;
+       function __GetCount: Integer;
+     public
+       constructor Create(ID: Integer); reintroduce;
+       destructor Destroy; override;
+       procedure Add(Sender: TObject);
+       procedure Delete(Sender: TObject);
+       // properties
+       property LinkID: Integer read FLinkID;
+       property Count: Integer read __GetCount;
+     end; // TLinkID
+
+     TmafLinkManager = class(TmafCustomManagerComponent)
+     private
+       FLinkIDList   : TList;
+       FnEmptyChannelID_Start : Integer;
+       FnEmptyChannelID_Range : integer;
+       function GetLink(ID: Integer): TLinkID;
+     protected
+       procedure __RegisterAPI; override;
+       procedure __OnEvent(SubHookID: Integer; QHS: pQHS; UserParam: Pointer; var ErrCode: Integer); override;
+       function __Request_EmptyChannelID: Integer;
+     public
+       constructor Create(AOwner: TComponent); override;
+       destructor Destroy; override;
+       procedure Notification(AComponent: TComponent;  Operation: TOperation); override;
+
+       procedure Add(Sender: TObject; ID: Integer);
+       procedure Delete(Sender: TObject; ID: Integer);
+       procedure DeleteClient(Sender: Pointer);
+       procedure GetLinkList(ID: Integer;var pData: Pointer);
+       function DispatchText(ID: Integer; AText: PChar; Sender: Pointer): Integer;
+       function DispatchData(ID: Integer; pData: Pointer; Sender: Pointer): Integer;
+     published
+       property EmptyChannelID_Start : Integer read FnEmptyChannelID_Start write FnEmptyChannelID_Start default 15000;
+       property EmptyChannelID_Range : integer read FnEmptyChannelID_Range write FnEmptyChannelID_Range default 5000;
+
+     end; // TmafLinkManager
+
+var LM : TmafLinkManager;
+
+implementation
+
+uses SysUtils, uMAF_Tools, uMAF_LinkClient;
+
+const MAX_EVENTS = 1;
+
+var ManagerEvents : array[1..MAX_EVENTS] of Integer = (
+      HM_LINKMANAGER_QUERY);
+
+{ TLinkID }
+
+// ********************************* Comments **********************************
+// Description : neue LinkID wird angemeldet
+// Param (in)  : ID=ID der Links
+// Param (out) : N/A
+// Coding by   : Helge Lehn
+// Date        : 02.03.2004
+// Last Update : 02.03.2004
+// *****************************************************************************
+constructor TLinkID.Create(ID: Integer);
+begin
+  inherited Create;
+  ClientList := TList.Create; // Liste mit Clients an dieser ID
+  FLinkID := ID;              // ID, worüber der Typ des Link-Servers identifiziert wird
+end; // Create
+
+// ********************************* Comments **********************************
+// Description : Link wird komplett entfernt
+// Param (in)  : N/A
+// Param (out) : N/A
+// Coding by   : Helge Lehn
+// Date        : 02.03.2004
+// Last Update : 02.03.2004
+// *****************************************************************************
+destructor TLinkID.Destroy;
+begin
+  // mal schauen, ob noch Client gemeldet sind und die Links löschen
+  While ClientList.Count > 0 Do
+    ClientList.Delete(0);
+  ClientList.Free; // Liste zum Schluß freigeben
+  inherited;
+end; // Destroy
+
+// ********************************* Comments **********************************
+// Description : liefert die Anzahl der Clients
+// Param (in)  : N/A
+// Param (out) : N/A
+// Coding by   : Helge Lehn
+// Date        : 02.03.2004
+// Last Update : 02.03.2004
+// *****************************************************************************
+function TLinkID.__GetCount: Integer;
+begin
+  Result := ClientList.Count;
+end; // __GetCount
+
+// ********************************* Comments **********************************
+// Description : fügt einen neuen Client hinzu
+// Param (in)  : Sender=TLinkClient
+// Param (out) : N/A
+// Coding by   : Helge Lehn
+// Date        : 02.03.2004
+// Last Update : 02.03.2004
+// *****************************************************************************
+procedure TLinkID.Add(Sender: TObject);
+begin
+  If ClientList.IndexOf(Sender) = -1 Then
+    ClientList.Add(Sender); // add the client only when not already registered
+end; // Add
+
+// ********************************* Comments **********************************
+// Description : ein Link soll gelöscht werden
+// Param (in)  : Sender=TLinkClient
+// Param (out) : N/A
+// Coding by   : Helge Lehn
+// Date        : 02.03.2004
+// Last Update : 06.11.2004
+// *****************************************************************************
+procedure TLinkID.Delete(Sender: TObject);
+var i : Integer;
+begin
+  If ClientList.Count > 0 Then begin
+    i := ClientList.IndexOf(Sender);
+    If i > -1 Then
+      ClientList.Delete(i);
+  end;  //  --  If ClientList.Count > 0 Then 
+end; // Delete
+
+{ TERPLinkManager }
+
+// ********************************* Comments **********************************
+// Description : create
+// Param (in)  : N/A
+// Param (out) : N/A
+// Coding by   : Helge Lehn
+// Date        : 02.03.2004
+// Last Update : 02.03.2004
+// *****************************************************************************
+constructor TmafLinkManager.Create(AOwner: TComponent);
+begin
+  inherited;
+  ManagerType := MT_LINK_MANAGER;
+  FLinkIDList := TList.Create;
+  FnEmptyChannelID_Start := 15000;
+  FnEmptyChannelID_Range := 5000;
+end; // Create
+
+// ********************************* Comments **********************************
+// Description : destroy
+// Param (in)  : N/A
+// Param (out) : N/A
+// Coding by   : Helge Lehn
+// Date        : 02.03.2004
+// Last Update : 04.04.2004
+// *****************************************************************************
+destructor TmafLinkManager.Destroy;
+begin
+  While FLinkIDList.Count > 0 Do begin
+    TLinkID(FLinkIDList[0]).Free;               // free the LinkID
+    FLinkIDList.Delete(0);                      // remove from list
+  end;  //  --  While FLinkIDList.Count > 0 Do
+  FLinkIDList.Free;
+  inherited;
+end; // Destroy
+
+procedure TmafLinkManager.__OnEvent(SubHookID: Integer; QHS: pQHS; UserParam: Pointer; var ErrCode: Integer);
+begin
+  Case SubHookID Of
+    HM_LINKMANAGER_QUERY :
+    begin
+      Case QHS^.SubHookID Of
+        LM_GET_LINK_LIST   : GetLinkList(Integer(QHS), Pointer(UserParam^));
+        LM_DEL_LINK_CLIENT : DeleteClient(UserParam);
+        LM_ADD_LINK_ID     : Add(QHS^.pChildObj, QHS^.Reserved1); // (Sender, ID);
+        LM_DEL_LINK_ID     : Delete(QHS^.pChildObj, QHS^.Reserved1); // (Sender, ID);
+        LM_SEND_TEXT       : ErrCode := DispatchText(QHS^.Reserved1, PChar(QHS^.pChildObj), UserParam);
+        LM_SEND_DATA       : ErrCode := DispatchData(QHS^.Reserved1, QHS^.pChildObj, UserParam);
+        LM_REQUEST_CHANNEL_ID : QHS^.ResVal := __Request_EmptyChannelID;
+      end;
+    end;
+    Else inherited __OnEvent(SubHookID, QHS, UserParam, ErrCode);
+  end;  //  --  Case SubHookID Of
+end;
+
+procedure TmafLinkManager.__RegisterAPI;
+var i : integer;
+begin
+  inherited;
+  If Assigned(ModuleController) Then
+    For i := 1 To MAX_EVENTS Do
+      ModuleController.RegisterSubHookEvent(ManagerEvents[i], __OnEvent);
+end;
+
+function TmafLinkManager.__Request_EmptyChannelID: Integer;
+begin
+  Result := FnEmptyChannelID_Start;
+  Inc(FnEmptyChannelID_Start);
+end;
+
+// ********************************* Comments **********************************
+// Description : sucht einen Link aus der LinkIDListe
+// Param (in)  : N/A
+// Param (out) : N/A
+// Coding by   : Helge Lehn
+// Date        : 02.03.2004
+// Last Update : 02.03.2004
+// *****************************************************************************
+function TmafLinkManager.GetLink(ID: Integer): TLinkID;
+var i : Integer;
+begin
+  Result := nil;
+  For i := 0 To FLinkIDList.Count - 1 Do
+    If TLinkID(FLinkIDList[i]).LinkID = ID Then begin
+      Result := TLinkID(FLinkIDList[i]);
+      Break;
+    end;  //  --  If TLinkID(FLinkIDList[i]).LinkID Then
+end; // GetLink
+
+// ********************************* Comments **********************************
+// Description : fügt eine neue LinkID hinzu
+// Param (in)  : Sender=TLinkClient; ID=ID des Links
+// Param (out) : N/A
+// Coding by   : Helge Lehn
+// Date        : 02.03.2004
+// Last Update : 02.03.2004
+// *****************************************************************************
+procedure TmafLinkManager.Add(Sender: TObject; ID: Integer);
+var LinkID : TLinkID;
+begin
+  LinkID := GetLink(ID);
+  If Not Assigned(LinkID) Then begin
+    LinkID := TLinkID.Create(ID);   // LinkID erstellen
+    FLinkIDList.Add(LinkID);        // diesen in unsere Liste einfügen
+  end;  //  --  If Not Assigned(LinkID) Then
+  LinkID.Add(Sender);
+  TComponent(Sender).FreeNotification(Self);
+end; // Add
+
+procedure TmafLinkManager.Notification(AComponent: TComponent; Operation: TOperation);
+begin
+  inherited;
+  If ((Operation = opRemove) And (IsClass(AComponent, TmafLinkClient))) Then
+    DeleteClient(AComponent);
+end;
+
+// ********************************* Comments **********************************
+// Description : löscht eine LinkID
+// Param (in)  : Sender=TLinkClient; ID=ID des Links
+// Param (out) : N/A
+// Coding by   : Helge Lehn
+// Date        : 02.03.2004
+// Last Update : 02.03.2004
+// *****************************************************************************
+procedure TmafLinkManager.Delete(Sender: TObject; ID: Integer);
+var LinkID : TLinkID;
+begin
+  LinkID := GetLink(ID);
+  If Assigned(LinkID) Then begin
+    LinkID.Delete(Sender); // den Link löschen
+    If LinkID.Count = 0 Then begin // noch welche angemeldet ?
+      FLinkIDList.Delete(FLinkIDList.IndexOf(LinkID)); // aus unsere Liste löschen
+      LinkID.Free;                                     // den link freigeben
+    end;  //  --  If LinkID.Count = 0 Then
+  end;  //  --  If Assigned(LinkID) Then
+end; // Delete
+
+// ********************************* Comments **********************************
+// Description : liefert die Liste der aktuell auf ID gelinkten Clients zurück
+// Param (in)  : ID=LinkID; pData=Zeiger zur Rückgabe der TList
+// Param (out) : N/A
+// Coding by   : Helge Lehn
+// Date        : 03.03.2004
+// Last Update : 03.03.2004
+// *****************************************************************************
+procedure TmafLinkManager.GetLinkList(ID: Integer; var pData: Pointer);
+var LinkID : TLinkID;
+begin
+  LinkID := GetLink(ID);
+  If Assigned(LinkID) Then pData := Pointer(LinkID.ClientList)
+                      Else pData := nil;
+end; // GetLinkList
+
+// ********************************* Comments **********************************
+// Description : löscht einen Client aus allen Listen
+// Param (in)  : Sender=Zeiger auf den Client
+// Param (out) : N/A
+// Coding by   : Helge Lehn
+// Date        : 06.03.2004
+// Last Update : 06.11.2004
+// *****************************************************************************
+procedure TmafLinkManager.DeleteClient(Sender: Pointer);
+var i : Integer;
+begin
+  If FLinkIDList.Count = 0 Then
+    Exit;
+
+  For i := 0 To FLinkIDList.Count - 1 Do begin
+    TLinkID(FLinkIDList[i]).Delete(TObject(Sender));
+  end;
+end; // DeleteClient
+
+function TmafLinkManager.DispatchData(ID: Integer; pData, Sender: Pointer): Integer;
+var LinkID : TLinkID;
+    i : Integer;
+begin
+  Result := ERR_PARAM_FAILURE;
+  LinkID := GetLink(ID);
+  If LinkID = nil Then
+    Exit;
+  For i := 0 To LinkID.ClientList.Count - 1 Do
+    SendComponentMessage(TComponent(LinkID.ClientList.Items[i]), LC_DATA_MESSAGE, pData, Pointer(ID));
+end;
+
+function TmafLinkManager.DispatchText(ID: Integer; AText: PChar; Sender: Pointer): Integer;
+var LinkID : TLinkID;
+    i : Integer;
+begin
+  Result := ERR_PARAM_FAILURE;
+  LinkID := GetLink(ID);
+  If LinkID = nil Then
+    Exit;
+  For i := 0 To LinkID.ClientList.Count - 1 Do
+    SendComponentMessage(TComponent(LinkID.ClientList.Items[i]), LC_TEXT_MESSAGE, AText, Pointer(ID));
+end;
+
+end.

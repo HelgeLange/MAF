@@ -1,0 +1,76 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+   <title>OnFunctionObserver</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   <meta http-equiv="Content-Style-Type" content="text/css" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+   <script type="text/javascript" src="jquery.js"></script>
+   <script type="text/javascript" src="helpman_settings.js"></script>
+   <script type="text/javascript" src="helpman_topicinit.js"></script>
+
+   <script type="text/javascript">
+     HMSyncTOC("index.html", "tmafhookclient_onfunctionobserver.htm");
+   </script>
+   <script type="text/javascript" src="highlight.js"></script>
+   <script type="text/javascript">
+     $(document).ready(function(){highlight();});
+   </script>
+</head>
+<body style="margin: 0px 0px 0px 0px; background: #FFFFFF;">
+
+
+<table width="100%" border="0" cellspacing="0" cellpadding="5" bgcolor="#99CCFF">
+  <tr valign="middle">
+    <td align="left">
+     <span style="font-size: 8pt">
+      <b>Modular Application Framework Components</b>
+     </span>
+    </td>
+  </tr>
+  <tr valign="middle">
+    <td align="left">
+      <h1 class="p_Heading1"><span class="f_Heading1">OnFunctionObserver</span></h1>
+
+    </td>
+    <td align="right">
+     <span style="font-size: 9pt">
+     <a href="introduction.htm">Top</a>&nbsp;
+     <a href="tmafhookclient_events.htm">Previous</a>&nbsp;
+     <a href="tmafmodulecontroller.htm">Next</a>
+     </span>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table width="100%" border="0" cellspacing="0" cellpadding="5"><tr valign="top"><td align="left">
+<p style="margin: 0px 0px 0px 24px;">Event will be fired, if the current <a href="tmafhooclient.htm" class="topiclink">TmafHooClient</a> is observing one or more <a href="definitions_dynamicfunction.htm" class="topiclink">DynamicFunction</a> and in one of those a change occurred. That can be either a new <a href="definitions_subhook.htm" class="topiclink">SubHook</a> being added or an existing one deleted from the <a href="definitions_dft.htm" class="topiclink">DFT</a>. </p>
+<p>&nbsp;</p>
+<p><span style="font-size: 11pt; font-weight: bold;">Class</span></p>
+<p style="margin: 0px 0px 0px 24px;"><a href="tmafhooclient.htm" class="topiclink">TmafHookClient</a></p>
+<p>&nbsp;</p>
+<p><span style="font-size: 11pt; font-weight: bold;">Syntax</span></p>
+<p>&nbsp;</p>
+<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 24px;"><table style="background-color:#eaf4ff; border:none; border-spacing:0px;">
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; padding:0px;"><p>TFunctionObserverCallBack = <span style="font-weight: bold;">procedure</span>(Sender: TObject; nHookID, nSubHookID : Integer; Action: TFunctionObserverAction) <span style="font-weight: bold;">Of Object</span>;</p>
+</td>
+</tr>
+</table>
+</div>
+<p>&nbsp;</p>
+<p><span style="font-size: 11pt; font-weight: bold;">Remarks</span></p>
+<p style="margin: 0px 0px 0px 24px;">nHookID defines the <a href="definitions_dynamicfunction.htm" class="topiclink">DynamicFunction</a> that changed. <span style="font-style: italic;">nSubHookID</span> contains the <span style="font-style: italic;">SubHookID</span> of the function that has been added or removed.</p>
+<p style="margin: 0px 0px 0px 24px;">Action can either be <span style="font-style: italic;">foaAdd</span> or <span style="font-style: italic;">foaDelete</span>, indicating, what exactly happened to the <a href="definitions_subhook.htm" class="topiclink">SubHook</a>. </p>
+<p style="margin: 0px 0px 0px 24px;">If the observer is watching the whole <a href="definitions_dynamicfunction.htm" class="topiclink">DynamicFunction</a>, for each change this event will be fired.</p>
+<p style="margin: 0px 0px 0px 24px;">If a <a href="definitions_subhook.htm" class="topiclink">SubHook</a> was overwritten (re-routed to another module and function), the event will fire twice, first for the removal of the old SubHook and then for the adding of the new SubHook.</p>
+
+</td></tr></table>
+<hr />
+   (c)opyright 2009 by Helge Lange. All Rights Reserved.
+</body>
+</html>

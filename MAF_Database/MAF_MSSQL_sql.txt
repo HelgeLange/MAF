@@ -1,0 +1,35 @@
+
+-- Creating Table "dbo.MAF_Groups"
+CREATE TABLE dbo.MAF_Groups (
+  ID      int IDENTITY(1, 1),
+  [Name]  nvarchar(30),
+  SL      smallint CONSTRAINT DF_MAF_Groups_SL DEFAULT 1,
+  /* Keys */
+  CONSTRAINT PK_MAF_Groups PRIMARY KEY (ID)
+)
+GO
+
+-- Creating Table "dbo.MAF_Storage"
+CREATE TABLE dbo.MAF_Storage (
+  DataID         int IDENTITY(1, 1),
+  Data_Category  nvarchar(30),
+  Data_Name      nvarchar(30),
+  Data_Storage   image,
+  /* Keys */
+  PRIMARY KEY (DataID)
+)
+GO
+
+-- Creating Table "dbo.MAF_Users"
+CREATE TABLE dbo.MAF_Users (
+  ID            int IDENTITY(1, 1),
+  [Login]       nvarchar(30),
+  GroupID       int,
+  Account_Data  image,
+  /* Keys */
+  PRIMARY KEY (ID)
+)
+GO
+
+
+

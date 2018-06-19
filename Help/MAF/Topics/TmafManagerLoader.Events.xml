@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<topic template="Default" lasteditedby="Helge" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../helpproject.xsd">
+  <title translate="true">Events</title>
+  <body>
+    <header>
+      <para styleclass="Heading1"><text styleclass="Heading1" translate="true">Events</text></para>
+    </header>
+    <para styleclass="Normal" style="margin-left:24px;"><text styleclass="Normal" translate="true">Events used by the component </text><link displaytype="text" defaultstyle="true" type="topiclink" href="TmafManagerLoader" styleclass="Normal" translate="true">TmafManagerLoader</link><text styleclass="Normal" translate="true">.</text></para>
+    <para styleclass="Normal"></para>
+    <para styleclass="Normal"><text styleclass="Normal" style="font-size:11pt; font-weight:bold;" translate="true">Events</text></para>
+    <para styleclass="Normal"></para>
+    <para styleclass="Normal" style="margin-left:24px;"><table styleclass="Default" rowcount="9" colcount="2" style="cell-padding:2px; border-width:0px; border-spacing:0px; border-collapse:collapse; cell-border-width:1px; border-color:#000000; border-style:solid; head-row-background-color:#d5eaff; alt-row-background-color:none;">
+      <thead style="vertical-align:top">
+        <td style="width:180px;">
+          <para styleclass="Normal"><text styleclass="Normal" style="font-weight:bold;" translate="true">Name</text></para>
+        </td>
+        <td style="width:388px;">
+          <para styleclass="Normal"><text styleclass="Normal" style="font-weight:bold;" translate="true">Description</text></para>
+        </td>
+      </thead>
+      <tr style="vertical-align:top">
+        <td style="width:180px;">
+          <para styleclass="Normal"><link displaytype="text" defaultstyle="true" type="topiclink" href="TmafManagerLoader.AfterConnect" styleclass="Normal" translate="true">AfterConnect</link></para>
+        </td>
+        <td style="width:388px;">
+          <para styleclass="Normal"><text styleclass="Normal" translate="true">Fired after connecting to a manager.</text></para>
+        </td>
+      </tr>
+      <tr style="vertical-align:top">
+        <td style="width:180px;">
+          <para styleclass="Normal"><link displaytype="text" defaultstyle="true" type="topiclink" href="TmafManagerLoader.BeforeConnect" styleclass="Normal" translate="true">BeforeConnect</link></para>
+        </td>
+        <td style="width:388px;">
+          <para styleclass="Normal"><text styleclass="Normal" translate="true">Fired before conencting to a manager.</text></para>
+        </td>
+      </tr>
+      <tr style="vertical-align:top">
+        <td style="width:180px;">
+          <para styleclass="Normal"><link displaytype="text" defaultstyle="true" type="topiclink" href="TmafManagerLoader.BeforeLoadingManager" styleclass="Normal" translate="true">BeforeLoadingManager</link></para>
+        </td>
+        <td style="width:388px;">
+          <para styleclass="Normal"><text styleclass="Normal" translate="true">Fired before starting to load all registered manager.</text></para>
+        </td>
+      </tr>
+      <tr style="vertical-align:top">
+        <td style="width:180px;">
+          <para styleclass="Normal"><link displaytype="text" defaultstyle="true" type="topiclink" href="TmafManagerLoader.OnConnect" styleclass="Normal" translate="true">OnConnect</link></para>
+        </td>
+        <td style="width:388px;">
+          <para styleclass="Normal"><text styleclass="Normal" translate="true">Fired when connected to a manager successfully.</text></para>
+        </td>
+      </tr>
+      <tr style="vertical-align:top">
+        <td style="width:180px;">
+          <para styleclass="Normal"><link displaytype="text" defaultstyle="true" type="topiclink" href="TmafManagerLoader.OnDataLoad" styleclass="Normal" translate="true">OnDataLoad</link></para>
+        </td>
+        <td style="width:388px;">
+          <para styleclass="Normal"><text styleclass="Normal" translate="true">Fired for every registered manager when </text><link displaytype="text" defaultstyle="true" type="topiclink" href="TmafManagerLoader.DataLoadMethod" styleclass="Normal" translate="true">DataLoadMethod</link><text styleclass="Normal" translate="true"> is set to dlmUserdefined.</text></para>
+        </td>
+      </tr>
+      <tr style="vertical-align:top">
+        <td style="width:180px;">
+          <para styleclass="Normal"><link displaytype="text" defaultstyle="true" type="topiclink" href="TmafManagerLoader.OnDisconnect" styleclass="Normal" translate="true">OnDisconnect</link></para>
+        </td>
+        <td style="width:388px;">
+          <para styleclass="Normal"><text styleclass="Normal" translate="true">Fired when disconnecting from a manager.</text></para>
+        </td>
+      </tr>
+      <tr style="vertical-align:top">
+        <td style="width:180px;">
+          <para styleclass="Normal"><link displaytype="text" defaultstyle="true" type="topiclink" href="TmafManagerLoader.OnLoadingFinished" styleclass="Normal" translate="true">OnLoadingFinished</link></para>
+        </td>
+        <td style="width:388px;">
+          <para styleclass="Normal"><text styleclass="Normal" translate="true">Fired when all registered manager are loaded.</text></para>
+        </td>
+      </tr>
+      <tr style="vertical-align:top">
+        <td style="width:180px;">
+          <para styleclass="Normal"><link displaytype="text" defaultstyle="true" type="topiclink" href="TmafManagerLoader.OnLoadManagerError" styleclass="Normal" translate="true">OnLoadManagerError</link></para>
+        </td>
+        <td style="width:388px;">
+          <para styleclass="Normal"><text styleclass="Normal" translate="true">Fired when the loading of a manager fails.</text></para>
+        </td>
+      </tr>
+    </table></para>
+  </body>
+</topic>

@@ -1,0 +1,48 @@
+﻿	<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+		<PropertyGroup>
+			<ProjectGuid>{403EAACC-9352-48E4-912C-CCE868786231}</ProjectGuid>
+		</PropertyGroup>
+		<ItemGroup>
+			<Projects Include="MAF_Loader.dproj">
+				<Dependencies/>
+			</Projects>
+			<Projects Include="Modules\Router_FileDB\Router_FileDB.dproj">
+				<Dependencies/>
+			</Projects>
+		</ItemGroup>
+		<ProjectExtensions>
+			<Borland.Personality>Default.Personality.12</Borland.Personality>
+			<Borland.ProjectType/>
+			<BorlandProject>
+				<Default.Personality/>
+			</BorlandProject>
+		</ProjectExtensions>
+		<Target Name="MAF_Loader">
+			<MSBuild Projects="MAF_Loader.dproj"/>
+		</Target>
+		<Target Name="MAF_Loader:Clean">
+			<MSBuild Targets="Clean" Projects="MAF_Loader.dproj"/>
+		</Target>
+		<Target Name="MAF_Loader:Make">
+			<MSBuild Targets="Make" Projects="MAF_Loader.dproj"/>
+		</Target>
+		<Target Name="Router_FileDB">
+			<MSBuild Projects="Modules\Router_FileDB\Router_FileDB.dproj"/>
+		</Target>
+		<Target Name="Router_FileDB:Clean">
+			<MSBuild Targets="Clean" Projects="Modules\Router_FileDB\Router_FileDB.dproj"/>
+		</Target>
+		<Target Name="Router_FileDB:Make">
+			<MSBuild Targets="Make" Projects="Modules\Router_FileDB\Router_FileDB.dproj"/>
+		</Target>
+		<Target Name="Build">
+			<CallTarget Targets="MAF_Loader;Router_FileDB"/>
+		</Target>
+		<Target Name="Clean">
+			<CallTarget Targets="MAF_Loader:Clean;Router_FileDB:Clean"/>
+		</Target>
+		<Target Name="Make">
+			<CallTarget Targets="MAF_Loader:Make;Router_FileDB:Make"/>
+		</Target>
+		<Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+	</Project>

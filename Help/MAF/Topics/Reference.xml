@@ -1,0 +1,148 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<topic template="Default" lasteditedby="Helge" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../helpproject.xsd">
+  <title translate="true">Reference</title>
+  <body>
+    <header>
+      <para styleclass="Heading1"><text styleclass="Heading1" translate="true">Reference</text></para>
+    </header>
+    <para styleclass="Normal"><text styleclass="Normal" translate="true">This topic describes the MAF component classes.</text></para>
+    <para styleclass="Normal"></para>
+    <para styleclass="Normal"><text styleclass="Normal" style="font-size:12pt; font-weight:bold; text-decoration:underline;" translate="true">Manager Components</text></para>
+    <para styleclass="Normal"></para>
+    <para styleclass="Normal" style="margin-left:24px;"><text styleclass="Normal" translate="true">Manager components normally don&apos;t have many public methods as they use an API function through which they are called by their client components.</text></para>
+    <para styleclass="Normal"></para>
+    <para styleclass="Normal" style="margin-left:24px;"><table styleclass="Default" rowcount="10" colcount="2" style="border-width:0px; border-spacing:0px; border-collapse:collapse; cell-border-width:1px; border-color:#000000; border-style:solid; background-color:#ebebeb; head-row-background-color:#99ccff; alt-row-background-color:none;">
+      <thead style="vertical-align:top">
+        <td style="width:219px;">
+          <para styleclass="Normal"><text styleclass="Normal" style="font-size:11pt; font-weight:bold; color:#0d0d0d;" translate="true">Component</text></para>
+        </td>
+        <td style="width:377px;">
+          <para styleclass="Normal"><text styleclass="Normal" style="font-size:11pt; font-weight:bold; color:#0d0d0d;" translate="true">Description</text></para>
+        </td>
+      </thead>
+      <tr style="vertical-align:top">
+        <td style="width:219px;">
+          <para styleclass="Normal"><link displaytype="text" defaultstyle="true" type="topiclink" href="TmafManagerLoader" styleclass="Normal" translate="true">TmafManagerLoader</link></para>
+        </td>
+        <td style="width:377px;">
+          <para styleclass="Normal"><text styleclass="Normal" translate="true">Loader component for manager modules</text></para>
+        </td>
+      </tr>
+      <tr style="vertical-align:top">
+        <td style="width:219px;">
+          <para styleclass="Normal"><link displaytype="text" defaultstyle="true" type="topiclink" href="TmafHookManager" styleclass="Normal" translate="true">TmafHookManager</link></para>
+        </td>
+        <td style="width:377px;">
+          <para styleclass="Normal"><text styleclass="Normal" translate="true">The module and DynamicCode manager</text></para>
+        </td>
+      </tr>
+      <tr style="vertical-align:top">
+        <td style="width:219px;">
+          <para styleclass="Normal"><link displaytype="text" defaultstyle="true" type="topiclink" href="TmafResourceManager" styleclass="Normal" translate="true">TmafResourceManager</link></para>
+        </td>
+        <td style="width:377px;">
+          <para styleclass="Normal"><text styleclass="Normal" translate="true">The resource manager component for graphics, localized language file and SQL strings.</text></para>
+        </td>
+      </tr>
+      <tr style="vertical-align:top">
+        <td style="width:219px;">
+          <para styleclass="Normal"><link displaytype="text" defaultstyle="true" type="topiclink" href="TmafLinkManager" styleclass="Normal" translate="true">TmafLinkManager</link></para>
+        </td>
+        <td style="width:377px;">
+        </td>
+      </tr>
+      <tr style="vertical-align:top">
+        <td style="width:219px;">
+          <para styleclass="Normal"><link displaytype="text" defaultstyle="true" type="topiclink" href="TmafWindowManager" styleclass="Normal" translate="true">TmafWindowManager</link></para>
+        </td>
+        <td style="width:377px;">
+        </td>
+      </tr>
+      <tr style="vertical-align:top">
+        <td style="width:219px;">
+          <para styleclass="Normal"><link displaytype="text" defaultstyle="true" type="topiclink" href="TmafDataStorage" styleclass="Normal" translate="true">TmafDataStorage</link></para>
+        </td>
+        <td style="width:377px;">
+          <para styleclass="Normal"><text styleclass="Normal" translate="true">Data stream storage component</text></para>
+        </td>
+      </tr>
+      <tr style="vertical-align:top">
+        <td style="width:219px;">
+          <para styleclass="Normal"><text styleclass="Normal" translate="true">TmafFileLogger</text></para>
+        </td>
+        <td style="width:377px;">
+          <para styleclass="Normal"><text styleclass="Normal" translate="true">Logging component for reporting errors, warnings and information during the execution</text></para>
+        </td>
+      </tr>
+      <tr style="vertical-align:top">
+        <td style="width:219px;">
+          <para styleclass="Normal"><text styleclass="Normal" translate="true">TmafUserSecurity</text></para>
+        </td>
+        <td style="width:377px;">
+          <para styleclass="Normal"><text styleclass="Normal" translate="true">User security component</text></para>
+        </td>
+      </tr>
+      <tr style="vertical-align:top">
+        <td style="width:219px;">
+          <para styleclass="Normal"><text styleclass="Normal" translate="true">TmafGlobalVars</text></para>
+        </td>
+        <td style="width:377px;">
+          <para styleclass="Normal"><text styleclass="Normal" translate="true">Global variable support</text></para>
+        </td>
+      </tr>
+    </table></para>
+    <para styleclass="Normal"></para>
+    <para styleclass="Normal"><text styleclass="Normal" style="font-size:12pt; font-weight:bold; text-decoration:underline;" translate="true">Client Components</text></para>
+    <para styleclass="Normal"></para>
+    <para styleclass="Normal" style="margin-left:24px;"><table styleclass="Default" rowcount="6" colcount="2" style="border-width:0px; border-spacing:0px; border-collapse:collapse; cell-border-width:1px; border-color:#000000; border-style:solid; background-color:#f2f2f2; head-row-background-color:#99ccff; alt-row-background-color:none;">
+      <thead style="vertical-align:top">
+        <td style="width:220px;">
+          <para styleclass="Normal"><text styleclass="Normal" style="font-size:11pt; font-weight:bold; color:#000000;" translate="true">Component</text></para>
+        </td>
+        <td style="width:377px;">
+          <para styleclass="Normal"><text styleclass="Normal" style="font-size:11pt; font-weight:bold; color:#000000;" translate="true">Description</text></para>
+        </td>
+      </thead>
+      <tr style="vertical-align:top">
+        <td style="width:220px;">
+          <para styleclass="Normal"><link displaytype="text" defaultstyle="true" type="topiclink" href="TmafHooClient" styleclass="Normal" translate="true">TmafHookClient</link></para>
+        </td>
+        <td style="width:377px;">
+          <para styleclass="Normal"><text styleclass="Normal" translate="true">Client for </text><link displaytype="text" defaultstyle="true" type="topiclink" href="TmafHookManager" styleclass="Normal" translate="true">TmafHookManage</link><text styleclass="Normal" translate="true">r, TmafGlobalVars and </text><link displaytype="text" defaultstyle="true" type="topiclink" href="TmafDataStorage" styleclass="Normal" translate="true">TmafDataStorage</link></para>
+        </td>
+      </tr>
+      <tr style="vertical-align:top">
+        <td style="width:220px;">
+          <para styleclass="Normal"><text styleclass="Normal" translate="true">TmafResourceClient</text></para>
+        </td>
+        <td style="width:377px;">
+          <para styleclass="Normal"><text styleclass="Normal" translate="true">Client for </text><link displaytype="text" defaultstyle="true" type="topiclink" href="TmafResourceManager" styleclass="Normal" translate="true">TmafResourceManager</link></para>
+        </td>
+      </tr>
+      <tr style="vertical-align:top">
+        <td style="width:220px;">
+          <para styleclass="Normal"><text styleclass="Normal" translate="true">TmafLinkClient</text></para>
+        </td>
+        <td style="width:377px;">
+          <para styleclass="Normal"><text styleclass="Normal" translate="true">Client for </text><link displaytype="text" defaultstyle="true" type="topiclink" href="TmafLinkManager" styleclass="Normal" translate="true">TmafLinkManager</link></para>
+        </td>
+      </tr>
+      <tr style="vertical-align:top">
+        <td style="width:220px;">
+          <para styleclass="Normal"><link displaytype="text" defaultstyle="true" type="topiclink" href="TmafModuleController" styleclass="Normal" translate="true">TmafModuleController</link></para>
+        </td>
+        <td style="width:377px;">
+          <para styleclass="Normal"><text styleclass="Normal" translate="true">Module controller component</text></para>
+        </td>
+      </tr>
+      <tr style="vertical-align:top">
+        <td style="width:220px;">
+          <para styleclass="Normal"><text styleclass="Normal" translate="true">TmafWindowClient</text></para>
+        </td>
+        <td style="width:377px;">
+          <para styleclass="Normal"><text styleclass="Normal" translate="true">Client for </text><link displaytype="text" defaultstyle="true" type="topiclink" href="TmafWindowManager" styleclass="Normal" translate="true">TmafWindowManager</link></para>
+        </td>
+      </tr>
+    </table></para>
+  </body>
+</topic>

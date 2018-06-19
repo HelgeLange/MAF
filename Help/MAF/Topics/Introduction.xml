@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<topic template="Default" lasteditedby="Helge" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../helpproject.xsd">
+  <title translate="true">Overview</title>
+  <body>
+    <header>
+      <para styleclass="Heading1"><text styleclass="Heading1" translate="true">Overview</text></para>
+    </header>
+    <para styleclass="Normal" style="margin-left:24px;"><text styleclass="Normal" style="font-weight:bold;" translate="true">M</text><text styleclass="Normal" translate="true">odular </text><text styleclass="Normal" style="font-weight:bold;" translate="true">A</text><text styleclass="Normal" translate="true">pplication </text><text styleclass="Normal" style="font-weight:bold;" translate="true">F</text><text styleclass="Normal" translate="true">ramework Components (MAF Components) is a suite of components to build a modular application in Delphi 6 to Delphi 2010. The components are especially designed to work besides any existing application from the beginning, which allows to migrate step by step and retain full functionality during the migration process.</text></para>
+    <para styleclass="Normal" style="margin-left:24px;"></para>
+    <para styleclass="Normal" style="margin-left:24px;"><text styleclass="Normal" translate="true">Visit our website </text><link displaytype="text" defaultstyle="true" type="weblink" href="&lt;%LINK_CAPTION%&gt;" target="_blank" styleclass="Normal" translate="true">http://www.maf-components.com</link><text styleclass="Normal" translate="true"> for more information</text></para>
+    <para styleclass="Normal" style="margin-left:24px;"></para>
+    <para styleclass="Normal" style="margin-left:24px;"></para>
+    <para styleclass="Normal" style="margin-left:0px;"><text styleclass="Normal" style="font-size:11pt; font-weight:bold;" translate="true">Advantages using MAF Components</text></para>
+    <para styleclass="Normal" style="margin-left:24px;"><text styleclass="Normal" translate="true">The MAF Components are designed to work with both newly created and old monolith applications. This is achieved by the unique design to work side by side with the application and gives the developer the chance to migrate older projects step by step. For new programs it offers from the start a powerful system to create not only a modular application with only a few lines of code, but also a totally dynamic one with the unique DynamicCode engine. This allows to add new code into old functions, remove obsolete code and even exchange old (maybe buggy) code with new one. All that without recompiling the application or the installed modules.</text></para>
+    <para styleclass="Normal" style="margin-left:24px;"><text styleclass="Normal" translate="true">Integrated into the DynamicCode engine is a code protection system, that compiles the DynamicFunctionTable at start-up for every user with his actual rights to execute certain code or access parts of the application. If the current user does not have the right to access parts of the code, it will not be compiled into the DynamicFunctionTable and cannot be executed.</text></para>
+    <para styleclass="Normal" style="margin-left:24px;"><text styleclass="Normal" translate="true">A extensive resource management keeps exchangeable items likes icons, bitmaps etc. outside the application in a single monolith file and allows to replace them with newer versions centralized at any time. It also manages language resource files, which allow your application to display itself in different languages without even restarting the application.</text></para>
+    <para styleclass="Normal" style="margin-left:24px;"></para>
+    <para styleclass="Normal" style="margin-left:0px;"><text styleclass="Normal" style="font-size:11pt; font-weight:bold;" translate="true">Feature matrix</text></para>
+    <list id="1" type="ul" listtype="bullet" formatstring="&#183;" format-charset="SYMBOL_CHARSET" levelreset="true" legalstyle="false" startfrom="1" styleclass="Normal" style="margin-left:24px; font-family:Symbol; font-size:10pt; color:#000000;">
+      <li styleclass="Normal" style="margin-left:24px;"><text styleclass="Normal" translate="true">Module management</text></li>
+      <li styleclass="Normal" style="margin-left:24px;"><text styleclass="Normal" translate="true">DynamicCode technology to add/remove and exchange code without re-compiling</text></li>
+      <li styleclass="Normal" style="margin-left:24px;"><text styleclass="Normal" translate="true">Resource management for graphics/files in a monolith file system</text></li>
+      <li styleclass="Normal" style="margin-left:24px;"><text styleclass="Normal" translate="true">String resource files to create localized version of the application</text></li>
+      <li styleclass="Normal" style="margin-left:24px;"><text styleclass="Normal" translate="true">SQL resource files to get applications ready to use several database systems without changing code</text></li>
+      <li styleclass="Normal" style="margin-left:24px;"><text styleclass="Normal" translate="true">Window management </text></li>
+      <li styleclass="Normal" style="margin-left:24px;"><text styleclass="Normal" translate="true">Centralized code protection through integrated user management</text></li>
+      <li styleclass="Normal" style="margin-left:24px;"><text styleclass="Normal" translate="true">Connectivity with easy data exchange between modules</text></li>
+      <li styleclass="Normal" style="margin-left:24px;"><text styleclass="Normal" translate="true">Global variables, that can be saved and loaded with the next program start again</text></li>
+      <li styleclass="Normal" style="margin-left:24px;"><text styleclass="Normal" translate="true">Database connectivity with different DACs already supported</text></li>
+      <li styleclass="Normal" style="margin-left:24px;"><text styleclass="Normal" translate="true">DataStorage and easy data stream handling</text></li>
+    </list>
+    <para styleclass="Normal" style="margin-left:24px;"></para>
+    <para styleclass="Normal" style="margin-left:0px;"></para>
+  </body>
+</topic>

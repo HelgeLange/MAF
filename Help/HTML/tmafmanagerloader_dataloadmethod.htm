@@ -1,0 +1,76 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+   <title>DataLoadMethod</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   <meta http-equiv="Content-Style-Type" content="text/css" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+   <script type="text/javascript" src="jquery.js"></script>
+   <script type="text/javascript" src="helpman_settings.js"></script>
+   <script type="text/javascript" src="helpman_topicinit.js"></script>
+
+   <script type="text/javascript">
+     HMSyncTOC("index.html", "tmafmanagerloader_dataloadmethod.htm");
+   </script>
+   <script type="text/javascript" src="highlight.js"></script>
+   <script type="text/javascript">
+     $(document).ready(function(){highlight();});
+   </script>
+</head>
+<body style="margin: 0px 0px 0px 0px; background: #FFFFFF;">
+
+
+<table width="100%" border="0" cellspacing="0" cellpadding="5" bgcolor="#99CCFF">
+  <tr valign="middle">
+    <td align="left">
+     <span style="font-size: 8pt">
+      <b>Modular Application Framework Components</b>
+     </span>
+    </td>
+  </tr>
+  <tr valign="middle">
+    <td align="left">
+      <h1 class="p_Heading1"><span class="f_Heading1">DataLoadMethod</span></h1>
+
+    </td>
+    <td align="right">
+     <span style="font-size: 9pt">
+     <a href="introduction.htm">Top</a>&nbsp;
+     <a href="tmafmanagerloader_autoload.htm">Previous</a>&nbsp;
+     <a href="tmafmanagerloader_inisettings.htm">Next</a>
+     </span>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table width="100%" border="0" cellspacing="0" cellpadding="5"><tr valign="top"><td align="left">
+<p style="margin: 0px 0px 0px 24px;">Defines the method from where the information about the manager to load will be taken from. </p>
+<p>&nbsp;</p>
+<p><span style="font-size: 11pt; font-weight: bold;">Class</span></p>
+<p style="margin: 0px 0px 0px 24px;"><a href="tmafmanagerloader.htm" class="topiclink">TmafManagerLoader</a></p>
+<p>&nbsp;</p>
+<p><span style="font-size: 11pt; font-weight: bold;">Syntax</span></p>
+<p>&nbsp;</p>
+<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 24px;"><table style="background-color:#eaf4ff; border:none; border-spacing:0px;">
+<tr style="text-align:left;vertical-align:top;">
+<th style="vertical-align:top; padding:0px;"><p><span style="font-weight: bold;">property</span> DataLoadMethod: TDataLoadMethod <span style="font-weight: bold;">default</span> [dlmUserdefined];</p>
+</th>
+</tr>
+</table>
+</div>
+<p>&nbsp;</p>
+<p><span style="font-size: 11pt; font-weight: bold;">Remarks</span></p>
+<p style="margin: 0px 0px 0px 24px;">The component defines three sources to load the manager information from :</p>
+<p style="margin: 0px 0px 0px 24px;">&nbsp;</p>
+<p style="text-align: left; padding: 0px 0px 0px 15px; margin: 0px 0px 0px 24px;"><span style="font-size:10pt; font-family: 'Arial';color:#000000;display:inline-block;width:15px;margin-left:-15px">1.</span>INI file</p><p style="text-align: left; padding: 0px 0px 0px 15px; margin: 0px 0px 0px 24px;"><span style="font-size:10pt; font-family: 'Arial';color:#000000;display:inline-block;width:15px;margin-left:-15px">2.</span>Registry</p><p style="text-align: left; padding: 0px 0px 0px 15px; margin: 0px 0px 0px 24px;"><span style="font-size:10pt; font-family: 'Arial';color:#000000;display:inline-block;width:15px;margin-left:-15px">3.</span>User defined</p><p style="margin: 0px 0px 0px 24px;">&nbsp;</p>
+<p style="margin: 0px 0px 0px 24px;">While the first two can be set up that no further interaction during the loading process is necessary, the third will fire an OnDataLoad event for each manager to load, where the file name of the manager to be loaded is expected. </p>
+
+</td></tr></table>
+<hr />
+   (c)opyright 2009 by Helge Lange. All Rights Reserved.
+</body>
+</html>

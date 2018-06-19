@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<topic template="Default" lasteditedby="Helge" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../helpproject.xsd">
+  <title translate="true">DynamicFunction</title>
+  <body>
+    <header>
+      <para styleclass="Heading1"><text styleclass="Heading1" translate="true">DynamicFunction</text></para>
+    </header>
+    <para styleclass="Normal" style="margin-left:24px;"><text styleclass="Normal" translate="true">A DynamicFunction is basically represented by its ID (HookID) and contains 1 - n SubHooks. These SubHooks do have an order, which can be changed in design- and run-time. The order defines when certain code is executed, very much like a programmer writes his procedures with calls to other procedures or functions.</text></para>
+    <para styleclass="Normal" style="margin-left:24px;"></para>
+    <para styleclass="Normal" style="margin-left:24px;"><text styleclass="Normal" translate="true">Parameters can be set and results taken during the events BeforeCallRouter, AfterCallRouter, BeforeExecHook and AfterExecHook.</text></para>
+    <para styleclass="Normal" style="margin-left:24px;"></para>
+    <para styleclass="Normal" style="margin-left:24px;"><text styleclass="Normal" translate="true">If there is no SubHook left inside a DynamicFunction, it will cease to exist. Calling an non-existing DynamicFunction is no error and will always return ERR_NO_ERROR.</text></para>
+  </body>
+</topic>

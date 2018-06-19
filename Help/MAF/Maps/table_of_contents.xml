@@ -1,0 +1,219 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<map xmlns:xsi="http://www.w3.org/2001/XInclude">
+  <topicref type="topic" id="401086845060487" build="ALL" modified="2009-10-22T20:51:22.280Z" icon="0" href="Introduction">
+    <caption translate="true">Overview</caption>
+  </topicref>
+  <topicref type="topic" id="401090925376256" build="ALL" modified="2009-10-22T23:03:07.873Z" icon="0" href="Getting_Support">
+    <caption translate="true">Getting Support</caption>
+  </topicref>
+  <topicref type="topic" id="401089157077541" build="ALL" modified="2009-10-22T23:08:00.661Z" icon="0" href="Deployment">
+    <caption translate="true">Deployment</caption>
+  </topicref>
+  <topicref type="topic" id="401089188894453" build="ALL" modified="2009-10-22T23:15:25.605Z" icon="0" href="Reference">
+    <caption translate="true">Reference</caption>
+    <topicref type="topic" id="401091524286689" build="ALL" modified="2009-10-22T23:31:12.874Z" icon="0" href="TmafManagerLoader">
+      <caption translate="true">TmafManagerLoader</caption>
+      <topicref type="topic" id="401093914863710" build="ALL" modified="2009-10-23T13:39:28.459Z" icon="0" href="TmafManagerLoader.Properties">
+        <caption translate="true">Properties</caption>
+        <topicref type="topic" id="401094641836809" build="ALL" modified="2009-10-23T12:48:13.621Z" icon="0" href="TmafManagerLoader.AutoLoad">
+          <caption translate="true">AutoLoad</caption>
+        </topicref>
+        <topicref type="topic" id="401094766528651" build="ALL" modified="2009-10-23T12:53:26.969Z" icon="0" href="TmafManagerLoader.DataLoadMethod">
+          <caption translate="true">DataLoadMethod</caption>
+        </topicref>
+        <topicref type="topic" id="401093524875787" build="ALL" modified="2009-10-23T13:09:11.993Z" icon="0" href="TmafManagerLoader.INISettings">
+          <caption translate="true">INISettings</caption>
+        </topicref>
+        <topicref type="topic" id="401095283057237" build="ALL" modified="2009-10-23T13:03:01.734Z" icon="0" href="TmafManagerLoader.Manager">
+          <caption translate="true">Manager</caption>
+        </topicref>
+        <topicref type="topic" id="401094604632220" build="ALL" modified="2009-10-23T13:03:21.579Z" icon="0" href="TmafManagerLoader.ManagerLoaderOptions">
+          <caption translate="true">ManagerLoaderOptions</caption>
+        </topicref>
+        <topicref type="topic" id="401096113526323" build="ALL" modified="2009-10-23T13:03:38.850Z" icon="0" href="TmafManagerLoader.ManagerSubDirectory">
+          <caption translate="true">ManagerSubDirectory</caption>
+        </topicref>
+        <topicref type="topic" id="401097261317736" build="ALL" modified="2009-10-23T13:09:28.360Z" icon="0" href="TmafManagerLoader.RegistrySettings">
+          <caption translate="true">RegistrySettings</caption>
+        </topicref>
+      </topicref>
+      <topicref type="topic" id="401095528574072" build="ALL" modified="2009-10-23T13:41:45.213Z" icon="0" href="TmafManagerLoader.Methods">
+        <caption translate="true">Methods</caption>
+        <topicref type="topic" id="401095676767272" build="ALL" modified="2009-10-23T13:10:48.853Z" icon="0" href="TmafManagerLoader.AddManager">
+          <caption translate="true">AddManager</caption>
+        </topicref>
+        <topicref type="topic" id="401093939199542" build="ALL" modified="2009-10-23T13:11:00.670Z" icon="0" href="TmafManagerLoader.DeleteManager">
+          <caption translate="true">DeleteManager</caption>
+        </topicref>
+        <topicref type="topic" id="401097166903345" build="ALL" modified="2009-10-23T13:23:42.964Z" icon="0" href="TmafManagerLoader.ConnectManager">
+          <caption translate="true">ConnectManager</caption>
+        </topicref>
+        <topicref type="topic" id="401094015325479" build="ALL" modified="2009-10-23T13:23:56.989Z" icon="0" href="TmafManagerLoader.DisconnectManager">
+          <caption translate="true">DisconnectManager</caption>
+        </topicref>
+      </topicref>
+      <topicref type="topic" id="401096505302880" build="ALL" modified="2009-10-23T13:35:37.786Z" icon="0" href="TmafManagerLoader.Events">
+        <caption translate="true">Events</caption>
+        <topicref type="topic" id="401094725039518" build="ALL" modified="2009-10-23T13:26:51.354Z" icon="0" href="TmafManagerLoader.AfterConnect">
+          <caption translate="true">AfterConnect</caption>
+        </topicref>
+        <topicref type="topic" id="401094394952069" build="ALL" modified="2009-10-23T13:27:06.447Z" icon="0" href="TmafManagerLoader.BeforeConnect">
+          <caption translate="true">BeforeConnect</caption>
+        </topicref>
+        <topicref type="topic" id="401097286375714" build="ALL" modified="2009-10-23T13:27:26.180Z" icon="0" href="TmafManagerLoader.BeforeLoadingManager">
+          <caption translate="true">BeforeLoadingManager</caption>
+        </topicref>
+        <topicref type="topic" id="40108605491804" build="ALL" modified="2009-10-23T13:27:37.771Z" icon="0" href="TmafManagerLoader.OnConnect">
+          <caption translate="true">OnConnect</caption>
+        </topicref>
+        <topicref type="topic" id="40111516976595" build="ALL" modified="2009-10-23T13:27:48.557Z" icon="0" href="TmafManagerLoader.OnDataLoad">
+          <caption translate="true">OnDataLoad</caption>
+        </topicref>
+        <topicref type="topic" id="40111130421828" build="ALL" modified="2009-10-23T13:27:58.230Z" icon="0" href="TmafManagerLoader.OnDisconnect">
+          <caption translate="true">OnDisconnect</caption>
+        </topicref>
+        <topicref type="topic" id="401094709063444" build="ALL" modified="2009-10-23T13:28:22.866Z" icon="0" href="TmafManagerLoader.OnLoadingFinished">
+          <caption translate="true">OnLoadingFinished</caption>
+        </topicref>
+        <topicref type="topic" id="401093853584135" build="ALL" modified="2009-10-23T13:28:35.215Z" icon="0" href="TmafManagerLoader.OnLoadManagerError">
+          <caption translate="true">OnLoadManagerError</caption>
+        </topicref>
+      </topicref>
+      <topicref type="topic" id="401096676764547" build="ALL" modified="2009-10-23T13:35:01.283Z" icon="0" href="TmafManagerLoader.Types">
+        <caption translate="true">Types</caption>
+        <topicref type="topic" id="401096298422087" build="ALL" modified="2009-10-23T13:51:43.833Z" icon="0" href="TmafManagerLoader.TManagerNotify">
+          <caption translate="true">TManagerNotify</caption>
+        </topicref>
+      </topicref>
+      <topicref type="topic" id="401094336292133" build="ALL" modified="2009-10-23T14:14:19.135Z" icon="0" href="TmafManagerLoader.Classes">
+        <caption translate="true">Classes</caption>
+        <topicref type="topic" id="401096120511818" build="ALL" modified="2009-10-23T14:15:03.343Z" icon="0" href="TmafManagerLoader.Classes.INISettings">
+          <caption translate="true">INISettings</caption>
+        </topicref>
+        <topicref type="topic" id="401094408630451" build="ALL" modified="2009-10-23T14:15:18.161Z" icon="0" href="TmafManagerLoader.Classes.RegistrySettings">
+          <caption translate="true">RegistrySettings</caption>
+        </topicref>
+      </topicref>
+    </topicref>
+    <topicref type="topic" id="401090001055347" build="ALL" modified="2009-10-22T23:32:09.033Z" icon="0" href="TmafHookManager">
+      <caption translate="true">TmafHookManager</caption>
+      <topicref type="topic" id="409771016260600" build="ALL" modified="2012-03-08T22:07:56.535Z" icon="0" href="TmafHookManager.Overview">
+        <caption translate="true">Overview</caption>
+      </topicref>
+      <topicref type="topic" id="401095908437968" build="ALL" modified="2009-10-23T14:10:08.541Z" icon="0" href="TmafHookManager.Properties">
+        <caption translate="true">Properties</caption>
+      </topicref>
+      <topicref type="topic" id="401096963640810" build="ALL" modified="2009-10-23T14:10:39.110Z" icon="0" href="TmafHookManager.Types">
+        <caption translate="true">Types</caption>
+      </topicref>
+    </topicref>
+    <topicref type="topic" id="401091084990117" build="ALL" modified="2009-10-22T23:34:36.246Z" icon="0" href="TmafResourceManager">
+      <caption translate="true">TmafResourceManager</caption>
+      <topicref type="topic" id="401094913260057" build="ALL" modified="2009-10-23T14:11:00.222Z" icon="0" href="TmafResourceManager.Properties">
+        <caption translate="true">Properties</caption>
+      </topicref>
+      <topicref type="topic" id="401093770106649" build="ALL" modified="2009-10-23T14:11:08.837Z" icon="0" href="TmafResourceManager.Methods">
+        <caption translate="true">Methods</caption>
+      </topicref>
+      <topicref type="topic" id="401096959889014" build="ALL" modified="2009-10-23T14:11:18.293Z" icon="0" href="TmafResourceManager.Events">
+        <caption translate="true">Events</caption>
+      </topicref>
+      <topicref type="topic" id="401097309391186" build="ALL" modified="2009-10-23T14:11:25.888Z" icon="0" href="TmafResourceManager.Types">
+        <caption translate="true">Types</caption>
+      </topicref>
+    </topicref>
+    <topicref type="topic" id="401090319034406" build="ALL" modified="2009-10-22T23:57:12.648Z" icon="0" href="TmafWindowManager">
+      <caption translate="true">TmafWindowManager</caption>
+      <topicref type="topic" id="401094105456674" build="ALL" modified="2009-10-23T14:11:52.226Z" icon="0" href="TmafWindowManager.Properties">
+        <caption translate="true">Properties</caption>
+      </topicref>
+      <topicref type="topic" id="401094480720229" build="ALL" modified="2009-10-23T14:12:02.053Z" icon="0" href="TmafWindowManager.Methods">
+        <caption translate="true">Methods</caption>
+      </topicref>
+      <topicref type="topic" id="401095949367725" build="ALL" modified="2009-10-23T14:12:10.581Z" icon="0" href="TmafWindowManager.Events">
+        <caption translate="true">Events</caption>
+      </topicref>
+      <topicref type="topic" id="401094548936183" build="ALL" modified="2009-10-23T14:12:17.191Z" icon="0" href="TmafWindowManager.Types">
+        <caption translate="true">Types</caption>
+      </topicref>
+    </topicref>
+    <topicref type="topic" id="401089781048573" build="ALL" modified="2009-10-22T23:58:37.450Z" icon="0" href="TmafDataStorage">
+      <caption translate="true">TmafDataStorage</caption>
+      <topicref type="topic" id="401093873808450" build="ALL" modified="2009-10-23T14:12:34.354Z" icon="0" href="TmafDataStorage.Properties">
+        <caption translate="true">Properties</caption>
+      </topicref>
+      <topicref type="topic" id="401094817642908" build="ALL" modified="2009-10-23T14:12:40.812Z" icon="0" href="TmafDataStorage.Methods">
+        <caption translate="true">Methods</caption>
+      </topicref>
+      <topicref type="topic" id="40109619660889" build="ALL" modified="2009-10-23T14:12:48.841Z" icon="0" href="TmafDataStorage.Events">
+        <caption translate="true">Events</caption>
+      </topicref>
+      <topicref type="topic" id="401096042371692" build="ALL" modified="2009-10-23T14:12:55.895Z" icon="0" href="TmafDataStorage.Types">
+        <caption translate="true">Types</caption>
+      </topicref>
+    </topicref>
+    <topicref type="topic" id="401096387830771" build="ALL" modified="2009-10-23T12:15:56.045Z" icon="0" href="TmafLinkManager">
+      <caption translate="true">TmafLinkManager</caption>
+      <topicref type="topic" id="401094582964613" build="ALL" modified="2009-10-23T14:13:10.006Z" icon="0" href="TmafLinkManager.Properties">
+        <caption translate="true">Properties</caption>
+      </topicref>
+      <topicref type="topic" id="401097727628295" build="ALL" modified="2009-10-23T14:13:34.974Z" icon="0" href="TmafLinkManager.Types">
+        <caption translate="true">Types</caption>
+      </topicref>
+    </topicref>
+    <topicref type="topic" id="40112108435779" build="ALL" modified="2012-03-08T16:51:13.906Z" icon="0" href="TmafHooClient">
+      <caption translate="true">TmafHookClient</caption>
+      <topicref type="topic" id="401131939103403" build="ALL" modified="2009-10-27T09:30:44.472Z" icon="0" href="TmafHookClient.Properties">
+        <caption translate="true">Properties</caption>
+      </topicref>
+      <topicref type="topic" id="401132981940409" build="ALL" modified="2009-10-27T09:31:02.459Z" icon="0" href="TmafHookClient.Methods">
+        <caption translate="true">Methods</caption>
+        <topicref type="topic" id="401132976801801" build="ALL" modified="2009-10-27T09:33:27.408Z" icon="0" href="TmafHooClient.ExecuteHook">
+          <caption translate="true">ExecuteHook</caption>
+        </topicref>
+        <topicref type="topic" id="401133714391353" build="ALL" modified="2009-10-27T09:40:01.280Z" icon="0" href="TmafHookClient.__Query_HookManager">
+          <caption translate="true">__Query_HookManager</caption>
+        </topicref>
+        <topicref type="topic" id="401135989978722" build="ALL" modified="2009-10-27T09:40:33.127Z" icon="0" href="TmafHookClient.__Query_Manager">
+          <caption translate="true">__Query_Manager</caption>
+        </topicref>
+        <topicref type="topic" id="401135912311377" build="ALL" modified="2009-10-27T09:41:02.283Z" icon="0" href="TmafHoookClient.__Add_FunctionObserver">
+          <caption translate="true">__Add_FunctionObserver</caption>
+        </topicref>
+        <topicref type="topic" id="401135033373941" build="ALL" modified="2009-10-27T09:41:31.562Z" icon="0" href="TmafHookClient.__Delete_FunctionObserver">
+          <caption translate="true">__Delete_FunctionObserver</caption>
+        </topicref>
+      </topicref>
+      <topicref type="topic" id="401133335555178" build="ALL" modified="2009-10-27T09:31:22.326Z" icon="0" href="TmafHookClient.Events">
+        <caption translate="true">Events</caption>
+        <topicref type="topic" id="401145571701789" build="ALL" modified="2009-10-28T10:41:53.853Z" icon="0" href="TmafHookCLient.OnFunctionObserver">
+          <caption translate="true">OnFunctionObserver</caption>
+        </topicref>
+      </topicref>
+    </topicref>
+    <topicref type="topic" id="409765270844623" build="ALL" modified="2012-03-08T12:29:45.863Z" icon="0" href="TmafModuleController">
+      <caption translate="true">TmafModuleController</caption>
+      <topicref type="topic" id="409763535769920" build="ALL" modified="2012-03-08T12:38:14.694Z" icon="0" href="TmafModuleController_Events">
+        <caption translate="true">Events</caption>
+        <topicref type="topic" id="409766718943342" build="ALL" modified="2012-03-08T12:42:40.841Z" icon="0" href="TmafModuleController_Events_BeforeFormCreate">
+          <caption translate="true">BeforeFormCreate</caption>
+        </topicref>
+      </topicref>
+    </topicref>
+  </topicref>
+  <topicref type="topic" id="401143515485453" build="ALL" modified="2009-10-28T10:44:53.781Z" icon="0" href="Definitions">
+    <caption translate="true">Definitions</caption>
+    <topicref type="topic" id="401146330330139" build="ALL" modified="2009-10-28T10:45:19.892Z" icon="0" href="Definitions.DFT">
+      <caption translate="true">DFT</caption>
+    </topicref>
+    <topicref type="topic" id="401144734411481" build="ALL" modified="2009-10-28T10:45:39.231Z" icon="0" href="Definitions.DynamicFunction">
+      <caption translate="true">DynamicFunction</caption>
+    </topicref>
+    <topicref type="topic" id="401142653210469" build="ALL" modified="2009-10-28T10:45:53.040Z" icon="0" href="Definitions.Hook">
+      <caption translate="true">Hook</caption>
+    </topicref>
+    <topicref type="topic" id="401143796651857" build="ALL" modified="2009-10-28T10:46:01.952Z" icon="0" href="Definitions.SubHook">
+      <caption translate="true">SubHook</caption>
+    </topicref>
+  </topicref>
+</map>

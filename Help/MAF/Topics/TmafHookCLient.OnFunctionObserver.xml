@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<topic template="Default" lasteditedby="Helge" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../helpproject.xsd">
+  <title translate="true">OnFunctionObserver</title>
+  <body>
+    <header>
+      <para styleclass="Heading1"><text styleclass="Heading1" translate="true">OnFunctionObserver</text></para>
+    </header>
+    <para styleclass="Normal" style="margin-left:24px;"><text styleclass="Normal" translate="true">Event will be fired, if the current </text><link displaytype="text" defaultstyle="true" type="topiclink" href="TmafHooClient" styleclass="Normal" translate="true">TmafHooClient</link><text styleclass="Normal" translate="true"> is observing one or more </text><link displaytype="text" defaultstyle="true" type="topiclink" href="Definitions.DynamicFunction" styleclass="Normal" translate="true">DynamicFunction</link><text styleclass="Normal" translate="true"> and in one of those a change occurred. That can be either a new </text><link displaytype="text" defaultstyle="true" type="topiclink" href="Definitions.SubHook" styleclass="Normal" translate="true">SubHook</link><text styleclass="Normal" translate="true"> being added or an existing one deleted from the </text><link displaytype="text" defaultstyle="true" type="topiclink" href="Definitions.DFT" styleclass="Normal" translate="true">DFT</link><text styleclass="Normal" translate="true">. </text></para>
+    <para styleclass="Normal"></para>
+    <para styleclass="Normal"><text styleclass="Normal" style="font-size:11pt; font-weight:bold;" translate="true">Class</text></para>
+    <para styleclass="Normal" style="margin-left:24px;"><link displaytype="text" defaultstyle="true" type="topiclink" href="TmafHooClient" styleclass="Normal" translate="true">TmafHookClient</link></para>
+    <para styleclass="Normal"></para>
+    <para styleclass="Normal"><text styleclass="Normal" style="font-size:11pt; font-weight:bold;" translate="true">Syntax</text></para>
+    <para styleclass="Normal"></para>
+    <para styleclass="Normal" style="margin-left:24px;"><table styleclass="Default" rowcount="1" colcount="1" style="background-color:#eaf4ff;">
+      <tr style="vertical-align:top">
+        <td>
+          <para styleclass="Normal"><text styleclass="Normal" translate="true">TFunctionObserverCallBack = </text><text styleclass="Normal" style="font-weight:bold;" translate="true">procedure</text><text styleclass="Normal" translate="true">(Sender: TObject; nHookID, nSubHookID : Integer; Action: TFunctionObserverAction) </text><text styleclass="Normal" style="font-weight:bold;" translate="true">Of Object</text><text styleclass="Normal" translate="true">;</text></para>
+        </td>
+      </tr>
+    </table></para>
+    <para styleclass="Normal"></para>
+    <para styleclass="Normal"><text styleclass="Normal" style="font-size:11pt; font-weight:bold;" translate="true">Remarks</text></para>
+    <para styleclass="Normal" style="margin-left:24px;"><text styleclass="Normal" translate="true">nHookID defines the </text><link displaytype="text" defaultstyle="true" type="topiclink" href="Definitions.DynamicFunction" styleclass="Normal" translate="true">DynamicFunction</link><text styleclass="Normal" translate="true"> that changed. </text><text styleclass="Normal" style="font-style:italic;" translate="true">nSubHookID</text><text styleclass="Normal" translate="true"> contains the </text><text styleclass="Normal" style="font-style:italic;" translate="true">SubHookID</text><text styleclass="Normal" translate="true"> of the function that has been added or removed.</text></para>
+    <para styleclass="Normal" style="margin-left:24px;"><text styleclass="Normal" translate="true">Action can either be </text><text styleclass="Normal" style="font-style:italic;" translate="true">foaAdd</text><text styleclass="Normal" translate="true"> or </text><text styleclass="Normal" style="font-style:italic;" translate="true">foaDelete</text><text styleclass="Normal" translate="true">, indicating, what exactly happened to the </text><link displaytype="text" defaultstyle="true" type="topiclink" href="Definitions.SubHook" styleclass="Normal" translate="true">SubHook</link><text styleclass="Normal" translate="true">. </text></para>
+    <para styleclass="Normal" style="margin-left:24px;"><text styleclass="Normal" translate="true">If the observer is watching the whole </text><link displaytype="text" defaultstyle="true" type="topiclink" href="Definitions.DynamicFunction" styleclass="Normal" translate="true">DynamicFunction</link><text styleclass="Normal" translate="true">, for each change this event will be fired.</text></para>
+    <para styleclass="Normal" style="margin-left:24px;"><text styleclass="Normal" translate="true">If a </text><link displaytype="text" defaultstyle="true" type="topiclink" href="Definitions.SubHook" styleclass="Normal" translate="true">SubHook</link><text styleclass="Normal" translate="true"> was overwritten (re-routed to another module and function), the event will fire twice, first for the removal of the old SubHook and then for the adding of the new SubHook.</text></para>
+  </body>
+</topic>

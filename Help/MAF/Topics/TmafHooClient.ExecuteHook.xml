@@ -1,0 +1,101 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<topic template="Default" lasteditedby="Helge" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../helpproject.xsd">
+  <title translate="true">ExecuteHook</title>
+  <body>
+    <header>
+      <para styleclass="Heading1"><text styleclass="Heading1" translate="true">ExecuteHook</text></para>
+    </header>
+    <para styleclass="Normal" style="margin-left:24px;"><text styleclass="Normal" translate="true">Executes a DynamicFunction or a specific SubHook. Executing a specific SubHook should be used ONLY if it is sure, that the function behind it will never be overwritten through another module. In that case it is better to call ExecuteUniqueID, as the UniqueID must be the same when overwriting a specific SubHook with another function from another module.</text></para>
+    <para styleclass="Normal"></para>
+    <para styleclass="Normal"><text styleclass="Normal" style="font-size:11pt; font-weight:bold;" translate="true">Class</text></para>
+    <para styleclass="Normal" style="margin-left:24px;"><link displaytype="text" defaultstyle="true" type="topiclink" href="TmafHooClient" styleclass="Normal" translate="true">TmafHookClient</link></para>
+    <para styleclass="Normal"></para>
+    <para styleclass="Normal"><text styleclass="Normal" style="font-size:11pt; font-weight:bold;" translate="true">Syntax</text></para>
+    <para styleclass="Normal"></para>
+    <para styleclass="Normal" style="margin-left:24px;"><table styleclass="Default" rowcount="1" colcount="1" style="background-color:#ecf5ff;">
+      <tr style="vertical-align:top">
+        <td>
+          <para styleclass="Normal"><text styleclass="Normal" style="font-weight:bold;" translate="true">function</text><text styleclass="Normal" translate="true"> ExecuteHook(HookID: Integer; SubHookID: Integer = 0; bClearEvents: Boolean = False; EventFlags: Byte = 15): Integer;</text></para>
+        </td>
+      </tr>
+    </table></para>
+    <para styleclass="Normal"></para>
+    <para styleclass="Normal"><text styleclass="Normal" style="font-size:11pt; font-weight:bold;" translate="true">Remarks</text></para>
+    <para styleclass="Normal" style="margin-left:24px;"><text styleclass="Normal" translate="true">HookID defines the DynamicFunction to be executed.</text></para>
+    <para styleclass="Normal" style="margin-left:24px;"><text styleclass="Normal" translate="true">If SubHookID is 0 (default, when not given), the whole DynamicFunction is executed, otherwise only the SubHook indicated in SubHookID.</text></para>
+    <para styleclass="Normal" style="margin-left:24px;"><text styleclass="Normal" translate="true">bClearEvents can clear the components events automatically, if you want to use several event handler. That saves the code to set them to nil.</text></para>
+    <para styleclass="Normal" style="margin-left:24px;"></para>
+    <para styleclass="Normal" style="margin-left:24px;"><text styleclass="Normal" translate="true">EventFlags define, which of the 4 events involved should be executed.</text></para>
+    <para styleclass="Normal" style="margin-left:24px;"></para>
+    <para styleclass="Normal" style="margin-left:24px;"><table styleclass="Default" rowcount="5" colcount="3" style="cell-padding:2px; border-width:0px; border-spacing:0px; border-collapse:collapse; cell-border-width:1px; border-color:#000000; border-style:solid; head-row-background-color:#c0c0c0; alt-row-background-color:none;">
+      <thead style="vertical-align:top">
+        <td style="width:196px;">
+          <para styleclass="Normal" style="margin-left:24px;"><text styleclass="Normal" style="font-weight:bold;" translate="true">Event</text></para>
+        </td>
+        <td style="width:37px;">
+          <para styleclass="Normal" style="margin-left:24px;"><text styleclass="Normal" style="font-weight:bold;" translate="true">No</text></para>
+        </td>
+        <td style="width:370px;">
+          <para styleclass="Normal" style="margin-left:24px;"><text styleclass="Normal" style="font-weight:bold;" translate="true">Examples</text></para>
+        </td>
+      </thead>
+      <tr style="vertical-align:top">
+        <td style="width:196px;">
+          <para styleclass="Normal" style="margin-left:24px;"><text styleclass="Normal" translate="true">Bit 0 : BeforeCallRouter</text></para>
+        </td>
+        <td style="width:37px;">
+          <para styleclass="Normal" style="margin-left:24px;"><text styleclass="Normal" translate="true">1</text></para>
+        </td>
+        <td style="width:370px;">
+          <para styleclass="Normal" style="margin-left:24px;"><text styleclass="Normal" translate="true">All = 1 + 2 + 4 + 8 = 15</text></para>
+        </td>
+      </tr>
+      <tr style="vertical-align:top">
+        <td style="width:196px;">
+          <para styleclass="Normal" style="margin-left:24px;"><text styleclass="Normal" translate="true">Bit 1 : AfterCallRouter</text></para>
+        </td>
+        <td style="width:37px;">
+          <para styleclass="Normal" style="margin-left:24px;"><text styleclass="Normal" translate="true">2</text></para>
+        </td>
+        <td style="width:370px;">
+          <para styleclass="Normal" style="margin-left:24px;"><text styleclass="Normal" translate="true">only BCR + ACR = 1 + 2 = 3</text></para>
+        </td>
+      </tr>
+      <tr style="vertical-align:top">
+        <td style="width:196px;">
+          <para styleclass="Normal" style="margin-left:24px;"><text styleclass="Normal" translate="true">Bit 2 : BeforeExecHook</text></para>
+        </td>
+        <td style="width:37px;">
+          <para styleclass="Normal" style="margin-left:24px;"><text styleclass="Normal" translate="true">4</text></para>
+        </td>
+        <td style="width:370px;">
+          <para styleclass="Normal" style="margin-left:24px;"><text styleclass="Normal" translate="true">only BEH + AEH = 4 + 8 = 12</text></para>
+        </td>
+      </tr>
+      <tr style="vertical-align:top">
+        <td style="width:196px;">
+          <para styleclass="Normal" style="margin-left:24px;"><text styleclass="Normal" translate="true">Bit 3 : AfterExecHook</text></para>
+        </td>
+        <td style="width:37px;">
+          <para styleclass="Normal" style="margin-left:24px;"><text styleclass="Normal" translate="true">8</text></para>
+        </td>
+        <td style="width:370px;">
+          <para styleclass="Normal" style="margin-left:24px;"></para>
+        </td>
+      </tr>
+    </table></para>
+    <para styleclass="Normal" style="margin-left:24px;"></para>
+    <para styleclass="Normal" style="margin-left:24px;"><text styleclass="Normal" translate="true">Result is always an error code, if no error occurred, the function should return ERR_NO_ERROR. Parameters into the DynamicFunction can be given in the events BeforeCallRouter and BeforeExecHook or through TmafParameters connected with the TmafHookClient. </text></para>
+    <para styleclass="Normal" style="margin-left:24px;"><text styleclass="Normal" translate="true">Results from the DynamicFunction or its SubHooks can be taken from the events AfterCallRouter and AfterExecHook or from the TmafParameters component.</text></para>
+    <para styleclass="Normal" style="margin-left:24px;"></para>
+    <para styleclass="Normal" style="margin-left:0px;"><text styleclass="Normal" style="font-weight:bold;" translate="true">Example</text></para>
+    <para styleclass="Normal" style="margin-left:0px;"></para>
+    <para styleclass="Normal" style="margin-left:24px;"><text styleclass="Normal" style="font-weight:bold;" translate="true">const</text><text styleclass="Normal" style="font-weight:normal;" translate="true"> HK_INIT_APPLICATION = 10000;</text></para>
+    <para styleclass="Normal" style="margin-left:24px;"></para>
+    <para styleclass="Normal" style="margin-left:24px;"><text styleclass="Normal" style="font-weight:bold;" translate="true">begin</text></para>
+    <para styleclass="Normal" style="margin-left:24px;"><text styleclass="Normal" style="font-weight:normal;" translate="true"> &#160;mafHookClient1.ExecuteHook(HK_INIT_APPLICATION);</text></para>
+    <para styleclass="Normal" style="margin-left:24px;"><text styleclass="Normal" style="font-weight:bold;" translate="true">end</text><text styleclass="Normal" style="font-weight:normal;" translate="true">;</text></para>
+    <para styleclass="Normal" style="margin-left:24px;"></para>
+    <para styleclass="Normal" style="margin-left:24px;"><text styleclass="Normal" style="font-weight:normal;" translate="true">This small example executes a Hook with the ID 10.000 and it does not matter, how many SubHooks are registered. Also SubHooks can be added and deleted later on by other modules, but the caller code from the example doesn&apos;t have to be recompiled to use the new functions added or forget the ones deleted.</text></para>
+  </body>
+</topic>

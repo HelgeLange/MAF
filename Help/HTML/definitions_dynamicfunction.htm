@@ -1,0 +1,61 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+   <title>DynamicFunction</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   <meta http-equiv="Content-Style-Type" content="text/css" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+   <script type="text/javascript" src="jquery.js"></script>
+   <script type="text/javascript" src="helpman_settings.js"></script>
+   <script type="text/javascript" src="helpman_topicinit.js"></script>
+
+   <script type="text/javascript">
+     HMSyncTOC("index.html", "definitions_dynamicfunction.htm");
+   </script>
+   <script type="text/javascript" src="highlight.js"></script>
+   <script type="text/javascript">
+     $(document).ready(function(){highlight();});
+   </script>
+</head>
+<body style="margin: 0px 0px 0px 0px; background: #FFFFFF;">
+
+
+<table width="100%" border="0" cellspacing="0" cellpadding="5" bgcolor="#99CCFF">
+  <tr valign="middle">
+    <td align="left">
+     <span style="font-size: 8pt">
+      <b>Modular Application Framework Components</b>
+     </span>
+    </td>
+  </tr>
+  <tr valign="middle">
+    <td align="left">
+      <h1 class="p_Heading1"><span class="f_Heading1">DynamicFunction</span></h1>
+
+    </td>
+    <td align="right">
+     <span style="font-size: 9pt">
+     <a href="introduction.htm">Top</a>&nbsp;
+     <a href="definitions_dft.htm">Previous</a>&nbsp;
+     <a href="definitions_hook.htm">Next</a>
+     </span>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table width="100%" border="0" cellspacing="0" cellpadding="5"><tr valign="top"><td align="left">
+<p style="margin: 0px 0px 0px 24px;">A DynamicFunction is basically represented by its ID (HookID) and contains 1 - n SubHooks. These SubHooks do have an order, which can be changed in design- and run-time. The order defines when certain code is executed, very much like a programmer writes his procedures with calls to other procedures or functions.</p>
+<p style="margin: 0px 0px 0px 24px;">&nbsp;</p>
+<p style="margin: 0px 0px 0px 24px;">Parameters can be set and results taken during the events BeforeCallRouter, AfterCallRouter, BeforeExecHook and AfterExecHook.</p>
+<p style="margin: 0px 0px 0px 24px;">&nbsp;</p>
+<p style="margin: 0px 0px 0px 24px;">If there is no SubHook left inside a DynamicFunction, it will cease to exist. Calling an non-existing DynamicFunction is no error and will always return ERR_NO_ERROR.</p>
+
+</td></tr></table>
+<hr />
+   (c)opyright 2009 by Helge Lange. All Rights Reserved.
+</body>
+</html>

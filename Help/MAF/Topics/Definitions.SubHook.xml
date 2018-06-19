@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<topic template="Default" lasteditedby="Helge" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../helpproject.xsd">
+  <title translate="true">SubHook</title>
+  <body>
+    <header>
+      <para styleclass="Heading1"><text styleclass="Heading1" translate="true">SubHook</text></para>
+    </header>
+    <para styleclass="Normal" style="margin-left:24px;"><text styleclass="Normal" translate="true">A SubHook defines a single function in a module. It is a member to one DynamicFunction only, but its code can be assigned to several SubHooks.</text></para>
+    <para styleclass="Normal" style="margin-left:24px;"><text styleclass="Normal" translate="true">The SubHook uses a local ID to identify itself withion a module. This ID must be unique within the module and should be unique within the DynamicFunction.</text></para>
+    <para styleclass="Normal" style="margin-left:24px;"><text styleclass="Normal" translate="true">Additionally the SubHook has a global unique ID that is used for installation purposes. This ID is managed by the DFT automatically.</text></para>
+    <para styleclass="Normal" style="margin-left:24px;"><text styleclass="Normal" translate="true">If a new module wants to overwrite an existing SubHook with own code, it has to overwrite this unique ID, as it cannot be certain that the function still can be found using the combination HookID, SubHookID and ModuleID (due to the installation of another module before overwriting the same SubHook).</text></para>
+    <para styleclass="Normal" style="margin-left:24px;"></para>
+    <para styleclass="Normal" style="margin-left:24px;"></para>
+    <para styleclass="Normal" style="margin-left:24px;"><text styleclass="Normal" translate="true">If the DynamicFunction doesn&apos;t exist when the SubHook gets installed, the DynamicFunction will be created.</text></para>
+    <para styleclass="Normal"></para>
+    <para styleclass="Normal"></para>
+  </body>
+</topic>

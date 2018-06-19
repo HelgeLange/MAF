@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<topic template="Default" lasteditedby="Helge" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../helpproject.xsd">
+  <title translate="true">DFT</title>
+  <body>
+    <header>
+      <para styleclass="Heading1"><text styleclass="Heading1" translate="true">DFT</text></para>
+    </header>
+    <para styleclass="Normal" style="margin-left:24px;"><text styleclass="Normal" translate="true">The DFT (Dynamic Function Table) contains all code links in a MAF based application. There are 2 versions of the DFT : an un-compiled version in the data storage from which the second version is being compiled from when the application starts and a user logs on. The compilation includes only functions the current user has access to, preventing the user centralized from calling functions he shouldn&apos;t have access to.</text></para>
+  </body>
+</topic>

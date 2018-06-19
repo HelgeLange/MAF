@@ -1,0 +1,136 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<topic template="Default" lasteditedby="Helge" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../helpproject.xsd">
+  <title translate="true">TmafResourceManager</title>
+  <body>
+    <header>
+      <para styleclass="Heading1"><text styleclass="Heading1" translate="true">TmafResourceManager</text></para>
+    </header>
+    <para styleclass="Normal" style="margin-left:24px;"><text styleclass="Normal" translate="true">TmafManagerLoader class overview</text></para>
+    <para styleclass="Normal"></para>
+    <para styleclass="Normal"><text styleclass="Normal" style="font-weight:bold;" translate="true">Properties</text></para>
+    <para styleclass="Normal"></para>
+    <para styleclass="Normal" style="margin-left:24px;"><table styleclass="Default" rowcount="7" colcount="2" style="cell-padding:2px; border-width:0px; border-spacing:0px; border-collapse:collapse; cell-border-width:1px; border-color:#000000; border-style:solid; background-color:none; head-row-background-color:#d5eaff; alt-row-background-color:none;">
+      <thead style="vertical-align:top">
+        <td style="width:156px;">
+          <para styleclass="Normal"><text styleclass="Normal" style="font-weight:bold;" translate="true">Name</text></para>
+        </td>
+        <td style="width:404px;">
+          <para styleclass="Normal"><text styleclass="Normal" style="font-weight:bold;" translate="true">Description</text></para>
+        </td>
+      </thead>
+      <tr style="vertical-align:top">
+        <td style="width:156px;">
+          <para styleclass="Normal"><text styleclass="Normal" translate="true">FileResource</text></para>
+        </td>
+        <td style="width:404px;">
+          <para styleclass="Normal"><text styleclass="Normal" translate="true">The monolith file resource class.</text></para>
+        </td>
+      </tr>
+      <tr style="vertical-align:top">
+        <td style="width:156px;">
+          <para styleclass="Normal"><text styleclass="Normal" translate="true">GlobalVars</text></para>
+        </td>
+        <td style="width:404px;">
+          <para styleclass="Normal"><text styleclass="Normal" translate="true">The connected TmafGlobalVars.</text></para>
+        </td>
+      </tr>
+      <tr style="vertical-align:top">
+        <td style="width:156px;">
+          <para styleclass="Normal"><text styleclass="Normal" translate="true">LanguageSubDir</text></para>
+        </td>
+        <td style="width:404px;">
+          <para styleclass="Normal"><text styleclass="Normal" translate="true">The sub directory for language files.</text></para>
+        </td>
+      </tr>
+      <tr style="vertical-align:top">
+        <td style="width:156px;">
+          <para styleclass="Normal"><text styleclass="Normal" translate="true">ModuleController</text></para>
+        </td>
+        <td style="width:404px;">
+          <para styleclass="Normal"><text styleclass="Normal" translate="true">The connected TmafModuleController component.</text></para>
+        </td>
+      </tr>
+      <tr style="vertical-align:top">
+        <td style="width:156px;">
+          <para styleclass="Normal"><text styleclass="Normal" translate="true">SQLResource</text></para>
+        </td>
+        <td style="width:404px;">
+          <para styleclass="Normal"><text styleclass="Normal" translate="true">The SQL string resource class.</text></para>
+        </td>
+      </tr>
+      <tr style="vertical-align:top">
+        <td style="width:156px;">
+          <para styleclass="Normal"><text styleclass="Normal" translate="true">StringResource</text></para>
+        </td>
+        <td style="width:404px;">
+          <para styleclass="Normal"><text styleclass="Normal" translate="true">The String resource class for localized language files.</text></para>
+        </td>
+      </tr>
+    </table></para>
+    <para styleclass="Normal"></para>
+    <para styleclass="Normal"><text styleclass="Normal" style="font-weight:bold;" translate="true">Methods</text></para>
+    <para styleclass="Normal"></para>
+    <para styleclass="Normal" style="margin-left:24px;"><table styleclass="Default" rowcount="2" colcount="2" style="cell-padding:2px; border-width:0px; border-spacing:0px; border-collapse:collapse; cell-border-width:1px; border-color:#000000; border-style:solid; head-row-background-color:#d5eaff; alt-row-background-color:none;">
+      <thead style="vertical-align:top">
+        <td>
+          <para styleclass="Normal"><text styleclass="Normal" style="font-weight:bold;" translate="true">Name</text></para>
+        </td>
+        <td>
+          <para styleclass="Normal"><text styleclass="Normal" style="font-weight:bold;" translate="true">Description</text></para>
+        </td>
+      </thead>
+      <tr style="vertical-align:top">
+        <td>
+        </td>
+        <td>
+        </td>
+      </tr>
+    </table></para>
+    <para styleclass="Normal"></para>
+    <para styleclass="Normal"><text styleclass="Normal" style="font-weight:bold;" translate="true">Events</text></para>
+    <para styleclass="Normal"></para>
+    <para styleclass="Normal" style="margin-left:24px;"><table styleclass="Default" rowcount="5" colcount="2" style="cell-padding:2px; border-width:0px; border-spacing:0px; border-collapse:collapse; cell-border-width:1px; border-color:#000000; border-style:solid; head-row-background-color:#d5eaff; alt-row-background-color:none;">
+      <thead style="vertical-align:top">
+        <td>
+          <para styleclass="Normal"><text styleclass="Normal" style="font-weight:bold;" translate="true">Name</text></para>
+        </td>
+        <td>
+          <para styleclass="Normal"><text styleclass="Normal" style="font-weight:bold;" translate="true">Description</text></para>
+        </td>
+      </thead>
+      <tr style="vertical-align:top">
+        <td>
+          <para styleclass="Normal"><text styleclass="Normal" translate="true">OnResourceFileClosed</text></para>
+        </td>
+        <td>
+          <para styleclass="Normal"><text styleclass="Normal" translate="true">Fired when a resource file was closed.</text></para>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <para styleclass="Normal"><text styleclass="Normal" translate="true">OnResourceFileLoaded</text></para>
+        </td>
+        <td>
+          <para styleclass="Normal"><text styleclass="Normal" translate="true">Fired when a resource file was loaded.</text></para>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <para styleclass="Normal"><text styleclass="Normal" translate="true">OnResourceFileModified</text></para>
+        </td>
+        <td>
+          <para styleclass="Normal"><text styleclass="Normal" translate="true">Fired when a resource file was modified.</text></para>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <para styleclass="Normal"><text styleclass="Normal" translate="true">OnUnknownImageType</text></para>
+        </td>
+        <td>
+          <para styleclass="Normal"><text styleclass="Normal" translate="true">Fired when a TGraphic was was requested, but the component didn&apos;t recognize the extension.</text></para>
+        </td>
+      </tr>
+    </table></para>
+    <para styleclass="Normal"></para>
+  </body>
+</topic>

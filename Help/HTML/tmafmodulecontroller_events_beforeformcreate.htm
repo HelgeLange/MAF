@@ -1,0 +1,78 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+   <title>BeforeFormCreate</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   <meta http-equiv="Content-Style-Type" content="text/css" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+   <script type="text/javascript" src="jquery.js"></script>
+   <script type="text/javascript" src="helpman_settings.js"></script>
+   <script type="text/javascript" src="helpman_topicinit.js"></script>
+
+   <script type="text/javascript">
+     HMSyncTOC("index.html", "tmafmodulecontroller_events_beforeformcreate.htm");
+   </script>
+   <script type="text/javascript" src="highlight.js"></script>
+   <script type="text/javascript">
+     $(document).ready(function(){highlight();});
+   </script>
+</head>
+<body style="margin: 0px 0px 0px 0px; background: #FFFFFF;">
+
+
+<table width="100%" border="0" cellspacing="0" cellpadding="5" bgcolor="#99CCFF">
+  <tr valign="middle">
+    <td align="left">
+     <span style="font-size: 8pt">
+      <b>Modular Application Framework Components</b>
+     </span>
+    </td>
+  </tr>
+  <tr valign="middle">
+    <td align="left">
+      <h1 class="p_Heading1"><span class="f_Heading1">BeforeFormCreate</span></h1>
+
+    </td>
+    <td align="right">
+     <span style="font-size: 9pt">
+     <a href="introduction.htm">Top</a>&nbsp;
+     <a href="tmafmodulecontroller_events.htm">Previous</a>&nbsp;
+     <a href="definitions.htm">Next</a>
+     </span>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table width="100%" border="0" cellspacing="0" cellpadding="5"><tr valign="top"><td align="left">
+<p style="margin: 0px 0px 0px 24px;">Fired before a form is created by the TmafModuleController. Obviously it will be only fired, if the TmafModuleController has a form associated with the current SubHook and the default action for the SubHook is one of the Form-Creation-Methods.</p>
+<p style="margin: 0px 0px 0px 24px;">&nbsp;</p>
+<p><span style="font-size: 11pt; font-weight: bold;">Class</span></p>
+<p style="margin: 0px 0px 0px 24px;"><a href="tmafmanagerloader.htm" class="topiclink">TmafModuleController</a></p>
+<p>&nbsp;</p>
+<p><span style="font-size: 11pt; font-weight: bold;">Syntax</span></p>
+<p>&nbsp;</p>
+<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 24px;"><table style="border:none; border-spacing:0px;">
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; padding:0px;"><p><span style="font-weight: bold;">property </span>OnBeforeFormCreate : TBeforeFormNotifyEvent;</p>
+<p>&nbsp;</p>
+<p>TBeforeFormNotifyEvent = procedure(Sender: TObject; QHS: pQHS; nSubHookID: Integer; pData: Pointer; var CanContinue: Boolean) Of Object;</p>
+</td>
+</tr>
+</table>
+</div>
+<p>&nbsp;</p>
+<p><span style="font-size: 11pt; font-weight: bold;">Remarks</span></p>
+<p>&nbsp;</p>
+<p style="margin: 0px 0px 0px 24px;">With the variable QHS you receive the pointer to a TQueryHandlerStruct record from the caller and can access all variables and parameters within it to check, if the form creation can continue.</p>
+<p style="margin: 0px 0px 0px 24px;">pData is a data pointer to the structure assigned to the SubHook within the local ModuleController.</p>
+<p style="margin: 0px 0px 0px 24px;">CanContinue is default true, to inform the ModuleController to not create the form for some reason, just set it to false before leaving the event.</p>
+
+</td></tr></table>
+<hr />
+   (c)opyright 2009 by Helge Lange. All Rights Reserved.
+</body>
+</html>

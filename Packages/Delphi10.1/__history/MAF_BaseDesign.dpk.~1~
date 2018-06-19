@@ -1,0 +1,69 @@
+package MAF_BaseDesign;
+
+{$R *.res}
+{$R '..\MAF_BaseDesign.dcr'}
+{$IFDEF IMPLICITBUILDING This IFDEF should not be used by users}
+{$ALIGN 8}
+{$ASSERTIONS ON}
+{$BOOLEVAL OFF}
+{$DEBUGINFO OFF}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS OFF}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION ON}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO OFF}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES OFF}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST OFF}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$DEFINE RELEASE}
+{$DEFINE SourceEdition}
+{$DEFINE Package_Build}
+{$ENDIF IMPLICITBUILDING}
+{$DESCRIPTION 'Modular Application Framework Components Base (Designtime)'}
+{$LIBSUFFIX '240'}
+{$DESIGNONLY}
+{$IMPLICITBUILD OFF}
+
+requires
+  rtl,
+  designide,
+  CodeSiteLoggingPkg,
+  MAF_Base;
+
+contains
+  uMAF_PropertyEditors in '..\..\MAF_Editors\uMAF_PropertyEditors.pas',
+  frmCodeGroupEdit in '..\..\MAF_Editors\frmCodeGroupEdit.pas' {fCodeGroupEdit},
+  frmConfiguration in '..\..\MAF_Editors\frmConfiguration.pas' {fConfiguration},
+  frmHookManager_Editor in '..\..\MAF_Editors\frmHookManager_Editor.pas' {fDFTEdit},
+  frmEditDataDef in '..\..\MAF_Editors\frmEditDataDef.pas' {fEditDataDef},
+  frmEditName_Generic in '..\..\MAF_Editors\frmEditName_Generic.pas' {fEditName_Generic},
+  frmEditSubHook in '..\..\MAF_Editors\frmEditSubHook.pas' {fEditSubHook},
+  frmLinkData_Editor in '..\..\MAF_Editors\frmLinkData_Editor.pas' {fLinkDataEditor},
+  frmModuleController_Editor in '..\..\MAF_Editors\frmModuleController_Editor.pas' {fModuleController_Editor},
+  uXMLSynchro in '..\..\MAF_Editors\uXMLSynchro.pas',
+  MAF_BaseReg in '..\MAF_BaseReg.pas',
+  frmResourceManager_Editor in '..\..\MAF_Editors\frmResourceManager_Editor.pas' {fRMT_Main},
+  frmCategoryEdit in '..\..\MAF_Editors\frmCategoryEdit.pas' {fCategoryEdit},
+  frmImageData_Edit in '..\..\MAF_Editors\frmImageData_Edit.pas' {fImageData_Edit},
+  frmListView_ColumnFilter in '..\..\MAF_Editors\frmListView_ColumnFilter.pas' {fListView_ColumnFilter},
+  frmResourceBaseEditorForm in '..\..\MAF_Editors\frmResourceBaseEditorForm.pas' {fResourceBaseEditorForm},
+  frmStringData_Edit in '..\..\MAF_Editors\frmStringData_Edit.pas' {fStringData_Editor},
+  frmFilesAdd_Wizard in '..\..\MAF_Editors\frmFilesAdd_Wizard.pas' {fFilesAdd_Wizard},
+  frmResourceClient_Editor in '..\..\MAF_Editors\frmResourceClient_Editor.pas' {fResourceClient_Editor},
+  frmFileDB_UserEditor in '..\..\MAF_Editors\frmFileDB_UserEditor.pas' {fFileDB_UserEditor},
+  frmMAFFileLogger_Editor in '..\..\MAF_Editors\frmMAFFileLogger_Editor.pas' {fFileLoggerEditor},
+  frmResourceFileInfo in '..\..\MAF_Editors\frmResourceFileInfo.pas' {fResourceFileInfo},
+  frmFileDB_Viewer in '..\..\MAF_Editors\frmFileDB_Viewer.pas' {fFileDB_Viewer},
+  frmCreateDevAccount in '..\..\MAF_Editors\frmCreateDevAccount.pas' {fCreateDevAccount},
+  frmParameter_Edit in '..\..\MAF_Editors\frmParameter_Edit.pas' {fParameter_Edit};
+
+end.

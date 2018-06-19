@@ -1,0 +1,81 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+   <title>__Delete_FunctionObserver</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   <meta http-equiv="Content-Style-Type" content="text/css" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+   <script type="text/javascript" src="jquery.js"></script>
+   <script type="text/javascript" src="helpman_settings.js"></script>
+   <script type="text/javascript" src="helpman_topicinit.js"></script>
+
+   <script type="text/javascript">
+     HMSyncTOC("index.html", "tmafhookclient___delete_functionobserver.htm");
+   </script>
+   <script type="text/javascript" src="highlight.js"></script>
+   <script type="text/javascript">
+     $(document).ready(function(){highlight();});
+   </script>
+</head>
+<body style="margin: 0px 0px 0px 0px; background: #FFFFFF;">
+
+
+<table width="100%" border="0" cellspacing="0" cellpadding="5" bgcolor="#99CCFF">
+  <tr valign="middle">
+    <td align="left">
+     <span style="font-size: 8pt">
+      <b>Modular Application Framework Components</b>
+     </span>
+    </td>
+  </tr>
+  <tr valign="middle">
+    <td align="left">
+      <h1 class="p_Heading1"><span class="f_Heading1">__Delete_FunctionObserver</span></h1>
+
+    </td>
+    <td align="right">
+     <span style="font-size: 9pt">
+     <a href="introduction.htm">Top</a>&nbsp;
+     <a href="tmafhoookclient___add_functionobserver.htm">Previous</a>&nbsp;
+     <a href="tmafhookclient_events.htm">Next</a>
+     </span>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table width="100%" border="0" cellspacing="0" cellpadding="5"><tr valign="top"><td align="left">
+<p style="margin: 0px 0px 0px 24px;">Deletes an previously installed observer for a DynamicFunction.</p>
+<p>&nbsp;</p>
+<p><span style="font-size: 11pt; font-weight: bold;">Class</span></p>
+<p style="margin: 0px 0px 0px 24px;"><a href="tmafhooclient.htm" class="topiclink">TmafHookClient</a></p>
+<p>&nbsp;</p>
+<p><span style="font-size: 11pt; font-weight: bold;">Syntax</span></p>
+<p>&nbsp;</p>
+<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 24px;"><table style="background-color:#ecf5ff; border:none; border-spacing:0px;">
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; padding:0px;"><p><span style="font-weight: bold;">function</span> __Delete_FunctionObserver(nHookID, nSubHookID: Integer; AReceiver: TComponent = nil): Integer;</p>
+</td>
+</tr>
+</table>
+</div>
+<p>&nbsp;</p>
+<p><span style="font-size: 11pt; font-weight: bold;">Remarks</span></p>
+<p style="margin: 0px 0px 0px 24px;">nHookID defines the ID of the DynamicFunction to observe.</p>
+<p style="margin: 0px 0px 0px 24px;">nSubHookID defines a SubHook to observe. Is this parameter is 0, the whole DynamicFunction will be observed.</p>
+<p style="margin: 0px 0px 0px 24px;">AReceiver can contain a receiver component for the message sent by the TmafHookManager. For application development the parameter can just be left blank, but components should use this to intercept these messages instead of using the event fired.</p>
+<p style="margin: 0px 0px 0px 24px;">The result is an error code. If the execution was successful, ERR_NO_ERROR is returned.</p>
+<p style="margin: 0px 0px 0px 24px;">&nbsp;</p>
+<p style="margin: 0px 0px 0px 24px;">The parameter should be given here exactly as they were given when installing the function observer. If the parameter do not fit, the observer will not be de-installed and might call into an already destroyed callback.</p>
+<p style="margin: 0px 0px 0px 24px;">&nbsp;</p>
+<p><span style="font-size: 11pt; font-weight: bold;">See also</span></p>
+<p style="margin: 0px 0px 0px 24px;"><a href="tmafhoookclient___add_functionobserver.htm" class="topiclink">__Add_FunctionObserver</a></p>
+
+</td></tr></table>
+<hr />
+   (c)opyright 2009 by Helge Lange. All Rights Reserved.
+</body>
+</html>

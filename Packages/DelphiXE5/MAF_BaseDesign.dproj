@@ -1,0 +1,306 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{BAD0AC45-95D0-4076-814B-36412F18D12F}</ProjectGuid>
+        <MainSource>MAF_BaseDesign.dpk</MainSource>
+        <Base>True</Base>
+        <Config Condition="'$(Config)'==''">Debug</Config>
+        <AppType>Package</AppType>
+        <FrameworkType>None</FrameworkType>
+        <DCC_DCCCompiler>DCC32</DCC_DCCCompiler>
+        <ProjectVersion>15.3</ProjectVersion>
+        <Platform Condition="'$(Platform)'==''">Win32</Platform>
+        <TargetedPlatforms>1</TargetedPlatforms>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Config)'=='Base' or '$(Base)'!=''">
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="('$(Platform)'=='Win32' and '$(Base)'=='true') or '$(Base_Win32)'!=''">
+        <Base_Win32>true</Base_Win32>
+        <CfgParent>Base</CfgParent>
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="('$(Platform)'=='Win64' and '$(Base)'=='true') or '$(Base_Win64)'!=''">
+        <Base_Win64>true</Base_Win64>
+        <CfgParent>Base</CfgParent>
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Config)'=='Release' or '$(Cfg_1)'!=''">
+        <Cfg_1>true</Cfg_1>
+        <CfgParent>Base</CfgParent>
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="('$(Platform)'=='Win32' and '$(Cfg_1)'=='true') or '$(Cfg_1_Win32)'!=''">
+        <Cfg_1_Win32>true</Cfg_1_Win32>
+        <CfgParent>Cfg_1</CfgParent>
+        <Cfg_1>true</Cfg_1>
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Config)'=='Debug' or '$(Cfg_2)'!=''">
+        <Cfg_2>true</Cfg_2>
+        <CfgParent>Base</CfgParent>
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="('$(Platform)'=='Win32' and '$(Cfg_2)'=='true') or '$(Cfg_2_Win32)'!=''">
+        <Cfg_2_Win32>true</Cfg_2_Win32>
+        <CfgParent>Cfg_2</CfgParent>
+        <Cfg_2>true</Cfg_2>
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="('$(Platform)'=='Win64' and '$(Cfg_2)'=='true') or '$(Cfg_2_Win64)'!=''">
+        <Cfg_2_Win64>true</Cfg_2_Win64>
+        <CfgParent>Cfg_2</CfgParent>
+        <Cfg_2>true</Cfg_2>
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Config)'=='PE' or '$(Cfg_4)'!=''">
+        <Cfg_4>true</Cfg_4>
+        <CfgParent>Cfg_2</CfgParent>
+        <Cfg_2>true</Cfg_2>
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="('$(Platform)'=='Win32' and '$(Cfg_4)'=='true') or '$(Cfg_4_Win32)'!=''">
+        <Cfg_4_Win32>true</Cfg_4_Win32>
+        <CfgParent>Cfg_4</CfgParent>
+        <Cfg_4>true</Cfg_4>
+        <Cfg_2>true</Cfg_2>
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="('$(Platform)'=='Win64' and '$(Cfg_4)'=='true') or '$(Cfg_4_Win64)'!=''">
+        <Cfg_4_Win64>true</Cfg_4_Win64>
+        <CfgParent>Cfg_4</CfgParent>
+        <Cfg_4>true</Cfg_4>
+        <Cfg_2>true</Cfg_2>
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Base)'!=''">
+        <VerInfo_Build>740</VerInfo_Build>
+        <VerInfo_Keys>CompanyName=;FileDescription=Modular Application Framework Components - Base Designtime;FileVersion=2.1.0.740;InternalName=MAF_BaseDesign;LegalCopyright=(c) 2009-2011 by Helge Lange;LegalTrademarks=;OriginalFilename=MAF_BaseDesign150.bpl;ProductName=Modular Application Framework Components;ProductVersion=2.1;Comments=</VerInfo_Keys>
+        <DCC_UsePackage>rtl;$(DCC_UsePackage)</DCC_UsePackage>
+        <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
+        <DCC_Namespace>System;Xml;Data;Datasnap;Web;Soap;Winapi;Vcl;Xml.Win;Vcl.Imaging;$(DCC_Namespace)</DCC_Namespace>
+        <VerInfo_MajorVer>2</VerInfo_MajorVer>
+        <VerInfo_MinorVer>1</VerInfo_MinorVer>
+        <VerInfo_Locale>1033</VerInfo_Locale>
+        <DCC_DcuOutput>$(Platform)\dcu</DCC_DcuOutput>
+        <DesignOnlyPackage>true</DesignOnlyPackage>
+        <DllSuffix>190</DllSuffix>
+        <GenPackage>true</GenPackage>
+        <DCC_ImageBase>00400000</DCC_ImageBase>
+        <DCC_Define>Package_Build;$(DCC_Define)</DCC_Define>
+        <DCC_Description>Modular Application Framework Components Base (Designtime)</DCC_Description>
+        <DCC_S>false</DCC_S>
+        <DCC_OutputNeverBuildDcps>true</DCC_OutputNeverBuildDcps>
+        <GenDll>true</GenDll>
+        <DCC_N>false</DCC_N>
+        <DCC_E>false</DCC_E>
+        <DCC_F>false</DCC_F>
+        <DCC_K>false</DCC_K>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Base_Win32)'!=''">
+        <VerInfo_MinorVer>0</VerInfo_MinorVer>
+        <VerInfo_MajorVer>1</VerInfo_MajorVer>
+        <VerInfo_Build>0</VerInfo_Build>
+        <Icon_MainIcon>MAF_BaseDesign_Icon.ico</Icon_MainIcon>
+        <DCC_Namespace>System.Win;Data.Win;Datasnap.Win;Web.Win;Soap.Win;Bde;$(DCC_Namespace)</DCC_Namespace>
+        <VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
+        <Manifest_File>$(BDS)\bin\default_app.manifest</Manifest_File>
+        <DCC_UsePackage>MAF_Base;$(DCC_UsePackage)</DCC_UsePackage>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Base_Win64)'!=''">
+        <VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
+        <DCC_Namespace>System.Win;Data.Win;Datasnap.Win;Web.Win;Soap.Win;$(DCC_Namespace)</DCC_Namespace>
+        <Icon_MainIcon>MAF_BaseDesign_Icon.ico</Icon_MainIcon>
+        <DCC_DcuOutput>win64\dcu</DCC_DcuOutput>
+        <Manifest_File>$(BDS)\bin\default_app.manifest</Manifest_File>
+        <DCC_UsePackage>MAF_Base;$(DCC_UsePackage)</DCC_UsePackage>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Cfg_1)'!=''">
+        <DCC_LocalDebugSymbols>false</DCC_LocalDebugSymbols>
+        <DCC_Define>RELEASE;SourceEdition;$(DCC_Define)</DCC_Define>
+        <DCC_SymbolReferenceInfo>0</DCC_SymbolReferenceInfo>
+        <DCC_DebugInformation>0</DCC_DebugInformation>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Cfg_1_Win32)'!=''">
+        <VerInfo_MinorVer>0</VerInfo_MinorVer>
+        <VerInfo_MajorVer>1</VerInfo_MajorVer>
+        <VerInfo_Build>0</VerInfo_Build>
+        <VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Cfg_2)'!=''">
+        <DCC_CBuilderOutput>All</DCC_CBuilderOutput>
+        <DCC_Define>DEBUG;CodeSite;SourceEdition;$(DCC_Define)</DCC_Define>
+        <DCC_Optimize>false</DCC_Optimize>
+        <DCC_GenerateStackFrames>true</DCC_GenerateStackFrames>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Cfg_2_Win32)'!=''">
+        <DCC_DebugInformation>true</DCC_DebugInformation>
+        <DCC_MapFile>3</DCC_MapFile>
+        <DCC_BpiOutput>Win32\dcu\Debug\</DCC_BpiOutput>
+        <DCC_ObjOutput>Win32\dcu\Debug\</DCC_ObjOutput>
+        <DCC_HppOutput>Win32\dcu\Debug\</DCC_HppOutput>
+        <VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=2.1.0.740;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
+        <DCC_DcuOutput>win32\dcu\debug</DCC_DcuOutput>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Cfg_2_Win64)'!=''">
+        <VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
+        <DCC_DcuOutput>win64\dcu\debug</DCC_DcuOutput>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Cfg_4)'!=''">
+        <DCC_Define>PE;$(DCC_Define)</DCC_Define>
+        <DCC_BplOutput>..\..\..\MAF_Release\PE\DelphiXE</DCC_BplOutput>
+        <DCC_DcpOutput>..\..\..\MAF_Release\PE\DelphiXE\DCU</DCC_DcpOutput>
+        <DCC_DcuOutput>..\..\..\MAF_Release\PE\DelphiXE\DCU</DCC_DcuOutput>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Cfg_4_Win32)'!=''">
+        <VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
+        <DCC_DcuOutput>..\..\..\MAF_Release\PE\DelphiXE\Win32\DCU</DCC_DcuOutput>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Cfg_4_Win64)'!=''">
+        <VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
+        <DCC_DcuOutput>..\..\..\MAF_Release\PE\DelphiXE\win64\DCU</DCC_DcuOutput>
+    </PropertyGroup>
+    <ItemGroup>
+        <DelphiCompile Include="$(MainSource)">
+            <MainSource>MainSource</MainSource>
+        </DelphiCompile>
+        <DCCReference Include="..\MAF_BaseDesign.dcr"/>
+        <DCCReference Include="rtl.dcp"/>
+        <DCCReference Include="designide.dcp"/>
+        <DCCReference Include="CodeSiteLoggingPkg.dcp"/>
+        <DCCReference Include="MAF_Base.dcp"/>
+        <DCCReference Include="..\..\MAF_Editors\uMAF_PropertyEditors.pas"/>
+        <DCCReference Include="..\..\MAF_Editors\frmCodeGroupEdit.pas">
+            <Form>fCodeGroupEdit</Form>
+        </DCCReference>
+        <DCCReference Include="..\..\MAF_Editors\frmConfiguration.pas">
+            <Form>fConfiguration</Form>
+        </DCCReference>
+        <DCCReference Include="..\..\MAF_Editors\frmHookManager_Editor.pas">
+            <Form>fDFTEdit</Form>
+        </DCCReference>
+        <DCCReference Include="..\..\MAF_Editors\frmEditDataDef.pas">
+            <Form>fEditDataDef</Form>
+        </DCCReference>
+        <DCCReference Include="..\..\MAF_Editors\frmEditName_Generic.pas">
+            <Form>fEditName_Generic</Form>
+        </DCCReference>
+        <DCCReference Include="..\..\MAF_Editors\frmEditSubHook.pas">
+            <Form>fEditSubHook</Form>
+        </DCCReference>
+        <DCCReference Include="..\..\MAF_Editors\frmLinkData_Editor.pas">
+            <Form>fLinkDataEditor</Form>
+        </DCCReference>
+        <DCCReference Include="..\..\MAF_Editors\frmModuleController_Editor.pas">
+            <Form>fModuleController_Editor</Form>
+        </DCCReference>
+        <DCCReference Include="..\..\MAF_Editors\uXMLSynchro.pas"/>
+        <DCCReference Include="..\MAF_BaseReg.pas"/>
+        <DCCReference Include="..\..\MAF_Editors\frmResourceManager_Editor.pas">
+            <Form>fRMT_Main</Form>
+        </DCCReference>
+        <DCCReference Include="..\..\MAF_Editors\frmCategoryEdit.pas">
+            <Form>fCategoryEdit</Form>
+        </DCCReference>
+        <DCCReference Include="..\..\MAF_Editors\frmImageData_Edit.pas">
+            <Form>fImageData_Edit</Form>
+        </DCCReference>
+        <DCCReference Include="..\..\MAF_Editors\frmListView_ColumnFilter.pas">
+            <Form>fListView_ColumnFilter</Form>
+        </DCCReference>
+        <DCCReference Include="..\..\MAF_Editors\frmResourceBaseEditorForm.pas">
+            <Form>fResourceBaseEditorForm</Form>
+        </DCCReference>
+        <DCCReference Include="..\..\MAF_Editors\frmStringData_Edit.pas">
+            <Form>fStringData_Editor</Form>
+        </DCCReference>
+        <DCCReference Include="..\..\MAF_Editors\frmFilesAdd_Wizard.pas">
+            <Form>fFilesAdd_Wizard</Form>
+        </DCCReference>
+        <DCCReference Include="..\..\MAF_Editors\frmResourceClient_Editor.pas">
+            <Form>fResourceClient_Editor</Form>
+        </DCCReference>
+        <DCCReference Include="..\..\MAF_Editors\frmFileDB_UserEditor.pas">
+            <Form>fFileDB_UserEditor</Form>
+        </DCCReference>
+        <DCCReference Include="..\..\MAF_Editors\frmMAFFileLogger_Editor.pas">
+            <Form>fFileLoggerEditor</Form>
+        </DCCReference>
+        <DCCReference Include="..\..\MAF_Editors\frmResourceFileInfo.pas">
+            <Form>fResourceFileInfo</Form>
+        </DCCReference>
+        <DCCReference Include="..\..\MAF_Editors\frmFileDB_Viewer.pas">
+            <Form>fFileDB_Viewer</Form>
+        </DCCReference>
+        <DCCReference Include="..\..\MAF_Editors\frmCreateDevAccount.pas">
+            <Form>fCreateDevAccount</Form>
+        </DCCReference>
+        <DCCReference Include="..\..\MAF_Editors\frmParameter_Edit.pas">
+            <Form>fParameter_Edit</Form>
+        </DCCReference>
+        <BuildConfiguration Include="Debug">
+            <Key>Cfg_2</Key>
+            <CfgParent>Base</CfgParent>
+        </BuildConfiguration>
+        <BuildConfiguration Include="PE">
+            <Key>Cfg_4</Key>
+            <CfgParent>Cfg_2</CfgParent>
+        </BuildConfiguration>
+        <BuildConfiguration Include="Base">
+            <Key>Base</Key>
+        </BuildConfiguration>
+        <BuildConfiguration Include="Release">
+            <Key>Cfg_1</Key>
+            <CfgParent>Base</CfgParent>
+        </BuildConfiguration>
+    </ItemGroup>
+    <Import Condition="Exists('$(BDS)\Bin\CodeGear.Delphi.Targets')" Project="$(BDS)\Bin\CodeGear.Delphi.Targets"/>
+    <Import Condition="Exists('$(APPDATA)\Embarcadero\$(BDSAPPDATABASEDIR)\$(PRODUCTVERSION)\UserTools.proj')" Project="$(APPDATA)\Embarcadero\$(BDSAPPDATABASEDIR)\$(PRODUCTVERSION)\UserTools.proj"/>
+    <ProjectExtensions>
+        <Borland.Personality>Delphi.Personality.12</Borland.Personality>
+        <Borland.ProjectType>Package</Borland.ProjectType>
+        <BorlandProject>
+            <Delphi.Personality>
+                <Source>
+                    <Source Name="MainSource">MAF_BaseDesign.dpk</Source>
+                </Source>
+                <VersionInfo>
+                    <VersionInfo Name="IncludeVerInfo">True</VersionInfo>
+                    <VersionInfo Name="AutoIncBuild">False</VersionInfo>
+                    <VersionInfo Name="MajorVer">2</VersionInfo>
+                    <VersionInfo Name="MinorVer">1</VersionInfo>
+                    <VersionInfo Name="Release">0</VersionInfo>
+                    <VersionInfo Name="Build">740</VersionInfo>
+                    <VersionInfo Name="Debug">False</VersionInfo>
+                    <VersionInfo Name="PreRelease">False</VersionInfo>
+                    <VersionInfo Name="Special">False</VersionInfo>
+                    <VersionInfo Name="Private">False</VersionInfo>
+                    <VersionInfo Name="DLL">False</VersionInfo>
+                    <VersionInfo Name="Locale">1033</VersionInfo>
+                    <VersionInfo Name="CodePage">1252</VersionInfo>
+                </VersionInfo>
+                <VersionInfoKeys>
+                    <VersionInfoKeys Name="CompanyName"/>
+                    <VersionInfoKeys Name="FileDescription">Modular Application Framework Components - Base Designtime</VersionInfoKeys>
+                    <VersionInfoKeys Name="FileVersion">2.1.0.740</VersionInfoKeys>
+                    <VersionInfoKeys Name="InternalName">MAF_BaseDesign</VersionInfoKeys>
+                    <VersionInfoKeys Name="LegalCopyright">(c) 2009-2011 by Helge Lange</VersionInfoKeys>
+                    <VersionInfoKeys Name="LegalTrademarks"/>
+                    <VersionInfoKeys Name="OriginalFilename">MAF_BaseDesign150.bpl</VersionInfoKeys>
+                    <VersionInfoKeys Name="ProductName">Modular Application Framework Components</VersionInfoKeys>
+                    <VersionInfoKeys Name="ProductVersion">2.1</VersionInfoKeys>
+                    <VersionInfoKeys Name="Comments"/>
+                </VersionInfoKeys>
+                <Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\dcloffice2k190.bpl">Microsoft Office 2000 Sample Automation Server Wrapper Components</Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\dclofficexp190.bpl">Microsoft Office XP Sample Automation Server Wrapper Components</Excluded_Packages>
+                </Excluded_Packages>
+            </Delphi.Personality>
+            <Platforms>
+                <Platform value="OSX32">False</Platform>
+                <Platform value="Win32">True</Platform>
+                <Platform value="Win64">False</Platform>
+            </Platforms>
+        </BorlandProject>
+        <ProjectFileVersion>12</ProjectFileVersion>
+    </ProjectExtensions>
+</Project>

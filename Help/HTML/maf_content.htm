@@ -1,0 +1,255 @@
+﻿<!DOCTYPE HTML>
+<html><head>
+   <title>MAF Components 2.0 Help file</title>
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+   <!-- This line includes the general project style sheet (not required) -->
+   <link type="text/css" href="default.css" rel="stylesheet" />
+
+   <!-- This block defines the styles of the TOC headings, change them as needed -->
+   <style type="text/css">
+       body { background:#FFF; }
+       .navbar   { font-size: 120%; }
+
+       .heading1 { font-family: Arial,Helvetica; font-weight: normal; font-size: 10pt; color: #000000; text-decoration: none; }
+       .heading2 { font-family: Arial,Helvetica; font-weight: normal; font-size: 10pt; color: #000000; text-decoration: none; }
+       .heading3 { font-family: Arial,Helvetica; font-weight: normal; font-size: 10pt; color: #000000; text-decoration: none; }
+       .heading4 { font-family: Arial,Helvetica; font-weight: normal; font-size: 10pt; color: #000000; text-decoration: none; }
+       .heading5 { font-family: Arial,Helvetica; font-weight: normal; font-size: 10pt; color: #000000; text-decoration: none; }
+       .heading6 { font-family: Arial,Helvetica; font-weight: normal; font-size: 10pt; color: #000000; text-decoration: none; }
+
+       .hilight1 { font-family: Arial,Helvetica; font-weight: normal; font-size: 10pt; color: #FFFFFF; background: #002682; text-decoration: none; }
+       .hilight2 { font-family: Arial,Helvetica; font-weight: normal; font-size: 10pt; color: #FFFFFF; background: #002682; text-decoration: none; }
+       .hilight3 { font-family: Arial,Helvetica; font-weight: normal; font-size: 10pt; color: #FFFFFF; background: #002682; text-decoration: none; }
+       .hilight4 { font-family: Arial,Helvetica; font-weight: normal; font-size: 10pt; color: #FFFFFF; background: #002682; text-decoration: none; }
+       .hilight5 { font-family: Arial,Helvetica; font-weight: normal; font-size: 10pt; color: #FFFFFF; background: #002682; text-decoration: none; }
+       .hilight6 { font-family: Arial,Helvetica; font-weight: normal; font-size: 10pt; color: #FFFFFF; background: #002682; text-decoration: none; }
+
+       /* TOC LIST CSS */
+       #toc    { padding: 0; margin: 0; }
+       #toc li { margin-top: 2px; }
+       #toc ul { padding-left:0; padding-right:0 }
+       /* TOC LIST CSS */
+   </style>
+   <script type="text/javascript" src="jquery.js"></script>
+   <script type="text/javascript" src="helpman_settings.js"></script>
+   <script type="text/javascript">
+     var parentScope = (parent.hmNavigationFrame);
+     if (!parentScope) {
+		      var s = document.createElement("script");
+		      s.setAttribute("type","text/javascript");
+		      s.setAttribute("src", "helpman_navigation.js");
+		      document.getElementsByTagName("head")[0].appendChild(s);
+	    }
+     else {
+       if (initialtocstate != "expandall") parent.hmAddCss(document, "#toc li ul { display: none }");
+     }
+     function loadicons() { var icons = new Array(); for (i=0; i<arguments.length; i++) { icons[i] = new Image(); icons[i].src = arguments[i]; } }
+     function loadtoc() { if (parentScope) parent.loadstate(document.getElementById("toc")); else loadstate(document.getElementById("toc")); }
+     function savetoc() { if (parentScope) parent.savestate(document.getElementById("toc")); else savestate(document.getElementById("toc")); }
+     function clicked(node, event) { deselect(); if (parentScope) parent.hmNodeClicked(node, event); else hmNodeClicked(node, event); }
+     function dblclicked(node) { if (parentScope) parent.hmNodeDblclicked(node); else hmNodeDblclicked(node); }
+     function deselect() { if (window.getSelection) window.getSelection().removeAllRanges(); else if (document.selection) document.selection.empty(); }
+     $(document).ready(function(){
+       loadtoc();
+       $(window).onunload = savetoc;
+     });
+   </script>
+</head>
+<body>
+<p class="navbar"><b>Contents</b>
+ | <a href="maf_kwindex.htm">Index</a>
+ | <a href="maf_ftsearch.htm">Search</a>
+</p>
+<hr/>
+
+
+  <!-- Place holder for the TOC - this variable is REQUIRED! -->
+  <ul id="toc" style="list-style-type:none;display:block;padding-left:0">
+<li class="heading1" id="i1" style="background:url(cicon9.gif) no-repeat;padding-left:20px" onclick="return clicked(this,event)"><a class="heading1" id="a1" href="introduction.htm" target="hmcontent"><span class="heading1" id="s1">Overview</span></a>
+</li>
+<li class="heading1" id="i2" style="background:url(cicon9.gif) no-repeat;padding-left:20px" onclick="return clicked(this,event)"><a class="heading1" id="a2" href="getting_support.htm" target="hmcontent"><span class="heading1" id="s2">Getting Support</span></a>
+</li>
+<li class="heading1" id="i3" style="background:url(cicon9.gif) no-repeat;padding-left:20px" onclick="return clicked(this,event)"><a class="heading1" id="a3" href="deployment.htm" target="hmcontent"><span class="heading1" id="s3">Deployment</span></a>
+</li>
+<li class="heading1" id="i4" data-bg="cicon1.gif;cicon2.gif" style="background:url(cicon2.gif) no-repeat;cursor:pointer;padding-left:20px" onclick="return clicked(this,event)"><a class="heading1" id="a4" href="reference.htm" target="hmcontent"><span class="heading1" id="s4" ondblclick="return dblclicked(this)">Reference</span></a>
+<ul id="ul4" style="list-style-type:none">
+<li class="heading2" id="i4.1" data-bg="cicon1.gif;cicon2.gif" style="background:url(cicon2.gif) no-repeat;cursor:pointer;padding-left:20px" onclick="return clicked(this,event)"><a class="heading2" id="a4.1" href="tmafmanagerloader.htm" target="hmcontent"><span class="heading2" id="s4.1" ondblclick="return dblclicked(this)">TmafManagerLoader</span></a>
+<ul id="ul4.1" style="list-style-type:none">
+<li class="heading3" id="i4.1.1" data-bg="cicon1.gif;cicon2.gif" style="background:url(cicon2.gif) no-repeat;cursor:pointer;padding-left:20px" onclick="return clicked(this,event)"><a class="heading3" id="a4.1.1" href="tmafmanagerloader_properties.htm" target="hmcontent"><span class="heading3" id="s4.1.1" ondblclick="return dblclicked(this)">Properties</span></a>
+<ul id="ul4.1.1" style="list-style-type:none">
+<li class="heading4" id="i4.1.1.1" style="background:url(cicon9.gif) no-repeat;padding-left:20px" onclick="return clicked(this,event)"><a class="heading4" id="a4.1.1.1" href="tmafmanagerloader_autoload.htm" target="hmcontent"><span class="heading4" id="s4.1.1.1">AutoLoad</span></a>
+</li>
+<li class="heading4" id="i4.1.1.2" style="background:url(cicon9.gif) no-repeat;padding-left:20px" onclick="return clicked(this,event)"><a class="heading4" id="a4.1.1.2" href="tmafmanagerloader_dataloadmethod.htm" target="hmcontent"><span class="heading4" id="s4.1.1.2">DataLoadMethod</span></a>
+</li>
+<li class="heading4" id="i4.1.1.3" style="background:url(cicon9.gif) no-repeat;padding-left:20px" onclick="return clicked(this,event)"><a class="heading4" id="a4.1.1.3" href="tmafmanagerloader_inisettings.htm" target="hmcontent"><span class="heading4" id="s4.1.1.3">INISettings</span></a>
+</li>
+<li class="heading4" id="i4.1.1.4" style="background:url(cicon9.gif) no-repeat;padding-left:20px" onclick="return clicked(this,event)"><a class="heading4" id="a4.1.1.4" href="tmafmanagerloader_manager.htm" target="hmcontent"><span class="heading4" id="s4.1.1.4">Manager</span></a>
+</li>
+<li class="heading4" id="i4.1.1.5" style="background:url(cicon9.gif) no-repeat;padding-left:20px" onclick="return clicked(this,event)"><a class="heading4" id="a4.1.1.5" href="tmafmanagerloader_managerloaderoptions.htm" target="hmcontent"><span class="heading4" id="s4.1.1.5">ManagerLoaderOptions</span></a>
+</li>
+<li class="heading4" id="i4.1.1.6" style="background:url(cicon9.gif) no-repeat;padding-left:20px" onclick="return clicked(this,event)"><a class="heading4" id="a4.1.1.6" href="tmafmanagerloader_managersubdirectory.htm" target="hmcontent"><span class="heading4" id="s4.1.1.6">ManagerSubDirectory</span></a>
+</li>
+<li class="heading4" id="i4.1.1.7" style="background:url(cicon9.gif) no-repeat;padding-left:20px" onclick="return clicked(this,event)"><a class="heading4" id="a4.1.1.7" href="tmafmanagerloader_registrysettings.htm" target="hmcontent"><span class="heading4" id="s4.1.1.7">RegistrySettings</span></a>
+</li>
+</ul>
+</li>
+<li class="heading3" id="i4.1.2" data-bg="cicon1.gif;cicon2.gif" style="background:url(cicon2.gif) no-repeat;cursor:pointer;padding-left:20px" onclick="return clicked(this,event)"><a class="heading3" id="a4.1.2" href="tmafmanagerloader_methods.htm" target="hmcontent"><span class="heading3" id="s4.1.2" ondblclick="return dblclicked(this)">Methods</span></a>
+<ul id="ul4.1.2" style="list-style-type:none">
+<li class="heading4" id="i4.1.2.1" style="background:url(cicon9.gif) no-repeat;padding-left:20px" onclick="return clicked(this,event)"><a class="heading4" id="a4.1.2.1" href="tmafmanagerloader_addmanager.htm" target="hmcontent"><span class="heading4" id="s4.1.2.1">AddManager</span></a>
+</li>
+<li class="heading4" id="i4.1.2.2" style="background:url(cicon9.gif) no-repeat;padding-left:20px" onclick="return clicked(this,event)"><a class="heading4" id="a4.1.2.2" href="tmafmanagerloader_deletemanager.htm" target="hmcontent"><span class="heading4" id="s4.1.2.2">DeleteManager</span></a>
+</li>
+<li class="heading4" id="i4.1.2.3" style="background:url(cicon9.gif) no-repeat;padding-left:20px" onclick="return clicked(this,event)"><a class="heading4" id="a4.1.2.3" href="tmafmanagerloader_connectmanager.htm" target="hmcontent"><span class="heading4" id="s4.1.2.3">ConnectManager</span></a>
+</li>
+<li class="heading4" id="i4.1.2.4" style="background:url(cicon9.gif) no-repeat;padding-left:20px" onclick="return clicked(this,event)"><a class="heading4" id="a4.1.2.4" href="tmafmanagerloader_disconnectmanager.htm" target="hmcontent"><span class="heading4" id="s4.1.2.4">DisconnectManager</span></a>
+</li>
+</ul>
+</li>
+<li class="heading3" id="i4.1.3" data-bg="cicon1.gif;cicon2.gif" style="background:url(cicon2.gif) no-repeat;cursor:pointer;padding-left:20px" onclick="return clicked(this,event)"><a class="heading3" id="a4.1.3" href="tmafmanagerloader_events.htm" target="hmcontent"><span class="heading3" id="s4.1.3" ondblclick="return dblclicked(this)">Events</span></a>
+<ul id="ul4.1.3" style="list-style-type:none">
+<li class="heading4" id="i4.1.3.1" style="background:url(cicon9.gif) no-repeat;padding-left:20px" onclick="return clicked(this,event)"><a class="heading4" id="a4.1.3.1" href="tmafmanagerloader_afterconnect.htm" target="hmcontent"><span class="heading4" id="s4.1.3.1">AfterConnect</span></a>
+</li>
+<li class="heading4" id="i4.1.3.2" style="background:url(cicon9.gif) no-repeat;padding-left:20px" onclick="return clicked(this,event)"><a class="heading4" id="a4.1.3.2" href="tmafmanagerloader_beforeconnect.htm" target="hmcontent"><span class="heading4" id="s4.1.3.2">BeforeConnect</span></a>
+</li>
+<li class="heading4" id="i4.1.3.3" style="background:url(cicon9.gif) no-repeat;padding-left:20px" onclick="return clicked(this,event)"><a class="heading4" id="a4.1.3.3" href="tmafmanagerloader_beforeloadingmanager.htm" target="hmcontent"><span class="heading4" id="s4.1.3.3">BeforeLoadingManager</span></a>
+</li>
+<li class="heading4" id="i4.1.3.4" style="background:url(cicon9.gif) no-repeat;padding-left:20px" onclick="return clicked(this,event)"><a class="heading4" id="a4.1.3.4" href="tmafmanagerloader_onconnect.htm" target="hmcontent"><span class="heading4" id="s4.1.3.4">OnConnect</span></a>
+</li>
+<li class="heading4" id="i4.1.3.5" style="background:url(cicon9.gif) no-repeat;padding-left:20px" onclick="return clicked(this,event)"><a class="heading4" id="a4.1.3.5" href="tmafmanagerloader_ondataload.htm" target="hmcontent"><span class="heading4" id="s4.1.3.5">OnDataLoad</span></a>
+</li>
+<li class="heading4" id="i4.1.3.6" style="background:url(cicon9.gif) no-repeat;padding-left:20px" onclick="return clicked(this,event)"><a class="heading4" id="a4.1.3.6" href="tmafmanagerloader_ondisconnect.htm" target="hmcontent"><span class="heading4" id="s4.1.3.6">OnDisconnect</span></a>
+</li>
+<li class="heading4" id="i4.1.3.7" style="background:url(cicon9.gif) no-repeat;padding-left:20px" onclick="return clicked(this,event)"><a class="heading4" id="a4.1.3.7" href="tmafmanagerloader_onloadingfinished.htm" target="hmcontent"><span class="heading4" id="s4.1.3.7">OnLoadingFinished</span></a>
+</li>
+<li class="heading4" id="i4.1.3.8" style="background:url(cicon9.gif) no-repeat;padding-left:20px" onclick="return clicked(this,event)"><a class="heading4" id="a4.1.3.8" href="tmafmanagerloader_onloadmanagererror.htm" target="hmcontent"><span class="heading4" id="s4.1.3.8">OnLoadManagerError</span></a>
+</li>
+</ul>
+</li>
+<li class="heading3" id="i4.1.4" data-bg="cicon1.gif;cicon2.gif" style="background:url(cicon2.gif) no-repeat;cursor:pointer;padding-left:20px" onclick="return clicked(this,event)"><a class="heading3" id="a4.1.4" href="tmafmanagerloader_types.htm" target="hmcontent"><span class="heading3" id="s4.1.4" ondblclick="return dblclicked(this)">Types</span></a>
+<ul id="ul4.1.4" style="list-style-type:none">
+<li class="heading4" id="i4.1.4.1" style="background:url(cicon9.gif) no-repeat;padding-left:20px" onclick="return clicked(this,event)"><a class="heading4" id="a4.1.4.1" href="tmafmanagerloader_tmanagernotify.htm" target="hmcontent"><span class="heading4" id="s4.1.4.1">TManagerNotify</span></a>
+</li>
+</ul>
+</li>
+<li class="heading3" id="i4.1.5" data-bg="cicon1.gif;cicon2.gif" style="background:url(cicon2.gif) no-repeat;cursor:pointer;padding-left:20px" onclick="return clicked(this,event)"><a class="heading3" id="a4.1.5" href="tmafmanagerloader_classes.htm" target="hmcontent"><span class="heading3" id="s4.1.5" ondblclick="return dblclicked(this)">Classes</span></a>
+<ul id="ul4.1.5" style="list-style-type:none">
+<li class="heading4" id="i4.1.5.1" style="background:url(cicon9.gif) no-repeat;padding-left:20px" onclick="return clicked(this,event)"><a class="heading4" id="a4.1.5.1" href="tmafmanagerloader_classes_inisettings.htm" target="hmcontent"><span class="heading4" id="s4.1.5.1">INISettings</span></a>
+</li>
+<li class="heading4" id="i4.1.5.2" style="background:url(cicon9.gif) no-repeat;padding-left:20px" onclick="return clicked(this,event)"><a class="heading4" id="a4.1.5.2" href="tmafmanagerloader_classes_registrysettings.htm" target="hmcontent"><span class="heading4" id="s4.1.5.2">RegistrySettings</span></a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="heading2" id="i4.2" data-bg="cicon1.gif;cicon2.gif" style="background:url(cicon2.gif) no-repeat;cursor:pointer;padding-left:20px" onclick="return clicked(this,event)"><a class="heading2" id="a4.2" href="tmafhookmanager.htm" target="hmcontent"><span class="heading2" id="s4.2" ondblclick="return dblclicked(this)">TmafHookManager</span></a>
+<ul id="ul4.2" style="list-style-type:none">
+<li class="heading3" id="i4.2.1" style="background:url(cicon9.gif) no-repeat;padding-left:20px" onclick="return clicked(this,event)"><a class="heading3" id="a4.2.1" href="tmafhookmanager_overview.htm" target="hmcontent"><span class="heading3" id="s4.2.1">Overview</span></a>
+</li>
+<li class="heading3" id="i4.2.2" style="background:url(cicon9.gif) no-repeat;padding-left:20px" onclick="return clicked(this,event)"><a class="heading3" id="a4.2.2" href="tmafhookmanager_properties.htm" target="hmcontent"><span class="heading3" id="s4.2.2">Properties</span></a>
+</li>
+<li class="heading3" id="i4.2.3" style="background:url(cicon9.gif) no-repeat;padding-left:20px" onclick="return clicked(this,event)"><a class="heading3" id="a4.2.3" href="tmafhookmanager_types.htm" target="hmcontent"><span class="heading3" id="s4.2.3">Types</span></a>
+</li>
+</ul>
+</li>
+<li class="heading2" id="i4.3" data-bg="cicon1.gif;cicon2.gif" style="background:url(cicon2.gif) no-repeat;cursor:pointer;padding-left:20px" onclick="return clicked(this,event)"><a class="heading2" id="a4.3" href="tmafresourcemanager.htm" target="hmcontent"><span class="heading2" id="s4.3" ondblclick="return dblclicked(this)">TmafResourceManager</span></a>
+<ul id="ul4.3" style="list-style-type:none">
+<li class="heading3" id="i4.3.1" style="background:url(cicon9.gif) no-repeat;padding-left:20px" onclick="return clicked(this,event)"><a class="heading3" id="a4.3.1" href="tmafresourcemanager_properties.htm" target="hmcontent"><span class="heading3" id="s4.3.1">Properties</span></a>
+</li>
+<li class="heading3" id="i4.3.2" style="background:url(cicon9.gif) no-repeat;padding-left:20px" onclick="return clicked(this,event)"><a class="heading3" id="a4.3.2" href="tmafresourcemanager_methods.htm" target="hmcontent"><span class="heading3" id="s4.3.2">Methods</span></a>
+</li>
+<li class="heading3" id="i4.3.3" style="background:url(cicon9.gif) no-repeat;padding-left:20px" onclick="return clicked(this,event)"><a class="heading3" id="a4.3.3" href="tmafresourcemanager_events.htm" target="hmcontent"><span class="heading3" id="s4.3.3">Events</span></a>
+</li>
+<li class="heading3" id="i4.3.4" style="background:url(cicon9.gif) no-repeat;padding-left:20px" onclick="return clicked(this,event)"><a class="heading3" id="a4.3.4" href="tmafresourcemanager_types.htm" target="hmcontent"><span class="heading3" id="s4.3.4">Types</span></a>
+</li>
+</ul>
+</li>
+<li class="heading2" id="i4.4" data-bg="cicon1.gif;cicon2.gif" style="background:url(cicon2.gif) no-repeat;cursor:pointer;padding-left:20px" onclick="return clicked(this,event)"><a class="heading2" id="a4.4" href="tmafwindowmanager.htm" target="hmcontent"><span class="heading2" id="s4.4" ondblclick="return dblclicked(this)">TmafWindowManager</span></a>
+<ul id="ul4.4" style="list-style-type:none">
+<li class="heading3" id="i4.4.1" style="background:url(cicon9.gif) no-repeat;padding-left:20px" onclick="return clicked(this,event)"><a class="heading3" id="a4.4.1" href="tmafwindowmanager_properties.htm" target="hmcontent"><span class="heading3" id="s4.4.1">Properties</span></a>
+</li>
+<li class="heading3" id="i4.4.2" style="background:url(cicon9.gif) no-repeat;padding-left:20px" onclick="return clicked(this,event)"><a class="heading3" id="a4.4.2" href="tmafwindowmanager_methods.htm" target="hmcontent"><span class="heading3" id="s4.4.2">Methods</span></a>
+</li>
+<li class="heading3" id="i4.4.3" style="background:url(cicon9.gif) no-repeat;padding-left:20px" onclick="return clicked(this,event)"><a class="heading3" id="a4.4.3" href="tmafwindowmanager_events.htm" target="hmcontent"><span class="heading3" id="s4.4.3">Events</span></a>
+</li>
+<li class="heading3" id="i4.4.4" style="background:url(cicon9.gif) no-repeat;padding-left:20px" onclick="return clicked(this,event)"><a class="heading3" id="a4.4.4" href="tmafwindowmanager_types.htm" target="hmcontent"><span class="heading3" id="s4.4.4">Types</span></a>
+</li>
+</ul>
+</li>
+<li class="heading2" id="i4.5" data-bg="cicon1.gif;cicon2.gif" style="background:url(cicon2.gif) no-repeat;cursor:pointer;padding-left:20px" onclick="return clicked(this,event)"><a class="heading2" id="a4.5" href="tmafdatastorage.htm" target="hmcontent"><span class="heading2" id="s4.5" ondblclick="return dblclicked(this)">TmafDataStorage</span></a>
+<ul id="ul4.5" style="list-style-type:none">
+<li class="heading3" id="i4.5.1" style="background:url(cicon9.gif) no-repeat;padding-left:20px" onclick="return clicked(this,event)"><a class="heading3" id="a4.5.1" href="tmafdatastorage_properties.htm" target="hmcontent"><span class="heading3" id="s4.5.1">Properties</span></a>
+</li>
+<li class="heading3" id="i4.5.2" style="background:url(cicon9.gif) no-repeat;padding-left:20px" onclick="return clicked(this,event)"><a class="heading3" id="a4.5.2" href="tmafdatastorage_methods.htm" target="hmcontent"><span class="heading3" id="s4.5.2">Methods</span></a>
+</li>
+<li class="heading3" id="i4.5.3" style="background:url(cicon9.gif) no-repeat;padding-left:20px" onclick="return clicked(this,event)"><a class="heading3" id="a4.5.3" href="tmafdatastorage_events.htm" target="hmcontent"><span class="heading3" id="s4.5.3">Events</span></a>
+</li>
+<li class="heading3" id="i4.5.4" style="background:url(cicon9.gif) no-repeat;padding-left:20px" onclick="return clicked(this,event)"><a class="heading3" id="a4.5.4" href="tmafdatastorage_types.htm" target="hmcontent"><span class="heading3" id="s4.5.4">Types</span></a>
+</li>
+</ul>
+</li>
+<li class="heading2" id="i4.6" data-bg="cicon1.gif;cicon2.gif" style="background:url(cicon2.gif) no-repeat;cursor:pointer;padding-left:20px" onclick="return clicked(this,event)"><a class="heading2" id="a4.6" href="tmaflinkmanager.htm" target="hmcontent"><span class="heading2" id="s4.6" ondblclick="return dblclicked(this)">TmafLinkManager</span></a>
+<ul id="ul4.6" style="list-style-type:none">
+<li class="heading3" id="i4.6.1" style="background:url(cicon9.gif) no-repeat;padding-left:20px" onclick="return clicked(this,event)"><a class="heading3" id="a4.6.1" href="tmaflinkmanager_properties.htm" target="hmcontent"><span class="heading3" id="s4.6.1">Properties</span></a>
+</li>
+<li class="heading3" id="i4.6.2" style="background:url(cicon9.gif) no-repeat;padding-left:20px" onclick="return clicked(this,event)"><a class="heading3" id="a4.6.2" href="tmaflinkmanager_types.htm" target="hmcontent"><span class="heading3" id="s4.6.2">Types</span></a>
+</li>
+</ul>
+</li>
+<li class="heading2" id="i4.7" data-bg="cicon1.gif;cicon2.gif" style="background:url(cicon2.gif) no-repeat;cursor:pointer;padding-left:20px" onclick="return clicked(this,event)"><a class="heading2" id="a4.7" href="tmafhooclient.htm" target="hmcontent"><span class="heading2" id="s4.7" ondblclick="return dblclicked(this)">TmafHookClient</span></a>
+<ul id="ul4.7" style="list-style-type:none">
+<li class="heading3" id="i4.7.1" style="background:url(cicon9.gif) no-repeat;padding-left:20px" onclick="return clicked(this,event)"><a class="heading3" id="a4.7.1" href="tmafhookclient_properties.htm" target="hmcontent"><span class="heading3" id="s4.7.1">Properties</span></a>
+</li>
+<li class="heading3" id="i4.7.2" data-bg="cicon1.gif;cicon2.gif" style="background:url(cicon2.gif) no-repeat;cursor:pointer;padding-left:20px" onclick="return clicked(this,event)"><a class="heading3" id="a4.7.2" href="tmafhookclient_methods.htm" target="hmcontent"><span class="heading3" id="s4.7.2" ondblclick="return dblclicked(this)">Methods</span></a>
+<ul id="ul4.7.2" style="list-style-type:none">
+<li class="heading4" id="i4.7.2.1" style="background:url(cicon9.gif) no-repeat;padding-left:20px" onclick="return clicked(this,event)"><a class="heading4" id="a4.7.2.1" href="tmafhooclient_executehook.htm" target="hmcontent"><span class="heading4" id="s4.7.2.1">ExecuteHook</span></a>
+</li>
+<li class="heading4" id="i4.7.2.2" style="background:url(cicon9.gif) no-repeat;padding-left:20px" onclick="return clicked(this,event)"><a class="heading4" id="a4.7.2.2" href="tmafhookclient___query_hookmanager.htm" target="hmcontent"><span class="heading4" id="s4.7.2.2">__Query_HookManager</span></a>
+</li>
+<li class="heading4" id="i4.7.2.3" style="background:url(cicon9.gif) no-repeat;padding-left:20px" onclick="return clicked(this,event)"><a class="heading4" id="a4.7.2.3" href="tmafhookclient___query_manager.htm" target="hmcontent"><span class="heading4" id="s4.7.2.3">__Query_Manager</span></a>
+</li>
+<li class="heading4" id="i4.7.2.4" style="background:url(cicon9.gif) no-repeat;padding-left:20px" onclick="return clicked(this,event)"><a class="heading4" id="a4.7.2.4" href="tmafhoookclient___add_functionobserver.htm" target="hmcontent"><span class="heading4" id="s4.7.2.4">__Add_FunctionObserver</span></a>
+</li>
+<li class="heading4" id="i4.7.2.5" style="background:url(cicon9.gif) no-repeat;padding-left:20px" onclick="return clicked(this,event)"><a class="heading4" id="a4.7.2.5" href="tmafhookclient___delete_functionobserver.htm" target="hmcontent"><span class="heading4" id="s4.7.2.5">__Delete_FunctionObserver</span></a>
+</li>
+</ul>
+</li>
+<li class="heading3" id="i4.7.3" data-bg="cicon1.gif;cicon2.gif" style="background:url(cicon2.gif) no-repeat;cursor:pointer;padding-left:20px" onclick="return clicked(this,event)"><a class="heading3" id="a4.7.3" href="tmafhookclient_events.htm" target="hmcontent"><span class="heading3" id="s4.7.3" ondblclick="return dblclicked(this)">Events</span></a>
+<ul id="ul4.7.3" style="list-style-type:none">
+<li class="heading4" id="i4.7.3.1" style="background:url(cicon9.gif) no-repeat;padding-left:20px" onclick="return clicked(this,event)"><a class="heading4" id="a4.7.3.1" href="tmafhookclient_onfunctionobserver.htm" target="hmcontent"><span class="heading4" id="s4.7.3.1">OnFunctionObserver</span></a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="heading2" id="i4.8" data-bg="cicon1.gif;cicon2.gif" style="background:url(cicon2.gif) no-repeat;cursor:pointer;padding-left:20px" onclick="return clicked(this,event)"><a class="heading2" id="a4.8" href="tmafmodulecontroller.htm" target="hmcontent"><span class="heading2" id="s4.8" ondblclick="return dblclicked(this)">TmafModuleController</span></a>
+<ul id="ul4.8" style="list-style-type:none">
+<li class="heading3" id="i4.8.1" data-bg="cicon1.gif;cicon2.gif" style="background:url(cicon2.gif) no-repeat;cursor:pointer;padding-left:20px" onclick="return clicked(this,event)"><a class="heading3" id="a4.8.1" href="tmafmodulecontroller_events.htm" target="hmcontent"><span class="heading3" id="s4.8.1" ondblclick="return dblclicked(this)">Events</span></a>
+<ul id="ul4.8.1" style="list-style-type:none">
+<li class="heading4" id="i4.8.1.1" style="background:url(cicon9.gif) no-repeat;padding-left:20px" onclick="return clicked(this,event)"><a class="heading4" id="a4.8.1.1" href="tmafmodulecontroller_events_beforeformcreate.htm" target="hmcontent"><span class="heading4" id="s4.8.1.1">BeforeFormCreate</span></a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="heading1" id="i5" data-bg="cicon1.gif;cicon2.gif" style="background:url(cicon2.gif) no-repeat;cursor:pointer;padding-left:20px" onclick="return clicked(this,event)"><a class="heading1" id="a5" href="definitions.htm" target="hmcontent"><span class="heading1" id="s5" ondblclick="return dblclicked(this)">Definitions</span></a>
+<ul id="ul5" style="list-style-type:none">
+<li class="heading2" id="i5.1" style="background:url(cicon9.gif) no-repeat;padding-left:20px" onclick="return clicked(this,event)"><a class="heading2" id="a5.1" href="definitions_dft.htm" target="hmcontent"><span class="heading2" id="s5.1">DFT</span></a>
+</li>
+<li class="heading2" id="i5.2" style="background:url(cicon9.gif) no-repeat;padding-left:20px" onclick="return clicked(this,event)"><a class="heading2" id="a5.2" href="definitions_dynamicfunction.htm" target="hmcontent"><span class="heading2" id="s5.2">DynamicFunction</span></a>
+</li>
+<li class="heading2" id="i5.3" style="background:url(cicon9.gif) no-repeat;padding-left:20px" onclick="return clicked(this,event)"><a class="heading2" id="a5.3" href="definitions_hook.htm" target="hmcontent"><span class="heading2" id="s5.3">Hook</span></a>
+</li>
+<li class="heading2" id="i5.4" style="background:url(cicon9.gif) no-repeat;padding-left:20px" onclick="return clicked(this,event)"><a class="heading2" id="a5.4" href="definitions_subhook.htm" target="hmcontent"><span class="heading2" id="s5.4">SubHook</span></a>
+</li>
+</ul>
+</li>
+</ul>
+<script type="text/javascript">loadicons('cicon9.gif','cicon2.gif','cicon1.gif');</script>
+
+
+</body>
+</html>

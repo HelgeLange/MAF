@@ -1,0 +1,230 @@
+{$IFDEF VER130}
+  {$DEFINE D4+}
+  {$DEFINE D5+}
+{$ENDIF}
+
+{$IFDEF VER140}
+  {$DEFINE D4+}
+  {$DEFINE D5+}
+  {$DEFINE D6+}
+{$ENDIF}
+
+{$IFDEF VER150}
+  {$DEFINE D4+}
+  {$DEFINE D5+}
+  {$DEFINE D6+}
+  {$DEFINE D7+}
+{$ENDIF}
+
+// Probably Delphi 2005 defines
+{$IFDEF VER170}
+  {$DEFINE D4+}
+  {$DEFINE D5+}
+  {$DEFINE D6+}
+  {$DEFINE D7+}
+  {$DEFINE D9+}
+{$ENDIF}
+
+
+// Delphi 2007
+{$IFDEF VER180}
+  {$DEFINE D4+}
+  {$DEFINE D5+}
+  {$DEFINE D6+}
+  {$DEFINE D7+}
+  {$DEFINE D9+}
+  {$DEFINE D10+}
+{$ENDIF}
+
+// also Delphi 2007
+{$IFDEF VER185}
+  {$DEFINE D4+}
+  {$DEFINE D5+}
+  {$DEFINE D6+}
+  {$DEFINE D7+}
+  {$DEFINE D9+}
+  {$DEFINE D10+}
+{$ENDIF}
+
+// Delphi 2009
+{$IFDEF VER200}
+  {$DEFINE D4+}
+  {$DEFINE D5+}
+  {$DEFINE D6+}
+  {$DEFINE D7+}
+  {$DEFINE D9+}
+  {$DEFINE D10+}
+  {$DEFINE D11+}
+{$ENDIF}
+
+// Delphi 2010
+{$IFDEF VER210}
+  {$DEFINE D4+}
+  {$DEFINE D5+}
+  {$DEFINE D6+}
+  {$DEFINE D7+}
+  {$DEFINE D9+}
+  {$DEFINE D10+}
+  {$DEFINE D11+}
+  {$DEFINE D12+}
+{$ENDIF}
+
+// DelphiXE
+{$IFDEF VER220}
+  {$DEFINE D4+}
+  {$DEFINE D5+}
+  {$DEFINE D6+}
+  {$DEFINE D7+}
+  {$DEFINE D9+}
+  {$DEFINE D10+}
+  {$DEFINE D11+}
+  {$DEFINE D12+}
+  {$DEFINE D13+}
+{$ENDIF}
+
+// Delphi XE2
+{$IFDEF VER230}
+  {$DEFINE D4+}
+  {$DEFINE D5+}
+  {$DEFINE D6+}
+  {$DEFINE D7+}
+  {$DEFINE D9+}
+  {$DEFINE D10+}
+  {$DEFINE D11+}
+  {$DEFINE D12+}
+  {$DEFINE D13+}
+  {$DEFINE D15+}
+{$ENDIF}
+
+// Delphi XE3
+{$IFDEF VER240}
+  {$DEFINE D4+}
+  {$DEFINE D5+}
+  {$DEFINE D6+}
+  {$DEFINE D7+}
+  {$DEFINE D9+}
+  {$DEFINE D10+}
+  {$DEFINE D11+}
+  {$DEFINE D12+}
+  {$DEFINE D13+}
+  {$DEFINE D15+}
+  {$DEFINE D16+}
+{$ENDIF}
+
+// Delphi XE4
+{$IFDEF VER250}
+  {$DEFINE D4+}
+  {$DEFINE D5+}
+  {$DEFINE D6+}
+  {$DEFINE D7+}
+  {$DEFINE D9+}
+  {$DEFINE D10+}
+  {$DEFINE D11+}
+  {$DEFINE D12+}
+  {$DEFINE D13+}
+  {$DEFINE D15+}
+  {$DEFINE D16+}
+  {$DEFINE D17+}
+{$ENDIF}
+
+// Delphi XE5
+{$IFDEF VER260}
+  {$DEFINE D4+}
+  {$DEFINE D5+}
+  {$DEFINE D6+}
+  {$DEFINE D7+}
+  {$DEFINE D9+}
+  {$DEFINE D10+}
+  {$DEFINE D11+}
+  {$DEFINE D12+}
+  {$DEFINE D13+}
+  {$DEFINE D15+}
+  {$DEFINE D16+}
+  {$DEFINE D17+}
+  {$DEFINE D18+}
+{$ENDIF}
+
+// Delphi XE6
+{$IFDEF VER270}
+  {$DEFINE D4+}
+  {$DEFINE D5+}
+  {$DEFINE D6+}
+  {$DEFINE D7+}
+  {$DEFINE D9+}
+  {$DEFINE D10+}
+  {$DEFINE D11+}
+  {$DEFINE D12+}
+  {$DEFINE D13+}
+  {$DEFINE D15+}
+  {$DEFINE D16+}
+  {$DEFINE D17+}
+  {$DEFINE D18+}
+  {$DEFINE D19+}
+{$ENDIF}
+
+// Delphi XE7
+{$IFDEF VER280}
+  {$DEFINE D4+}
+  {$DEFINE D5+}
+  {$DEFINE D6+}
+  {$DEFINE D7+}
+  {$DEFINE D9+}
+  {$DEFINE D10+}
+  {$DEFINE D11+}
+  {$DEFINE D12+}
+  {$DEFINE D13+}
+  {$DEFINE D15+}
+  {$DEFINE D16+}
+  {$DEFINE D17+}
+  {$DEFINE D18+}
+  {$DEFINE D19+}
+  {$DEFINE D20+}
+{$ENDIF}
+
+// Delphi XE8
+{$IFDEF VER290}
+  {$DEFINE D4+}
+  {$DEFINE D5+}
+  {$DEFINE D6+}
+  {$DEFINE D7+}
+  {$DEFINE D9+}
+  {$DEFINE D10+}
+  {$DEFINE D11+}
+  {$DEFINE D12+}
+  {$DEFINE D13+}
+  {$DEFINE D15+}
+  {$DEFINE D16+}
+  {$DEFINE D17+}
+  {$DEFINE D18+}
+  {$DEFINE D19+}
+  {$DEFINE D21+}
+{$ENDIF}
+
+// Delphi 10
+{$IFDEF VER300}
+  {$DEFINE D4+}
+  {$DEFINE D5+}
+  {$DEFINE D6+}
+  {$DEFINE D7+}
+  {$DEFINE D9+}
+  {$DEFINE D10+}
+  {$DEFINE D11+}
+  {$DEFINE D12+}
+  {$DEFINE D13+}
+  {$DEFINE D15+}
+  {$DEFINE D16+}
+  {$DEFINE D17+}
+  {$DEFINE D18+}
+  {$DEFINE D19+}
+  {$DEFINE D23+}
+{$ENDIF}
+
+// use the native PNG support in Delphi 2009 and above
+{$IFDEF D11+}
+  {$DEFINE PNGimage}
+{$ENDIF}
+
+{$IFDEF PNGComponents}
+  {$DEFINE PNGimage}
+{$ENDIF}
+

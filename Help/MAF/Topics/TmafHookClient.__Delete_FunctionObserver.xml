@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<topic template="Default" lasteditedby="Helge" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../helpproject.xsd">
+  <title translate="true">__Delete_FunctionObserver</title>
+  <body>
+    <header>
+      <para styleclass="Heading1"><text styleclass="Heading1" translate="true">__Delete_FunctionObserver</text></para>
+    </header>
+    <para styleclass="Normal" style="margin-left:24px;"><text styleclass="Normal" translate="true">Deletes an previously installed observer for a DynamicFunction.</text></para>
+    <para styleclass="Normal"></para>
+    <para styleclass="Normal"><text styleclass="Normal" style="font-size:11pt; font-weight:bold;" translate="true">Class</text></para>
+    <para styleclass="Normal" style="margin-left:24px;"><link displaytype="text" defaultstyle="true" type="topiclink" href="TmafHooClient" styleclass="Normal" translate="true">TmafHookClient</link></para>
+    <para styleclass="Normal"></para>
+    <para styleclass="Normal"><text styleclass="Normal" style="font-size:11pt; font-weight:bold;" translate="true">Syntax</text></para>
+    <para styleclass="Normal"></para>
+    <para styleclass="Normal" style="margin-left:24px;"><table styleclass="Default" rowcount="1" colcount="1" style="background-color:#ecf5ff;">
+      <tr style="vertical-align:top">
+        <td>
+          <para styleclass="Normal"><text styleclass="Normal" style="font-weight:bold;" translate="true">function</text><text styleclass="Normal" translate="true"> __Delete_FunctionObserver(nHookID, nSubHookID: Integer; AReceiver: TComponent = nil): Integer;</text></para>
+        </td>
+      </tr>
+    </table></para>
+    <para styleclass="Normal"></para>
+    <para styleclass="Normal"><text styleclass="Normal" style="font-size:11pt; font-weight:bold;" translate="true">Remarks</text></para>
+    <para styleclass="Normal" style="margin-left:24px;"><text styleclass="Normal" translate="true">nHookID defines the ID of the DynamicFunction to observe.</text></para>
+    <para styleclass="Normal" style="margin-left:24px;"><text styleclass="Normal" translate="true">nSubHookID defines a SubHook to observe. Is this parameter is 0, the whole DynamicFunction will be observed.</text></para>
+    <para styleclass="Normal" style="margin-left:24px;"><text styleclass="Normal" translate="true">AReceiver can contain a receiver component for the message sent by the TmafHookManager. For application development the parameter can just be left blank, but components should use this to intercept these messages instead of using the event fired.</text></para>
+    <para styleclass="Normal" style="margin-left:24px;"><text styleclass="Normal" translate="true">The result is an error code. If the execution was successful, ERR_NO_ERROR is returned.</text></para>
+    <para styleclass="Normal" style="margin-left:24px;"></para>
+    <para styleclass="Normal" style="margin-left:24px;"><text styleclass="Normal" translate="true">The parameter should be given here exactly as they were given when installing the function observer. If the parameter do not fit, the observer will not be de-installed and might call into an already destroyed callback.</text></para>
+    <para styleclass="Normal" style="margin-left:24px;"></para>
+    <para styleclass="Normal" style="margin-left:0px;"><text styleclass="Normal" style="font-size:11pt; font-weight:bold;" translate="true">See also</text></para>
+    <para styleclass="Normal" style="margin-left:24px;"><link displaytype="text" defaultstyle="true" type="topiclink" href="TmafHoookClient.__Add_FunctionObserver" styleclass="Normal" translate="true">__Add_FunctionObserver</link></para>
+  </body>
+</topic>

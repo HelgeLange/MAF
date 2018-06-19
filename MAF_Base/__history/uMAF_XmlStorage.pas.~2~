@@ -1,0 +1,35 @@
+{*******************************************************************************
+Name         : uMAF_XmlStorage.pas
+Coding by    : Helge Lange
+Copyright    : (c)opyright 2016 by Helge Lange
+Info         : HelgeLange@maf-components.com
+Website      : http://www.maf-components.com
+Date         : 09.04.2016
+Last Update  : 09.04.2016
+Version      : 1.0.000
+Purpose      :
+Last Changes :
+
+1.0.000 (09.04.2016) -----------------------------------------------------------
+- initial version
+*******************************************************************************}
+unit uMAF_XmlStorage;
+
+interface
+
+uses SysUtils, Classes, Windows,
+     uMAF_CustomBaseDB;
+
+Type TmafXmlStorage = class(TmafCustomBaseDB)
+     private
+       FsFileName: String;
+     protected
+     public
+     published
+       property FileName : String read FsFileName write FsFileName;
+     end;
+
+
+implementation
+
+end.

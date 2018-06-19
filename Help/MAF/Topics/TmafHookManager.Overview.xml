@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<topic template="Default" lasteditedby="Helge" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../helpproject.xsd">
+  <title translate="true">Overview</title>
+  <body>
+    <header>
+      <para styleclass="Heading1"><text styleclass="Heading1" translate="true">Overview</text></para>
+    </header>
+    <para styleclass="Normal"><text styleclass="Normal" translate="true">The TmafHookManager manages all published code with a MAF-Application. To do that it uses a Dynamic Function Table (DFT) to store, which function is in which module and how are they linked together.</text></para>
+    <para styleclass="Normal"></para>
+    <para styleclass="Normal"><text styleclass="Normal" translate="true">The DFT contains a list a Dynamic Functions (Hooks), which contain 1-n code fragments (SubHooks). Every SubHook represents published code in a module. Published code can be real code written inside a unit in a module or class information connected to a SubHook that can be created automatically by the TmafModuleController.</text></para>
+    <para styleclass="Normal"></para>
+    <para styleclass="Normal"><text styleclass="Normal" translate="true">SubHooks contain the following information :</text></para>
+    <para styleclass="Normal"></para>
+    <para styleclass="Normal" style="margin-left:24px;"><table styleclass="Default" rowcount="5" colcount="3" style="cell-padding:2px; border-width:0px; border-spacing:0px; border-collapse:collapse; cell-border-width:1px; border-color:#000000; border-style:solid; head-row-background-color:#d5eaff; alt-row-background-color:none;">
+      <thead style="vertical-align:top">
+        <td style="width:109px;">
+          <para styleclass="Normal"><text styleclass="Normal" style="font-weight:bold;" translate="true">Member</text></para>
+        </td>
+        <td style="width:99px;">
+          <para styleclass="Normal"><text styleclass="Normal" style="font-weight:bold;" translate="true">Type</text></para>
+        </td>
+        <td style="width:597px;">
+          <para styleclass="Normal"><text styleclass="Normal" style="font-weight:bold;" translate="true">Description</text></para>
+        </td>
+      </thead>
+      <tr style="vertical-align:top">
+        <td style="width:109px;">
+          <para styleclass="Normal"><text styleclass="Normal" translate="true">HookID</text></para>
+        </td>
+        <td style="width:99px;">
+          <para styleclass="Normal"><text styleclass="Normal" translate="true">Integer</text></para>
+        </td>
+        <td style="width:597px;">
+          <para styleclass="Normal"><text styleclass="Normal" style="font-style:normal;" translate="true">The Hook this SubHook belongs to</text></para>
+        </td>
+      </tr>
+      <tr style="vertical-align:top">
+        <td style="width:109px;">
+          <para styleclass="Normal"><text styleclass="Normal" translate="true">SubHookID</text></para>
+        </td>
+        <td style="width:99px;">
+          <para styleclass="Normal"><text styleclass="Normal" translate="true">Integer</text></para>
+        </td>
+        <td style="width:597px;">
+          <para styleclass="Normal"><text styleclass="Normal" translate="true">The SubHookID which must be unique for the module, should be unique in the system</text></para>
+        </td>
+      </tr>
+      <tr style="vertical-align:top">
+        <td style="width:109px;">
+          <para styleclass="Normal"><text styleclass="Normal" translate="true">UniqueID</text></para>
+        </td>
+        <td style="width:99px;">
+          <para styleclass="Normal"><text styleclass="Normal" translate="true">Cardinal</text></para>
+        </td>
+        <td style="width:597px;">
+          <para styleclass="Normal"><text styleclass="Normal" translate="true">MUST be unique within the DFT, modules can reintroduce function and overwrite an existing one with the same UniqueID</text></para>
+        </td>
+      </tr>
+      <tr style="vertical-align:top">
+        <td style="width:109px;">
+          <para styleclass="Normal"><text styleclass="Normal" translate="true">ModuleID</text></para>
+        </td>
+        <td style="width:99px;">
+          <para styleclass="Normal"><text styleclass="Normal" translate="true">Integer</text></para>
+        </td>
+        <td style="width:597px;">
+          <para styleclass="Normal"><text styleclass="Normal" translate="true">The ModuleID where the code resides in</text></para>
+        </td>
+      </tr>
+    </table></para>
+    <para styleclass="Normal" style="margin-left:24px;"></para>
+    <para styleclass="Normal" style="margin-left:0px;"><text styleclass="Normal" translate="true">Code can be executed only by a TmafHookClient and can call a Hook (with all its SubHooks) or a specific function (UniqueID) within a Hook.</text></para>
+    <para styleclass="Normal" style="margin-left:0px;"><text styleclass="Normal" translate="true">Therefore one can create Hooks that should be called as a whole, but also Hooks, that just collect single functions called only through their UniqueID. The latter is great to build Tool-Hooks, which contain a number of functions where the programmer is sure that they never need a second function added. It also improves the readability of the DFT in the DFT Editor, as the amount of Hooks decrease.</text></para>
+  </body>
+</topic>

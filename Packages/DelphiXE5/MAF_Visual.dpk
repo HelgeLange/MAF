@@ -1,0 +1,44 @@
+package MAF_Visual;
+
+{$R *.res}
+{$IFDEF IMPLICITBUILDING This IFDEF should not be used by users}
+{$ALIGN 8}
+{$ASSERTIONS ON}
+{$BOOLEVAL OFF}
+{$DEBUGINFO ON}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS ON}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION ON}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO OFF}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES ON}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST OFF}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$DEFINE DEBUG}
+{$ENDIF IMPLICITBUILDING}
+{$DESCRIPTION 'MAF Framework Components Visuals (Runtime)'}
+{$LIBSUFFIX '190'}
+{$RUNONLY}
+{$IMPLICITBUILD OFF}
+
+requires
+  rtl,
+  vclx,
+  MAF_Base;
+
+contains
+  uMAF_PageControl in '..\..\MAF_Visuals\uMAF_PageControl.pas',
+  uMAF_WizardPanel in '..\..\MAF_Visuals\uMAF_WizardPanel.pas',
+  uMAF_ConfigDlgManager in '..\..\MAF_Visuals\uMAF_ConfigDlgManager.pas',
+  uMAF_MainMenuInterface in '..\..\MAF_Visuals\uMAF_MainMenuInterface.pas';
+
+end.

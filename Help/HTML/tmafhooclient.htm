@@ -1,0 +1,348 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+   <title>TmafHookClient</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   <meta http-equiv="Content-Style-Type" content="text/css" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+   <script type="text/javascript" src="jquery.js"></script>
+   <script type="text/javascript" src="helpman_settings.js"></script>
+   <script type="text/javascript" src="helpman_topicinit.js"></script>
+
+   <script type="text/javascript">
+     HMSyncTOC("index.html", "tmafhooclient.htm");
+   </script>
+   <script type="text/javascript" src="highlight.js"></script>
+   <script type="text/javascript">
+     $(document).ready(function(){highlight();});
+   </script>
+</head>
+<body style="margin: 0px 0px 0px 0px; background: #FFFFFF;">
+
+
+<table width="100%" border="0" cellspacing="0" cellpadding="5" bgcolor="#99CCFF">
+  <tr valign="middle">
+    <td align="left">
+     <span style="font-size: 8pt">
+      <b>Modular Application Framework Components</b>
+     </span>
+    </td>
+  </tr>
+  <tr valign="middle">
+    <td align="left">
+      <h1 class="p_Heading1"><span class="f_Heading1">TmafHookClient</span></h1>
+
+    </td>
+    <td align="right">
+     <span style="font-size: 9pt">
+     <a href="introduction.htm">Top</a>&nbsp;
+     <a href="tmaflinkmanager_types.htm">Previous</a>&nbsp;
+     <a href="tmafhookclient_properties.htm">Next</a>
+     </span>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table width="100%" border="0" cellspacing="0" cellpadding="5"><tr valign="top"><td align="left">
+<p>The TmafHookClient ist actually used to connect to several Manager-Components :</p>
+<p>&nbsp;</p>
+<p style="margin: 0px 0px 0px 24px;"><a href="tmafhookmanager.htm" class="topiclink">TmafHookManager</a></p>
+<p style="margin: 0px 0px 0px 24px;"><a href="tmafdatastorage.htm" class="topiclink">TmafDataStorage</a></p>
+<p style="margin: 0px 0px 0px 24px;">TmafGlobalVars</p>
+<p style="margin: 0px 0px 0px 24px;">&nbsp;</p>
+<p style="margin: 0px 0px 0px 24px;">&nbsp;</p>
+<p>&nbsp;</p>
+<p style="margin: 0px 0px 0px 24px;">&nbsp;</p>
+<p><span style="font-weight: bold;">Properties</span></p>
+<p>&nbsp;</p>
+<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 24px;"><table style="border:none; border-spacing:0px; border-collapse:collapse;">
+<tr style="text-align:left;vertical-align:top;">
+<th style="vertical-align:top; background-color:#d5eaff; padding:2px; border:solid 1px #000000;"><p><span style="font-weight: bold;">Name</span></p>
+</th>
+<th style="vertical-align:top; background-color:#d5eaff; padding:2px; border:solid 1px #000000;"><p><span style="font-weight: bold;">Description</span></p>
+</th>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; padding:2px; border:solid 1px #000000;"><p>HookClientOptions</p>
+</td>
+<td style="vertical-align:top; padding:2px; border:solid 1px #000000;"><p><span style="font-style: italic;">hcoProcessOnIdle</span> to receive OnIdle events from the MainForm</p>
+<p><span style="font-style: italic;">hcoClearParamStack</span> to clear the param stack after every call</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; padding:2px; border:solid 1px #000000;"><p>Parameter</p>
+</td>
+<td style="vertical-align:top; padding:2px; border:solid 1px #000000;"><p>connected TmafParameters Component</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; padding:2px; border:solid 1px #000000;"><p>Streamer</p>
+</td>
+<td style="vertical-align:top; padding:2px; border:solid 1px #000000;"><p>TTemplateStreamer to have easy access to streamed data</p>
+</td>
+</tr>
+</table>
+</div>
+<p>&nbsp;</p>
+<p><span style="font-weight: bold;">Methods</span></p>
+<p>&nbsp;</p>
+<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 24px;"><table style="border:none; border-spacing:0px; border-collapse:collapse;">
+<tr style="text-align:left;vertical-align:top;">
+<th style="vertical-align:top; background-color:#d5eaff; padding:2px; border:solid 1px #000000;"><p><span style="font-weight: bold;">Name</span></p>
+</th>
+<th style="vertical-align:top; background-color:#d5eaff; padding:2px; border:solid 1px #000000;"><p><span style="font-weight: bold;">Description</span></p>
+</th>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; padding:2px; border:solid 1px #000000;"><p><a href="tmafhooclient_executehook.htm" class="topiclink">ExecuteHook</a></p>
+</td>
+<td style="vertical-align:top; padding:2px; border:solid 1px #000000;"><p>Executes a Hook with all its SubHooks</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; padding:2px; border:solid 1px #000000;"><p>ExecuteUniqueID</p>
+</td>
+<td style="vertical-align:top; padding:2px; border:solid 1px #000000;"><p>Executes a specific SubHook through its UniqueID</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; padding:2px; border:solid 1px #000000;"><p>GetGlobalString</p>
+</td>
+<td style="vertical-align:top; padding:2px; border:solid 1px #000000;"><p>Returns a previously saved String from the manager component TmafGlobalVars</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; padding:2px; border:solid 1px #000000;"><p>SetGlobalString</p>
+</td>
+<td style="vertical-align:top; padding:2px; border:solid 1px #000000;"><p>Saves a String in the manager component TmafGlobalVars</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; padding:2px; border:solid 1px #000000;"><p>GetGlobalInteger</p>
+</td>
+<td style="vertical-align:top; padding:2px; border:solid 1px #000000;"><p>Returns a previously saved Integer from the manager component TmafGlobalVars</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; padding:2px; border:solid 1px #000000;"><p>SetGlobalInteger</p>
+</td>
+<td style="vertical-align:top; padding:2px; border:solid 1px #000000;"><p>Saves a Integer in the manager component TmafGlobalVars</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; padding:2px; border:solid 1px #000000;"><p>GetGlobalObject</p>
+</td>
+<td style="vertical-align:top; padding:2px; border:solid 1px #000000;"><p>Returns a previously saved Object from the manager component TmafGlobalVars</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; padding:2px; border:solid 1px #000000;"><p>SetGlobalObject</p>
+</td>
+<td style="vertical-align:top; padding:2px; border:solid 1px #000000;"><p>Saves an Object in the manager component TmafGlobalVars</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; padding:2px; border:solid 1px #000000;"><p>GetGlobalBoolean</p>
+</td>
+<td style="vertical-align:top; padding:2px; border:solid 1px #000000;"><p>Returns a previously saved Boolean from the manager component TmafGlobalVars</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; padding:2px; border:solid 1px #000000;"><p>SetGlobalBoolean</p>
+</td>
+<td style="vertical-align:top; padding:2px; border:solid 1px #000000;"><p>Saves a Boolean in the manager component TmafGlobalVars</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; padding:2px; border:solid 1px #000000;"><p>LoadTemplate</p>
+</td>
+<td style="vertical-align:top; padding:2px; border:solid 1px #000000;"><p>Loads a template stored through the manager component <a href="tmafdatastorage.htm" class="topiclink">TmafDataStorage</a></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; padding:2px; border:solid 1px #000000;"><p>SaveTemplate</p>
+</td>
+<td style="vertical-align:top; padding:2px; border:solid 1px #000000;"><p>Saves a template in the manager component <a href="tmafdatastorage.htm" class="topiclink">TmafDataStorage</a></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; padding:2px; border:solid 1px #000000;"><p>PushEvents</p>
+</td>
+<td style="vertical-align:top; padding:2px; border:solid 1px #000000;"><p>Saves the current events into a stack and clears the events</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; padding:2px; border:solid 1px #000000;"><p>PopEvents</p>
+</td>
+<td style="vertical-align:top; padding:2px; border:solid 1px #000000;"><p>Restores previously stored events from the stack</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; padding:2px; border:solid 1px #000000;"><p>PushVar</p>
+</td>
+<td style="vertical-align:top; padding:2px; border:solid 1px #000000;"><p>Saves a variable to a stack</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; padding:2px; border:solid 1px #000000;"><p>PopVar</p>
+</td>
+<td style="vertical-align:top; padding:2px; border:solid 1px #000000;"><p>Loads a variable from a stack and deletes it there</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; padding:2px; border:solid 1px #000000;"><p>DeleteTemplate</p>
+</td>
+<td style="vertical-align:top; padding:2px; border:solid 1px #000000;"><p>Deletes a template</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; padding:2px; border:solid 1px #000000;"><p>RegisterCallback</p>
+</td>
+<td style="vertical-align:top; padding:2px; border:solid 1px #000000;"><p>Registers a callback notification for a specific global variable</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; padding:2px; border:solid 1px #000000;"><p>UnregisterCallback</p>
+</td>
+<td style="vertical-align:top; padding:2px; border:solid 1px #000000;"><p>Deregisters a previously registered callback notification for a specific global variable</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; padding:2px; border:solid 1px #000000;"><p>__Query_Manager</p>
+</td>
+<td style="vertical-align:top; padding:2px; border:solid 1px #000000;"><p>Executes a query to the TmafHookManager component</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; padding:2px; border:solid 1px #000000;"><p>__Add_FunctionObserver</p>
+</td>
+<td style="vertical-align:top; padding:2px; border:solid 1px #000000;"><p>Registers a function observer to be notified, when something in the DFT changes (add or delete). </p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; padding:2px; border:solid 1px #000000;"><p>__Delete_FunctionObserver</p>
+</td>
+<td style="vertical-align:top; padding:2px; border:solid 1px #000000;"><p>Deregisters a function observer.</p>
+</td>
+</tr>
+</table>
+</div>
+<p>&nbsp;</p>
+<p><span style="font-weight: bold;">Events</span></p>
+<p>&nbsp;</p>
+<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 24px;"><table style="border:none; border-spacing:0px; border-collapse:collapse;">
+<tr style="text-align:left;vertical-align:top;">
+<th style="vertical-align:top; background-color:#d5eaff; padding:2px; border:solid 1px #000000;"><p><span style="font-weight: bold;">Name</span></p>
+</th>
+<th style="vertical-align:top; background-color:#d5eaff; padding:2px; border:solid 1px #000000;"><p><span style="font-weight: bold;">Description</span></p>
+</th>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; padding:2px; border:solid 1px #000000;"><p>AfterCallRouter</p>
+</td>
+<td style="vertical-align:top; padding:2px; border:solid 1px #000000;"><p>Fired when ExecHook or ExecUniqueID is called after the call returns from the TmafHookManager</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; padding:2px; border:solid 1px #000000;"><p>AfterExecHook</p>
+</td>
+<td style="vertical-align:top; padding:2px; border:solid 1px #000000;"><p>Fired after every SubHook within a Dynamic Function (Hook)</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; padding:2px; border:solid 1px #000000;"><p>AfterQuery</p>
+</td>
+<td style="vertical-align:top; padding:2px; border:solid 1px #000000;"><p>Fired after execution of __Query_Manager</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; padding:2px; border:solid 1px #000000;"><p>BeforeCallRouter</p>
+</td>
+<td style="vertical-align:top; padding:2px; border:solid 1px #000000;"><p>Fired before a Hook or UniqueID is executed</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; padding:2px; border:solid 1px #000000;"><p>BeforeExecHook</p>
+</td>
+<td style="vertical-align:top; padding:2px; border:solid 1px #000000;"><p>Fired before the execution of every SubHook within a Hook</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; padding:2px; border:solid 1px #000000;"><p>BeforeQuery</p>
+</td>
+<td style="vertical-align:top; padding:2px; border:solid 1px #000000;"><p>Fired before the execution of __Query_Manager</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; padding:2px; border:solid 1px #000000;"><p>OnDFTChanged</p>
+</td>
+<td style="vertical-align:top; padding:2px; border:solid 1px #000000;"><p>The DFT has changed (after install/uninstall of a module)</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; padding:2px; border:solid 1px #000000;"><p>OnFunctionObserver</p>
+</td>
+<td style="vertical-align:top; padding:2px; border:solid 1px #000000;"><p>FunctionObserver fires this event, if at least one Hook or SubHook is on our watch list (added through __Add_FunctionObserver)</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; padding:2px; border:solid 1px #000000;"><p>OnGlobalVarChanged</p>
+</td>
+<td style="vertical-align:top; padding:2px; border:solid 1px #000000;"><p>A global variable in TmafGlobalVars has changed</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; padding:2px; border:solid 1px #000000;"><p>OnGlobalVarDeleted</p>
+</td>
+<td style="vertical-align:top; padding:2px; border:solid 1px #000000;"><p>A global variable in TmafGlobalVars has been deleted</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; padding:2px; border:solid 1px #000000;"><p>OnIdle</p>
+</td>
+<td style="vertical-align:top; padding:2px; border:solid 1px #000000;"><p>OnIdle in the MainForm occurs and the HookClient is notified because in HookClientOptions the option <span style="font-style: italic;">hcoProcessOnIdle</span> is set</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; padding:2px; border:solid 1px #000000;"><p>OnStreamReadAttribute</p>
+</td>
+<td style="vertical-align:top; padding:2px; border:solid 1px #000000;"><br />
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; padding:2px; border:solid 1px #000000;"><p>OnStreamVersion</p>
+</td>
+<td style="vertical-align:top; padding:2px; border:solid 1px #000000;"><br />
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; padding:2px; border:solid 1px #000000;"><p>OnStreamVersionError</p>
+</td>
+<td style="vertical-align:top; padding:2px; border:solid 1px #000000;"><br />
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; padding:2px; border:solid 1px #000000;"><p>OnStreamWriteAttribute</p>
+</td>
+<td style="vertical-align:top; padding:2px; border:solid 1px #000000;"><br />
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; padding:2px; border:solid 1px #000000;"><p>OnManagerContainerError</p>
+</td>
+<td style="vertical-align:top; padding:2px; border:solid 1px #000000;"><br />
+</td>
+</tr>
+</table>
+</div>
+<p>&nbsp;</p>
+
+</td></tr></table>
+<hr />
+   (c)opyright 2009 by Helge Lange. All Rights Reserved.
+</body>
+</html>

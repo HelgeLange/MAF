@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<topic template="Default" lasteditedby="Helge" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../helpproject.xsd">
+  <title translate="true">BeforeFormCreate</title>
+  <body>
+    <header>
+      <para styleclass="Heading1"><text styleclass="Heading1" translate="true">BeforeFormCreate</text></para>
+    </header>
+    <para styleclass="Normal" style="margin-left:24px;"><text styleclass="Normal" translate="true">Fired before a form is created by the TmafModuleController. Obviously it will be only fired, if the TmafModuleController has a form associated with the current SubHook and the default action for the SubHook is one of the Form-Creation-Methods.</text></para>
+    <para styleclass="Normal" style="margin-left:24px;"></para>
+    <para styleclass="Normal"><text styleclass="Normal" style="font-size:11pt; font-weight:bold;" translate="true">Class</text></para>
+    <para styleclass="Normal" style="margin-left:24px;"><link displaytype="text" defaultstyle="true" type="topiclink" href="TmafManagerLoader" styleclass="Normal" translate="true">TmafModuleController</link></para>
+    <para styleclass="Normal"></para>
+    <para styleclass="Normal"><text styleclass="Normal" style="font-size:11pt; font-weight:bold;" translate="true">Syntax</text></para>
+    <para styleclass="Normal"></para>
+    <para styleclass="Normal" style="margin-left:24px;"><table styleclass="Default" rowcount="1" colcount="1">
+      <tr style="vertical-align:top">
+        <td>
+          <para styleclass="Normal"><text styleclass="Normal" style="font-weight:bold;" translate="true">property </text><text styleclass="Normal" style="font-weight:normal;" translate="true">OnBeforeFormCreate : TBeforeFormNotifyEvent;</text></para>
+          <para styleclass="Normal"></para>
+          <para styleclass="Normal"><text styleclass="Normal" style="font-weight:normal;" translate="true">TBeforeFormNotifyEvent = procedure(Sender: TObject; QHS: pQHS; nSubHookID: Integer; pData: Pointer; var CanContinue: Boolean) Of Object;</text></para>
+        </td>
+      </tr>
+    </table></para>
+    <para styleclass="Normal"></para>
+    <para styleclass="Normal"><text styleclass="Normal" style="font-size:11pt; font-weight:bold;" translate="true">Remarks</text></para>
+    <para styleclass="Normal"></para>
+    <para styleclass="Normal" style="margin-left:24px;"><text styleclass="Normal" style="font-size:10pt; font-weight:normal;" translate="true">With the variable QHS you receive the pointer to a TQueryHandlerStruct record from the caller and can access all variables and parameters within it to check, if the form creation can continue.</text></para>
+    <para styleclass="Normal" style="margin-left:24px;"><text styleclass="Normal" style="font-size:10pt; font-weight:normal;" translate="true">pData is a data pointer to the structure assigned to the SubHook within the local ModuleController.</text></para>
+    <para styleclass="Normal" style="margin-left:24px;"><text styleclass="Normal" style="font-size:10pt; font-weight:normal;" translate="true">CanContinue is default true, to inform the ModuleController to not create the form for some reason, just set it to false before leaving the event.</text></para>
+  </body>
+</topic>

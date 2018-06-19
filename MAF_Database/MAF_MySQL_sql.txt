@@ -1,0 +1,29 @@
+--CREATE DATABASE TCA_Data
+--  CHARACTER SET latin1
+--  COLLATE latin1_swedish_ci;
+
+--USE TCA_Data;
+
+/* Tables */
+CREATE TABLE tca_groups (
+  id    int AUTO_INCREMENT NOT NULL,
+  name  varchar(30),
+  sl    tinyint NOT NULL DEFAULT '1',
+  PRIMARY KEY (id)
+) ENGINE = InnoDB;
+
+CREATE TABLE tca_storage (
+  dataid         int AUTO_INCREMENT NOT NULL,
+  data_category  varchar(30),
+  data_name      varchar(30),
+  data_storage   longblob,
+  PRIMARY KEY (dataid)
+) ENGINE = InnoDB;
+
+CREATE TABLE tca_users (
+  ID            int AUTO_INCREMENT NOT NULL,
+  login         varchar(30),
+  groupid       int,
+  account_data  longblob,
+  PRIMARY KEY (ID)
+) ENGINE = MyISAM;

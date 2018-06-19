@@ -1,0 +1,42 @@
+package MAF_UniDAC;
+
+{$R *.res}
+{$IFDEF IMPLICITBUILDING This IFDEF should not be used by users}
+{$ALIGN 8}
+{$ASSERTIONS ON}
+{$BOOLEVAL OFF}
+{$DEBUGINFO OFF}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS ON}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION ON}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO OFF}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES OFF}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST OFF}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$DEFINE DEBUG}
+{$DEFINE UniDAC}
+{$ENDIF IMPLICITBUILDING}
+{$DESCRIPTION 'Modular Application Framework Components (UniDAC Support Package)'}
+{$LIBSUFFIX '240'}
+{$IMPLICITBUILD OFF}
+
+requires
+  rtl,
+  MAF_Base,
+  unidac240;
+
+contains
+  uBaseSQL_Consts_Firebird in '..\..\MAF_Database\uBaseSQL_Consts_Firebird.pas',
+  uIBBaseDB in '..\..\MAF_Database\uIBBaseDB.pas';
+
+end.

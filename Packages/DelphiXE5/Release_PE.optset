@@ -1,0 +1,19 @@
+﻿	<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+		<PropertyGroup>
+			<DCC_LocalDebugSymbols>false</DCC_LocalDebugSymbols>
+			<DCC_Define>RELEASE;$(DCC_Define)</DCC_Define>
+			<DCC_BplOutput>E:\Delphi\MAF_Release\PE\DelphiXE\</DCC_BplOutput>
+			<DCC_DebugInformation>false</DCC_DebugInformation>
+			<DCC_DcpOutput>E:\Delphi\MAF_Release\PE\DelphiXE\</DCC_DcpOutput>
+			<DCC_DcuOutput>E:\Delphi\MAF_Release\PE\DelphiXE\DCU\</DCC_DcuOutput>
+			<DCC_SymbolReferenceInfo>0</DCC_SymbolReferenceInfo>
+		</PropertyGroup>
+		<ProjectExtensions>
+			<Borland.Personality>Delphi.Personality.12</Borland.Personality>
+			<Borland.ProjectType>OptionSet</Borland.ProjectType>
+			<BorlandProject>
+				<Delphi.Personality/>
+			</BorlandProject>
+			<ProjectFileVersion>12</ProjectFileVersion>
+		</ProjectExtensions>
+	</Project>

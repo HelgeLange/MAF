@@ -1,0 +1,84 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{0C4886BC-2F0C-4AA9-86B1-0307C2E40629}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="Delphi10.1\MAF_Base.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Delphi10.1\MAF_BaseDesign.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Delphi10.1\MAF_Visual.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Delphi10.1\MAF_VisualDesign.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Delphi10.1\MAF_UniDAC.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="MAF_Base">
+        <MSBuild Projects="Delphi10.1\MAF_Base.dproj"/>
+    </Target>
+    <Target Name="MAF_Base:Clean">
+        <MSBuild Projects="Delphi10.1\MAF_Base.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="MAF_Base:Make">
+        <MSBuild Projects="Delphi10.1\MAF_Base.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="MAF_BaseDesign">
+        <MSBuild Projects="Delphi10.1\MAF_BaseDesign.dproj"/>
+    </Target>
+    <Target Name="MAF_BaseDesign:Clean">
+        <MSBuild Projects="Delphi10.1\MAF_BaseDesign.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="MAF_BaseDesign:Make">
+        <MSBuild Projects="Delphi10.1\MAF_BaseDesign.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="MAF_Visual">
+        <MSBuild Projects="Delphi10.1\MAF_Visual.dproj"/>
+    </Target>
+    <Target Name="MAF_Visual:Clean">
+        <MSBuild Projects="Delphi10.1\MAF_Visual.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="MAF_Visual:Make">
+        <MSBuild Projects="Delphi10.1\MAF_Visual.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="MAF_VisualDesign">
+        <MSBuild Projects="Delphi10.1\MAF_VisualDesign.dproj"/>
+    </Target>
+    <Target Name="MAF_VisualDesign:Clean">
+        <MSBuild Projects="Delphi10.1\MAF_VisualDesign.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="MAF_VisualDesign:Make">
+        <MSBuild Projects="Delphi10.1\MAF_VisualDesign.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="MAF_UniDAC">
+        <MSBuild Projects="Delphi10.1\MAF_UniDAC.dproj"/>
+    </Target>
+    <Target Name="MAF_UniDAC:Clean">
+        <MSBuild Projects="Delphi10.1\MAF_UniDAC.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="MAF_UniDAC:Make">
+        <MSBuild Projects="Delphi10.1\MAF_UniDAC.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="MAF_Base;MAF_BaseDesign;MAF_Visual;MAF_VisualDesign;MAF_UniDAC"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="MAF_Base:Clean;MAF_BaseDesign:Clean;MAF_Visual:Clean;MAF_VisualDesign:Clean;MAF_UniDAC:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="MAF_Base:Make;MAF_BaseDesign:Make;MAF_Visual:Make;MAF_VisualDesign:Make;MAF_UniDAC:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>

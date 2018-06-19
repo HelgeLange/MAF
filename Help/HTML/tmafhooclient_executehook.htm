@@ -1,0 +1,134 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+   <title>ExecuteHook</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   <meta http-equiv="Content-Style-Type" content="text/css" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+   <script type="text/javascript" src="jquery.js"></script>
+   <script type="text/javascript" src="helpman_settings.js"></script>
+   <script type="text/javascript" src="helpman_topicinit.js"></script>
+
+   <script type="text/javascript">
+     HMSyncTOC("index.html", "tmafhooclient_executehook.htm");
+   </script>
+   <script type="text/javascript" src="highlight.js"></script>
+   <script type="text/javascript">
+     $(document).ready(function(){highlight();});
+   </script>
+</head>
+<body style="margin: 0px 0px 0px 0px; background: #FFFFFF;">
+
+
+<table width="100%" border="0" cellspacing="0" cellpadding="5" bgcolor="#99CCFF">
+  <tr valign="middle">
+    <td align="left">
+     <span style="font-size: 8pt">
+      <b>Modular Application Framework Components</b>
+     </span>
+    </td>
+  </tr>
+  <tr valign="middle">
+    <td align="left">
+      <h1 class="p_Heading1"><span class="f_Heading1">ExecuteHook</span></h1>
+
+    </td>
+    <td align="right">
+     <span style="font-size: 9pt">
+     <a href="introduction.htm">Top</a>&nbsp;
+     <a href="tmafhookclient_methods.htm">Previous</a>&nbsp;
+     <a href="tmafhookclient___query_hookmanager.htm">Next</a>
+     </span>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table width="100%" border="0" cellspacing="0" cellpadding="5"><tr valign="top"><td align="left">
+<p style="margin: 0px 0px 0px 24px;">Executes a DynamicFunction or a specific SubHook. Executing a specific SubHook should be used ONLY if it is sure, that the function behind it will never be overwritten through another module. In that case it is better to call ExecuteUniqueID, as the UniqueID must be the same when overwriting a specific SubHook with another function from another module.</p>
+<p>&nbsp;</p>
+<p><span style="font-size: 11pt; font-weight: bold;">Class</span></p>
+<p style="margin: 0px 0px 0px 24px;"><a href="tmafhooclient.htm" class="topiclink">TmafHookClient</a></p>
+<p>&nbsp;</p>
+<p><span style="font-size: 11pt; font-weight: bold;">Syntax</span></p>
+<p>&nbsp;</p>
+<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 24px;"><table style="background-color:#ecf5ff; border:none; border-spacing:0px;">
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; padding:0px;"><p><span style="font-weight: bold;">function</span> ExecuteHook(HookID: Integer; SubHookID: Integer = 0; bClearEvents: Boolean = False; EventFlags: Byte = 15): Integer;</p>
+</td>
+</tr>
+</table>
+</div>
+<p>&nbsp;</p>
+<p><span style="font-size: 11pt; font-weight: bold;">Remarks</span></p>
+<p style="margin: 0px 0px 0px 24px;">HookID defines the DynamicFunction to be executed.</p>
+<p style="margin: 0px 0px 0px 24px;">If SubHookID is 0 (default, when not given), the whole DynamicFunction is executed, otherwise only the SubHook indicated in SubHookID.</p>
+<p style="margin: 0px 0px 0px 24px;">bClearEvents can clear the components events automatically, if you want to use several event handler. That saves the code to set them to nil.</p>
+<p style="margin: 0px 0px 0px 24px;">&nbsp;</p>
+<p style="margin: 0px 0px 0px 24px;">EventFlags define, which of the 4 events involved should be executed.</p>
+<p style="margin: 0px 0px 0px 24px;">&nbsp;</p>
+<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 24px;"><table style="border:none; border-spacing:0px; border-collapse:collapse;">
+<tr style="text-align:left;vertical-align:top;">
+<th style="vertical-align:top; width:196px; background-color:#c0c0c0; padding:2px; border:solid 1px #000000;"><p style="margin: 0px 0px 0px 24px;"><span style="font-weight: bold;">Event</span></p>
+</th>
+<th style="vertical-align:top; width:37px; background-color:#c0c0c0; padding:2px; border:solid 1px #000000;"><p style="margin: 0px 0px 0px 24px;"><span style="font-weight: bold;">No</span></p>
+</th>
+<th style="vertical-align:top; width:370px; background-color:#c0c0c0; padding:2px; border:solid 1px #000000;"><p style="margin: 0px 0px 0px 24px;"><span style="font-weight: bold;">Examples</span></p>
+</th>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:196px; padding:2px; border:solid 1px #000000;"><p style="margin: 0px 0px 0px 24px;">Bit 0 : BeforeCallRouter</p>
+</td>
+<td style="vertical-align:top; width:37px; padding:2px; border:solid 1px #000000;"><p style="margin: 0px 0px 0px 24px;">1</p>
+</td>
+<td style="vertical-align:top; width:370px; padding:2px; border:solid 1px #000000;"><p style="margin: 0px 0px 0px 24px;">All = 1 + 2 + 4 + 8 = 15</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:196px; padding:2px; border:solid 1px #000000;"><p style="margin: 0px 0px 0px 24px;">Bit 1 : AfterCallRouter</p>
+</td>
+<td style="vertical-align:top; width:37px; padding:2px; border:solid 1px #000000;"><p style="margin: 0px 0px 0px 24px;">2</p>
+</td>
+<td style="vertical-align:top; width:370px; padding:2px; border:solid 1px #000000;"><p style="margin: 0px 0px 0px 24px;">only BCR + ACR = 1 + 2 = 3</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:196px; padding:2px; border:solid 1px #000000;"><p style="margin: 0px 0px 0px 24px;">Bit 2 : BeforeExecHook</p>
+</td>
+<td style="vertical-align:top; width:37px; padding:2px; border:solid 1px #000000;"><p style="margin: 0px 0px 0px 24px;">4</p>
+</td>
+<td style="vertical-align:top; width:370px; padding:2px; border:solid 1px #000000;"><p style="margin: 0px 0px 0px 24px;">only BEH + AEH = 4 + 8 = 12</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:196px; padding:2px; border:solid 1px #000000;"><p style="margin: 0px 0px 0px 24px;">Bit 3 : AfterExecHook</p>
+</td>
+<td style="vertical-align:top; width:37px; padding:2px; border:solid 1px #000000;"><p style="margin: 0px 0px 0px 24px;">8</p>
+</td>
+<td style="vertical-align:top; width:370px; padding:2px; border:solid 1px #000000;"><p style="margin: 0px 0px 0px 24px;">&nbsp;</p>
+</td>
+</tr>
+</table>
+</div>
+<p style="margin: 0px 0px 0px 24px;">&nbsp;</p>
+<p style="margin: 0px 0px 0px 24px;">Result is always an error code, if no error occurred, the function should return ERR_NO_ERROR. Parameters into the DynamicFunction can be given in the events BeforeCallRouter and BeforeExecHook or through TmafParameters connected with the TmafHookClient. </p>
+<p style="margin: 0px 0px 0px 24px;">Results from the DynamicFunction or its SubHooks can be taken from the events AfterCallRouter and AfterExecHook or from the TmafParameters component.</p>
+<p style="margin: 0px 0px 0px 24px;">&nbsp;</p>
+<p><span style="font-weight: bold;">Example</span></p>
+<p>&nbsp;</p>
+<p style="margin: 0px 0px 0px 24px;"><span style="font-weight: bold;">const</span> HK_INIT_APPLICATION = 10000;</p>
+<p style="margin: 0px 0px 0px 24px;">&nbsp;</p>
+<p style="margin: 0px 0px 0px 24px;"><span style="font-weight: bold;">begin</span></p>
+<p style="margin: 0px 0px 0px 24px;"> &nbsp;mafHookClient1.ExecuteHook(HK_INIT_APPLICATION);</p>
+<p style="margin: 0px 0px 0px 24px;"><span style="font-weight: bold;">end</span>;</p>
+<p style="margin: 0px 0px 0px 24px;">&nbsp;</p>
+<p style="margin: 0px 0px 0px 24px;">This small example executes a Hook with the ID 10.000 and it does not matter, how many SubHooks are registered. Also SubHooks can be added and deleted later on by other modules, but the caller code from the example doesn't have to be recompiled to use the new functions added or forget the ones deleted.</p>
+
+</td></tr></table>
+<hr />
+   (c)opyright 2009 by Helge Lange. All Rights Reserved.
+</body>
+</html>

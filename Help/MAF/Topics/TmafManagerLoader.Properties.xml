@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<topic template="Properties" lasteditedby="Helge" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../helpproject.xsd">
+  <title translate="true">Properties</title>
+  <body>
+    <header>
+      <para styleclass="Heading1"><text styleclass="Heading1" translate="true">Properties</text></para>
+    </header>
+    <para styleclass="Normal" style="margin-left:24px;"><text styleclass="Normal" translate="true">Properties used by the component </text><link displaytype="text" defaultstyle="true" type="topiclink" href="TmafManagerLoader" styleclass="Normal" translate="true">TmafManagerLoader</link><text styleclass="Normal" translate="true">.</text></para>
+    <para styleclass="Normal"></para>
+    <para styleclass="Normal"><text styleclass="Normal" style="font-size:11pt; font-weight:bold;" translate="true">Types</text></para>
+    <para styleclass="Normal"></para>
+    <para styleclass="Normal" style="margin-left:24px;"><table styleclass="Default" rowcount="8" colcount="2" style="width:100%; cell-padding:2px; border-width:0px; border-spacing:0px; border-collapse:collapse; cell-border-width:1px; border-color:#000000; border-style:solid; background-color:none; head-row-background-color:#d5eaff; alt-row-background-color:none;">
+      <thead style="vertical-align:top">
+        <td style="width:181px;">
+          <para styleclass="Normal"><text styleclass="Normal" style="font-weight:bold;" translate="true">Name</text></para>
+        </td>
+        <td style="width:387px;">
+          <para styleclass="Normal"><text styleclass="Normal" style="font-weight:bold;" translate="true">Description</text></para>
+        </td>
+      </thead>
+      <tr style="vertical-align:top">
+        <td style="width:181px;">
+          <para styleclass="Normal"><link displaytype="text" defaultstyle="true" type="topiclink" href="TmafManagerLoader.AutoLoad" styleclass="Normal" translate="true">AutoLoad</link></para>
+        </td>
+        <td style="width:387px;">
+          <para styleclass="Normal"><text styleclass="Normal" translate="true">Causes the component to load automatically the manager and connects to them</text></para>
+        </td>
+      </tr>
+      <tr style="vertical-align:top">
+        <td style="width:181px;">
+          <para styleclass="Normal"><link displaytype="text" defaultstyle="true" type="topiclink" href="TmafManagerLoader.DataLoadMethod" styleclass="Normal" translate="true">DataLoadMethod</link></para>
+        </td>
+        <td style="width:387px;">
+          <para styleclass="Normal"><text styleclass="Normal" translate="true">Defines from where the component loads the information about the manager to be loaded</text></para>
+        </td>
+      </tr>
+      <tr style="vertical-align:top">
+        <td style="width:181px;">
+          <para styleclass="Normal"><link displaytype="text" defaultstyle="true" type="topiclink" href="TmafManagerLoader.INISettings" styleclass="Normal" translate="true">INISettings</link></para>
+        </td>
+        <td style="width:387px;">
+          <para styleclass="Normal"><text styleclass="Normal" translate="true">Settings for the INI file if it is chosen in DataLoadMethod</text></para>
+        </td>
+      </tr>
+      <tr style="vertical-align:top">
+        <td style="width:181px;">
+          <para styleclass="Normal"><link displaytype="text" defaultstyle="true" type="topiclink" href="TmafManagerLoader.Manager" styleclass="Normal" translate="true">Manager</link></para>
+        </td>
+        <td style="width:387px;">
+          <para styleclass="Normal"><text styleclass="Normal" translate="true">List of manager names to load</text></para>
+        </td>
+      </tr>
+      <tr style="vertical-align:top">
+        <td style="width:181px;">
+          <para styleclass="Normal"><link displaytype="text" defaultstyle="true" type="topiclink" href="TmafManagerLoader.ManagerLoaderOptions" styleclass="Normal" translate="true">ManagerLoaderOptions</link></para>
+        </td>
+        <td style="width:387px;">
+          <para styleclass="Normal"><text styleclass="Normal" translate="true">Defines the loader options</text></para>
+        </td>
+      </tr>
+      <tr style="vertical-align:top">
+        <td style="width:181px;">
+          <para styleclass="Normal"><link displaytype="text" defaultstyle="true" type="topiclink" href="TmafManagerLoader.ManagerSubDirectory" styleclass="Normal" translate="true">ManagerSubDirectory</link></para>
+        </td>
+        <td style="width:387px;">
+          <para styleclass="Normal"><text styleclass="Normal" translate="true">Defines the manager sub directory</text></para>
+        </td>
+      </tr>
+      <tr style="vertical-align:top">
+        <td style="width:181px;">
+          <para styleclass="Normal"><link displaytype="text" defaultstyle="true" type="topiclink" href="TmafManagerLoader.RegistrySettings" styleclass="Normal" translate="true">RegistrySettings</link></para>
+        </td>
+        <td style="width:387px;">
+          <para styleclass="Normal"><text styleclass="Normal" translate="true">Settings for the registry if it is chosen in DataLoadMethod</text></para>
+        </td>
+      </tr>
+    </table></para>
+  </body>
+</topic>

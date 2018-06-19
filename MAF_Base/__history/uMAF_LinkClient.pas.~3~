@@ -1,0 +1,237 @@
+{*******************************************************************************
+Name         : uMAF_LinkClient.pas
+Coding by    : Helge Lange
+Copyright    : (c)opyright 2009-2016 by Helge Lange
+Info         : HelgeLange@maf-components.com
+Website      : http://www.maf-components.com
+Date         : 24.07.2009
+Last Update  : 20.03.2016
+Version      : 1.0.002
+Purpose      : client component for TmafLinkManager
+Last Changes :
+
+1.0.002 (20.03.2016)------------------------------------------------------------
+- [CHG] The Event definition TDataLinkFired changed form "pData: Pointer" to
+        "var pData: Pointer"
+1.0.001 (28.09.2009)------------------------------------------------------------
+- [FIX] the LinkIDs registered through the component editor weren't registered
+        if the component was on the datamodule loaded automatically with one
+        of the modules, as the LinkManager wasn't loaded yet. Now those will be
+        registered when the client registers itself
+1.0.000 (24.07.2009)------------------------------------------------------------
+- initial version
+*******************************************************************************}
+unit uMAF_LinkClient;
+
+interface
+
+uses Classes, Windows, Messages, Menus,
+     // Modular Application Framework Components units
+     uMAF_Core, uMAF_Globals;
+
+Type TDataLinkFired = procedure(Sender: TObject; ID: Integer; var pData: Pointer) Of Object;
+     TTextLinkFired = procedure(Sender: TObject; ID: Integer; AText: String) Of Object;
+
+     TmafLinkClient = class(TmafBaseComponent)
+     private
+       FpLinkIDs : TList;
+       FOnDataLinkFired : TDataLinkFired;
+       FOnTextLinkFired : TTextLinkFired;
+       procedure ReadData(aStream: TStream);
+       procedure WriteData(aStream: TStream);
+     protected
+       procedure DefineProperties(Filer: TFiler); override;
+       procedure RegisterSelf; override;
+       procedure InitDone; override;
+       procedure __DisconnectFromManager; override;
+       procedure __TextMessage(var Msg: TMessage); message LC_TEXT_MESSAGE;
+       procedure __DataMessage(var Msg: TMessage); message LC_DATA_MESSAGE;
+     public
+       constructor Create(AOwner: TComponent); override;
+       destructor Destroy; override;
+       procedure Loaded; override;
+       procedure Initialize;
+
+       procedure AddLink(ID: Integer);
+       procedure DeleteLink(ID: Integer);
+
+       procedure DispatchText(LinkID: Integer; AText: String);
+       procedure DispatchData(LinkID: Integer; pData: Pointer);
+
+       function Request_EmptyChannelID : Integer;
+       property LinkIDs : TList read FpLinkIDs;
+     published
+       property OnDataLinkFired : TDataLinkFired read FOnDataLinkFired write FOnDataLinkFired;
+       property OnTextLinkFired : TTextLinkFired read FOnTextLinkFired write FOnTextLinkFired;
+     end;
+
+implementation
+
+uses uMAF_Tools;
+
+const CurrentStreamVersion = 21101975;
+
+{ TmafLinkClient }
+
+constructor TmafLinkClient.Create(AOwner: TComponent);
+begin
+  AManagerQueryID := HM_LINKMANAGER_QUERY;
+  inherited;
+  ClientOptions := [coRegisterSelf];
+  FManagerType := MT_LINK_MANAGER;
+  FpLinkIDs := TList.Create;
+end;
+
+destructor TmafLinkClient.Destroy;
+begin
+  FpLinkIDs.Clear;
+  FpLinkIDs.Free;
+  inherited;
+end;
+
+procedure TmafLinkClient.Loaded;
+begin
+  inherited;
+  If csDesigning in ComponentState Then
+    Exit;
+  If Not bRunMode Then
+    Exit;
+end;
+
+procedure TmafLinkClient.__DisconnectFromManager;
+begin
+  If Connected Then
+    __AdvQuery_Manager(LM_DEL_LINK_CLIENT, nil, Self); // remove ourself from TmafLinkManager and all registered LinkIDs
+  inherited;
+end; // __DisconnectFromManager
+
+procedure TmafLinkClient.ReadData(aStream: TStream);
+var i, j, nCount : Integer;
+begin
+  aStream.Read(j, SizeOf(Integer));
+  If j <> CurrentStreamVersion Then
+    Raise EStreamError.Create('TmafLinkClient.LinkData corrupt !!');
+  aStream.Read(nCount, SizeOf(Integer));  // link count to read
+  For i := 0 To nCount - 1 Do begin
+    aStream.Read(j, SizeOf(Integer));
+    FpLinkIDs.Add(Pointer(j));  // just add
+  end;  //  --  For i := 0 To nCount - 1 Do
+end;
+
+procedure TmafLinkClient.RegisterSelf;
+begin
+  inherited;
+  Initialize;  // we need to register our LinkIDs from the property editor
+end;
+
+function TmafLinkClient.Request_EmptyChannelID: Integer;
+var QHS : pQHS;
+begin
+  QHS := __Create_QueryHandlerStruct;
+  __AdvQuery_Manager(LM_REQUEST_CHANNEL_ID, QHS, Self);
+  Result := QHS^.ResVal;
+  Dispose(QHS);
+end;
+
+procedure TmafLinkClient.WriteData(aStream: TStream);
+var i, j : Integer;
+begin
+  i := CurrentStreamVersion;
+  aStream.Write(i, SizeOf(Integer));
+  i := FpLinkIDs.Count;
+  aStream.Write(i, SizeOf(Integer));
+  For i := 0 To FpLinkIDs.Count - 1 Do begin
+    j := Integer(FpLinkIDs.Items[i]);
+    aStream.Write(j, SizeOf(Integer));
+  end;  //  --  For i := 0 to FLinkIDs.Count - 1 Do
+end;
+
+procedure TmafLinkClient.DefineProperties(Filer: TFiler);
+begin
+  inherited;
+  Filer.DefineBinaryProperty('LinkData', ReadData, WriteData, True);
+end;
+
+procedure TmafLinkClient.DeleteLink(ID: Integer);
+var QHS : pQHS;
+begin
+  QHS := __Create_QueryHandlerStruct;
+  QHS^.pChildObj := Self;
+  If FpLinkIDs.IndexOf(Pointer(ID)) > -1 Then begin
+    FpLinkIDs.Delete(FpLinkIDs.IndexOf(Pointer(ID)));
+    QHS^.Reserved1 := ID;
+    __AdvQuery_Manager(LM_DEL_LINK_ID, QHS, nil);
+  end;
+  Dispose(QHS);
+end;
+
+procedure TmafLinkClient.AddLink(ID: Integer);
+var QHS : pQHS;
+begin
+  QHS := __Create_QueryHandlerStruct;
+  QHS^.pChildObj := Self;
+  If FpLinkIDs.IndexOf(Pointer(ID)) = -1 Then begin
+    FpLinkIDs.Add(Pointer(ID));
+    QHS^.Reserved1 := ID;
+    __AdvQuery_Manager(LM_ADD_LINK_ID, QHS, nil);
+  end;
+  Dispose(QHS);
+end;
+
+procedure TmafLinkClient.DispatchData(LinkID: Integer; pData: Pointer);
+var QHS : pQHS;
+begin
+  QHS := __Create_QueryHandlerStruct;
+  QHS^.pChildObj := pData;
+  QHS^.Reserved1 := LinkID;
+  __AdvQuery_Manager(LM_SEND_DATA, QHS, Self);
+  Dispose(QHS);
+end;
+
+procedure TmafLinkClient.DispatchText(LinkID: Integer; AText: String);
+var PC : PChar;
+//    ErrCode : Integer;
+    QHS : pQHS;
+begin
+  PC := nil;
+  StrToPChar(AText, PC);
+  QHS := __Create_QueryHandlerStruct;
+  QHS^.pChildObj := PC;
+  QHS^.Reserved1 := LinkID;
+  {ErrCode := }__AdvQuery_Manager(LM_SEND_TEXT, QHS, Self);
+  FreePChar(PC);
+  Dispose(QHS);
+end;
+
+procedure TmafLinkClient.InitDone;
+begin
+  inherited;
+  Initialize;  //
+end;
+
+procedure TmafLinkClient.Initialize;
+var i : Integer;
+    QHS : pQHS;
+begin
+  QHS := __Create_QueryHandlerStruct;
+  QHS^.pChildObj := Self;
+  For i := 0 To FpLinkIDs.Count - 1 Do begin
+    QHS^.Reserved1 := Integer(FpLinkIDs.Items[i]);
+    __AdvQuery_Manager(LM_ADD_LINK_ID, QHS, nil);
+  end;
+  Dispose(QHS);
+end;
+
+procedure TmafLinkClient.__TextMessage(var Msg: TMessage);
+begin
+  If Assigned(FOnTextLinkFired) Then
+    FOnTextLinkFired(Self, Msg.LParam, String(PChar(Msg.WParam)));
+end;
+
+procedure TmafLinkClient.__DataMessage(var Msg: TMessage);
+begin
+  If Assigned(FOnDataLinkFired) Then
+    FOnDataLinkFired(Self, Msg.LParam, Pointer(Msg.WParam));
+end;
+
+end.

@@ -1,0 +1,238 @@
+{*******************************************************************************
+Name         : uMAF_ModuleManager.pas
+Coding by    : Helge Lange
+Copyright    : (c)opyright 2002-2011 by Helge Lange
+Info         : HelgeLange@maf-components.com
+Website      : http://www.maf-components.com
+Date         : 25.02.2002
+Last Update  : 18.06.2018
+Version      : 1.1.011
+Purpose      : administrates a modules within the system
+Last Changes :
+
+1.1.011 (18.06.2018) -----------------------------------------------------------
+- [CHG] the constructor now uses const for the string variable of the module name
+1.1.010 (02.09.2011) -----------------------------------------------------------
+- [ADD] property Max_uID which contains always the highest uID for that module
+        found in out DFT stream. The reason is that when a new function is to be
+        registered, the uID data from the module may be out-of-date, as the module
+        needs to import a newly created function first and then needs to be
+        recompiled in order to show the last created uID
+1.1.009 (04.09.2009) -----------------------------------------------------------
+- [ADD] added property ModuleID again to support the new DFT functions to save
+        memory by not keeping all modules loaded
+- [ADD] property ExportedFunctions wich has after the DFT loading the actual
+        count of exported function for every modules for the current user
+1.1.008 (19.08.2009) -----------------------------------------------------------
+- [ADD] Initialize throws now an exception, when the module does not have a
+        ModuleController and when there is no ModuleID set
+1.1.007 (03.07.2009) -----------------------------------------------------------
+- [DEL] removed property ModuleID, can be obtained from FpModuleController now
+- [DEL] removed FbDoUnload, wasn't used anymore, as "normal" modules and manager
+        modules use different CREATE/CLOSE commands
+- [DEL] removed property HasRes, isn't used anymore
+- [CHG] Init_DLL function is now called Initialize
+1.1.006 (25.06.2009) -----------------------------------------------------------
+- [CHG] major overhaul of the DLLManager including the name change to
+        TERPModuleManager
+- [ADD] when connecting to a module the ModuleManager now saves the HAC (name to
+        be changed, too) and gets all information from its new TModuleInfo. The
+        HAC is saved in TERPModuleManager.FpModuleController (HAC get renamed
+        to TERPModuleController when it unites HAC and FAM in one new and more
+        dynamic component)
+- [DEL] funtions/variables that used the old module identification system through
+        the RegisterStruct
+1.1.005 (15.10.2008) -----------------------------------------------------------
+- [FIX] Manager modules weren't unloaded in design time because of their flag
+        IsManager in the registration structure. The unload method now uses
+        the global variable "bRunMode" from ERP_GLOBALS.PAS to determine, if
+        we're in runmode or not. This variable is by default false, but will
+        be set true in TERPManagerContainer.Create, if the component is not
+        in design mode. Usually this component is loaded before anything else
+        that uses this variable bRunMode and therefore it should be always set
+        right autmatically
+        The bug kept Managermodules loaded in design time wich prevented Delphi
+        from overwriting the DLL when recompile and also if one tried to compile
+        the package  
+1.1.004 (23.03.2007) -----------------------------------------------------------
+- [CHANGE] change of some internal variable names from german to english for a
+           better understanding :)
+1.0.003 (01.03.2007) -----------------------------------------------------------
+- [FIX] fixed a bug in TDLLManager.GetDLLRegisterValues that the RegisterStruct
+        was freed, when the called to a modul failed
+- [CHANGE] some more code cleanup, using ERP_Globals.pas now
+1.0.002 (31.01.2007) -----------------------------------------------------------
+- code cleanup
+1.0.001 (25.02.2002) -----------------------------------------------------------
+- initial version
+*******************************************************************************}
+unit uMAF_ModuleManager;
+
+interface
+
+uses Windows, Classes,
+     {$IFDEF CodeSite} CodeSiteLogging, {$ENDIF}
+     // Modular Application Framework Components units
+     uMAF_Globals, uMAF_Core, uMAF_ModuleController, uMAF_Tracer;
+
+Type  TmafModuleManager = class(TObject)
+      private
+        FsModuleName : String;
+        Handle       : THandle;
+        JmpPoint     : TModuleServiceProc;
+        FpModuleController : TmafModuleController;
+        FnExportedFunctions : Integer; // holds the count for active functions
+        FnModuleID : Integer;
+        FbInitialized : Boolean;
+        function __GetMax_uID: Cardinal;
+      public
+        FnMax_uID : Cardinal;
+        constructor Create(const sModuleName: String);
+        destructor Destroy; override;
+        function Initialize(p1, p2: Pointer): Integer;
+        procedure Free_DLL;
+        function CallDLL(nCommand: Integer; aQHS, pUserParam : Pointer): Integer;
+        property ModuleName : String read FsModuleName write FsModuleName;
+        property ExportedFunctions : Integer read FnExportedFunctions write FnExportedFunctions;
+        property ModuleID : Integer read FnModuleID write FnModuleID;
+        property Max_uID : Cardinal read __GetMax_uID write FnMax_uID;
+        property ModuleController : TmafModuleController read FpModuleController;
+      end;
+
+implementation
+
+uses SysUtils, uMAF_Tools, Dialogs;
+
+{ TmafModuleManager }
+
+constructor TmafModuleManager.Create(const sModuleName: String);
+begin
+  FsModuleName := sModuleName;
+  @JmpPoint := nil;
+  FnExportedFunctions := 0;
+  FnModuleID := 0;
+  FbInitialized := False;
+  FpModuleController := nil;
+end; // Create
+
+destructor TmafModuleManager.Destroy;
+begin
+  Free_DLL;
+  FsModuleName := '';
+end;
+
+function TmafModuleManager.__GetMax_uID: Cardinal;
+begin
+  Inc(FnMax_uID);
+  Result := FnMax_uID;
+end;
+
+function TmafModuleManager.Initialize(p1, p2: Pointer): Integer;
+var QHS : pQHS;
+    iInitCmd : Integer;
+begin
+  {$IFDEF CodeSite} CodeSite.TraceMethod(Self, 'Initialize'); {$ENDIF}
+  {$IFDEF Tracer}
+  MAFTracer.Enter('TmafModuleManager.Initialize');
+  MAFTracer.Log_String('ModuleName', FsModuleName);
+  {$ENDIF}
+  Result := ERR_NO_ERROR;  // no error.. yet
+  If FbInitialized Then
+    Exit;
+
+  // ModuleName is being set by TmafHookManager with path
+  Handle := LoadLibrary(PChar(FsModuleName));
+  {$IFDEF Tracer}
+  MAFTracer.Log_Integer('Module Handle', Handle);
+  if bRunMode then
+    MAFTracer.Log_String('bRunMode', 'True')
+  else
+    MAFTracer.Log_String('bRunMode', 'False');
+  {$ENDIF}
+  If Handle <> 0 Then begin
+    If not bRunMode Then begin
+      @JmpPoint := GetProcAddress(Handle, PChar(MODULE_INIT_PROC));
+      iInitCmd := HM_INIT_MODULE;
+    end Else begin
+      @JmpPoint := GetProcAddress(Handle, PChar(MODULE_SERVICE_PROC));
+      iInitCmd := HM_CREATE;
+    end;
+
+    If Assigned(JmpPoint) Then begin
+      If p1 = nil Then QHS := __Create_QueryHandlerStruct
+                  else QHS := p1;
+      Result := JmpPoint(iInitCmd, QHS, p2);
+      {$IFDEF Tracer}
+      MAFTracer.Log_Integer('Module Init Result', Result);
+      if QHS^.pChildObj = nil then
+        MAFTracer.Log_Integer('QHS^.pChildObj', Integer(QHS^.pChildObj));
+      {$ENDIF}
+      If QHS^.pChildObj = nil Then
+        Raise EComponentError.Create('Module "' + FsModuleName + '" has no ModuleController' + #13#10 + 'ErrorCode : ' + IntToStr(Result));
+      FpModuleController := TMAFModuleController(QHS^.pChildObj); // saving the ModuleController
+{      If bRunMode Then
+        SendComponentMessage(FpModuleController, WM_INIT_DONE, nil, nil); }
+      If IsClass(FpModuleController, TMAFModuleController) Then begin
+        If FpModuleController.ModuleInfo.ModuleID = -1 Then
+          Raise EComponentError.Create('ModuleController in Module "' + FsModuleName + '" has no ModuleID')
+        Else begin
+          FnModuleID := FpModuleController.ModuleInfo.ModuleID; // save that local
+        end;
+      end;
+      FbInitialized := True;
+      If p1 = nil Then
+        Dispose(QHS);
+    end Else  //  --  If Func <> nil Then
+      Result := ERR_SERVICE_PROC_FAILED;
+  end Else begin //  --  If Handle = 0
+    Result := ERR_LOAD_LIBRARY_FAILED;
+    ShowMessage('DLL load error : ' + SysErrorMessage(GetLastError));
+  end;
+  {$IFDEF Tracer}
+  MAFTracer.Log_Integer('ErrorCode', Result);
+  MAFTracer.Leave;
+  {$ENDIF}
+end;  //  Init_DLL
+
+procedure TmafModuleManager.Free_DLL;
+begin
+  {$IFDEF CodeSite}
+  CodeSite.TraceMethod(Self, 'Free_DLL' );
+  CodeSite.Send( csmLevel4, 'ModuleName', FsModuleName);
+  {$ENDIF}
+  If Handle <> 0 Then begin          // Library still/already loaded ?
+    If @JmpPoint <> nil Then begin   // and we have the entry point ?
+      JmpPoint(HM_CLOSE, nil, nil);  // tell the module, that we're shutting down
+      If Not bRunMode Then           // if we're running in IDE (loaded by the component editor)
+        JmpPoint(MAN_CLOSE_MANAGER, nil, nil);  // we have to send this MAN_CLOSE_MANAGER, too
+    end;  //  --  If @JmpPoint <> nil Then
+    FreeLibrary(Handle);  // release module handle
+    @JmpPoint  := nil;               // reset the entry point variable
+    Handle    := 0;                  // clear the handle
+    FpModuleController := nil;
+    FbInitialized := False;
+  end;  //  --  If Handle <> 0 Then
+end;  //  Free_DLL
+
+function TmafModuleManager.CallDLL(nCommand: Integer; aQHS, pUserParam: Pointer): Integer;
+begin
+  {$IFDEF Tracer}
+  MAFTracer.Enter('TmafModuleManager.CallDLL');
+  {$ENDIF}
+  Result := ERR_DLL_NOT_LOADED;
+  If Not (@JmpPoint <> nil) Then
+  {$IFDEF Tracer} begin
+   MAFTracer.Log_String('initializing module again :(', '');
+  {$ENDIF}
+    Initialize(aQHS, pUserParam);
+  {$IFDEF Tracer}
+  end;
+  {$ENDIF}
+  If @JmpPoint <> nil Then
+    Result := JmpPoint(nCommand, aQHS, pUserParam);
+  {$IFDEF Tracer}
+  MAFTracer.Leave;
+  {$ENDIF}
+end; // CallDLL
+
+end.

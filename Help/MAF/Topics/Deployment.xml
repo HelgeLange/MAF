@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<topic template="Default" lasteditedby="Helge" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../helpproject.xsd">
+  <title translate="true">Deployment</title>
+  <body>
+    <header>
+      <para styleclass="Heading1"><text styleclass="Heading1" translate="true">Deployment</text></para>
+    </header>
+    <para styleclass="Normal"><text styleclass="Normal" translate="true">MAF Applications and all modules always have to be built with runtime packages of at least RTL, VCL, MAF_Base and MAF_Visual. These BPL files have to be deployed with your application.</text></para>
+    <para styleclass="Normal"></para>
+    <para styleclass="Normal"><text styleclass="Normal" translate="true">Remember, that all files use lib - suffixes, so every BPL file contains the Delphi-Version number :</text></para>
+    <para styleclass="Normal"></para>
+    <para styleclass="Normal"><text styleclass="Normal" translate="true">Delphi 2010 : VCL140.bpl, RTL140.bpl, MAF_Base140.bpl, MAF_Visual140.bpl</text></para>
+    <para styleclass="Normal"><text styleclass="Normal" translate="true">Delphi 2009 : VCL120.bpl, RTL120.bpl, MAF_Base120.bpl, MAF_Visual120.bpl</text></para>
+    <para styleclass="Normal"><text styleclass="Normal" translate="true">Delphi 2007 : VCL100.bpl, RTL100.bpl, MAF_Base100.bpl, MAF_Visual100.bpl</text></para>
+    <para styleclass="Normal"><text styleclass="Normal" translate="true">Delphi 2006 : VCL100.bpl, RTL100.bpl, MAF_Base100.bpl, MAF_Visual100.bpl</text></para>
+    <para styleclass="Normal"><text styleclass="Normal" translate="true">Delphi 2005 : VCL90.bpl, RTL90.bpl, MAF_Base90.bpl, MAF_Visual90.bpl</text></para>
+    <para styleclass="Normal"><text styleclass="Normal" translate="true">Delphi 7 &#160; &#160; &#160;: VCL70.bpl, RTL70.bpl, MAF_Base70.bpl, MAF_Visual70.bpl</text></para>
+  </body>
+</topic>
